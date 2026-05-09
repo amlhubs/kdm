@@ -1,0 +1,1709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:cmof="http://www.omg.org/spec/MOF/20110701/MOF.xmi">
+  <cmof:Package xmi:id='Pk_1' xmi:type='cmof:Package' name='KDM' >
+    <ownedMember xmi:id='Pk_917' xmi:type='cmof:Package' name='ui' >
+      <ownedMember xmi:id='A_2' xmi:type='cmof:Association' memberEnd='P_O_3 P_D_3'  name='A_AbstractUIElement_uiRelation' general='A_5'>
+        <ownedEnd xmi:id='P_D_3' xmi:type='cmof:Property'  type='C_7' name='abstractUIElement' lower='1' upper='1' isComposite='false' association='A_2' />
+      </ownedMember>
+      <ownedMember xmi:id='A_8' xmi:type='cmof:Association' memberEnd='P_O_9 P_D_9'  name='A_AbstractUIElement_implementation' general='A_11'>
+        <ownedEnd xmi:id='P_D_9' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_7' name='group' lower='0' upper='*' isComposite='false' association='A_8' />
+      </ownedMember>
+      <ownedMember xmi:id='A_13' xmi:type='cmof:Association' memberEnd='P_O_14 P_D_14'  name='A_AbstractUIElement_abstraction' general='A_16'>
+        <ownedEnd xmi:id='P_D_14' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_7' name='owner' lower='0' upper='1' isComposite='false' association='A_13' />
+      </ownedMember>
+      <ownedMember xmi:id='C_7' xmi:type='cmof:Class'  name='AbstractUIElement' superClass='C_67' isAbstract='true' >
+        <ownedAttribute xmi:id='P_O_3' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_4'  type='C_6' name='uiRelation' lower='0' upper='*' isComposite='true' association='A_2' />
+        <ownedAttribute xmi:id='P_O_9' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_12' name='implementation' lower='0' upper='*' isComposite='false' association='A_8' />
+        <ownedAttribute xmi:id='P_O_14' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_17' name='abstraction' lower='0' upper='*' isComposite='true' association='A_13' />
+      </ownedMember>
+      <ownedMember xmi:id='A_18' xmi:type='cmof:Association' memberEnd='P_O_19 P_D_19'  name='A_UIResource_uiElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_19' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_20' name='owner' lower='0' upper='1' isComposite='false' association='A_18' />
+      </ownedMember>
+      <ownedMember xmi:id='C_20' xmi:type='cmof:Class'  name='UIResource' superClass='C_7' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_19' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_7' name='uiElement' lower='0' upper='*' isComposite='true' association='A_18' />
+      </ownedMember>
+      <ownedMember xmi:id='C_918' xmi:type='cmof:Class'  name='UIDisplay' superClass='C_20' isAbstract='false' />
+      <ownedMember xmi:id='C_919' xmi:type='cmof:Class'  name='Screen' superClass='C_918' isAbstract='false' />
+      <ownedMember xmi:id='C_920' xmi:type='cmof:Class'  name='Report' superClass='C_918' isAbstract='false' />
+      <ownedMember xmi:id='A_21' xmi:type='cmof:Association' memberEnd='P_O_22 P_D_22'  name='A_UIModel_uiElement' general='A_24'>
+        <ownedEnd xmi:id='P_D_22' xmi:type='cmof:Property' subsettedProperty='P_D_23'  type='C_25' name='model' lower='0' upper='1' isComposite='false' association='A_21' />
+      </ownedMember>
+      <ownedMember xmi:id='C_25' xmi:type='cmof:Class'  name='UIModel' superClass='C_250'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_22' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_23'  type='C_7' name='uiElement' lower='0' upper='*' isComposite='true' association='A_21' />
+      </ownedMember>
+      <ownedMember xmi:id='C_6' xmi:type='cmof:Class'  name='AbstractUIRelationship' superClass='C_824'  isAbstract='true' />
+      <ownedMember xmi:id='A_26' xmi:type='cmof:Association' memberEnd='P_G_28 P_G_30'  name='A_uiLayout_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_30' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_38' name='inUILayout' lower='0' upper='*' isComposite='false' association='A_26' />
+      </ownedMember>
+      <ownedMember xmi:id='A_27' xmi:type='cmof:Association' memberEnd='P_G_29 P_G_31'  name='A_uiLayout_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_31' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_38' name='outUILayout' lower='0' upper='*' isComposite='false' association='A_27' />
+      </ownedMember>
+      <ownedMember xmi:id='C_38' xmi:type='cmof:Class'  name='UILayout' superClass='C_6'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_28' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_20' name='to' lower='1' upper='1' isComposite='false' association='A_26' />
+        <ownedAttribute xmi:id='P_G_29' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_20' name='from' lower='1' upper='1' isComposite='false' association='A_27' />
+      </ownedMember>
+      <ownedMember xmi:id='C_921' xmi:type='cmof:Class'  name='UIField' superClass='C_20' isAbstract='false' />
+      <ownedMember xmi:id='A_39' xmi:type='cmof:Association' memberEnd='P_G_41 P_G_43'  name='A_displaysImage_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_43' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_46' name='inDisplaysImage' lower='0' upper='*' isComposite='false' association='A_39' />
+      </ownedMember>
+      <ownedMember xmi:id='A_40' xmi:type='cmof:Association' memberEnd='P_G_42 P_G_44'  name='A_displaysImage_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_44' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_46' name='outDisplaysImage' lower='0' upper='*' isComposite='false' association='A_40' />
+      </ownedMember>
+      <ownedMember xmi:id='C_46' xmi:type='cmof:Class'  name='DisplaysImage' superClass='C_6'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_41' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_45' name='to' lower='1' upper='1' isComposite='false' association='A_39' />
+        <ownedAttribute xmi:id='P_G_42' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_40' />
+      </ownedMember>
+      <ownedMember xmi:id='A_47' xmi:type='cmof:Association' memberEnd='P_G_49 P_G_51'  name='A_displays_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_51' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_53' name='inDisplays' lower='0' upper='*' isComposite='false' association='A_47' />
+      </ownedMember>
+      <ownedMember xmi:id='A_48' xmi:type='cmof:Association' memberEnd='P_G_50 P_G_52'  name='A_displays_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_52' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_53' name='outDisplays' lower='0' upper='*' isComposite='false' association='A_48' />
+      </ownedMember>
+      <ownedMember xmi:id='C_53' xmi:type='cmof:Class'  name='Displays' superClass='C_6'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_49' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_20' name='to' lower='1' upper='1' isComposite='false' association='A_47' />
+        <ownedAttribute xmi:id='P_G_50' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_48' />
+      </ownedMember>
+      <ownedMember xmi:id='A_54' xmi:type='cmof:Association' memberEnd='P_G_56 P_G_58'  name='A_uiFlow_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_58' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_60' name='inUIFlow' lower='0' upper='*' isComposite='false' association='A_54' />
+      </ownedMember>
+      <ownedMember xmi:id='A_55' xmi:type='cmof:Association' memberEnd='P_G_57 P_G_59'  name='A_uiFlow_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_59' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_60' name='outUIFlow' lower='0' upper='*' isComposite='false' association='A_55' />
+      </ownedMember>
+      <ownedMember xmi:id='C_60' xmi:type='cmof:Class'  name='UIFlow' superClass='C_6'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_56' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_7' name='to' lower='1' upper='1' isComposite='false' association='A_54' />
+        <ownedAttribute xmi:id='P_G_57' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_7' name='from' lower='1' upper='1' isComposite='false' association='A_55' />
+      </ownedMember>
+      <ownedMember xmi:id='C_922' xmi:type='cmof:Class'  name='UIElement' superClass='C_7' isAbstract='false' />
+      <ownedMember xmi:id='A_61' xmi:type='cmof:Association' memberEnd='P_G_63 P_G_65'  name='A_uiRelationship_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_65' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_68' name='inUIRelationship' lower='0' upper='*' isComposite='false' association='A_61' />
+      </ownedMember>
+      <ownedMember xmi:id='A_62' xmi:type='cmof:Association' memberEnd='P_G_64 P_G_66'  name='A_uiRelationship_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_66' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_68' name='outUIRelationship' lower='0' upper='*' isComposite='false' association='A_62' />
+      </ownedMember>
+      <ownedMember xmi:id='C_68' xmi:type='cmof:Class'  name='UIRelationship' superClass='C_6'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_63' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_61' />
+        <ownedAttribute xmi:id='P_G_64' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_7' name='from' lower='1' upper='1' isComposite='false' association='A_62' />
+      </ownedMember>
+      <ownedMember xmi:id='A_69' xmi:type='cmof:Association' memberEnd='P_O_70 P_D_70'  name='A_UIAction_uiElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_70' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_72' name='owner' lower='0' upper='1' isComposite='false' association='A_69' />
+      </ownedMember>
+      <ownedMember xmi:id='C_72' xmi:type='cmof:Class'  name='UIAction' superClass='C_7' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_70' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_71' name='uiElement' lower='0' upper='*' isComposite='true' association='A_69' />
+        <ownedAttribute xmi:id='P_924' xmi:type='cmof:Property' name='kind' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_71' xmi:type='cmof:Class'  name='UIEvent' superClass='C_7' isAbstract='false' >
+        <ownedAttribute xmi:id='P_925' xmi:type='cmof:Property' name='kind' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='A_73' xmi:type='cmof:Association' memberEnd='P_G_75 P_G_77'  name='A_readsUI_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_77' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_79' name='inReadsUI' lower='0' upper='*' isComposite='false' association='A_73' />
+      </ownedMember>
+      <ownedMember xmi:id='A_74' xmi:type='cmof:Association' memberEnd='P_G_76 P_G_78'  name='A_readsUI_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_78' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_79' name='outReadsUI' lower='0' upper='*' isComposite='false' association='A_74' />
+      </ownedMember>
+      <ownedMember xmi:id='C_79' xmi:type='cmof:Class'  name='ReadsUI' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_75' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_20' name='to' lower='1' upper='1' isComposite='false' association='A_73' />
+        <ownedAttribute xmi:id='P_G_76' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_74' />
+      </ownedMember>
+      <ownedMember xmi:id='A_80' xmi:type='cmof:Association' memberEnd='P_G_82 P_G_84'  name='A_writesUI_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_84' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_86' name='inWritesUI' lower='0' upper='*' isComposite='false' association='A_80' />
+      </ownedMember>
+      <ownedMember xmi:id='A_81' xmi:type='cmof:Association' memberEnd='P_G_83 P_G_85'  name='A_writesUI_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_85' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_86' name='outWritesUI' lower='0' upper='*' isComposite='false' association='A_81' />
+      </ownedMember>
+      <ownedMember xmi:id='C_86' xmi:type='cmof:Class'  name='WritesUI' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_82' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_20' name='to' lower='1' upper='1' isComposite='false' association='A_80' />
+        <ownedAttribute xmi:id='P_G_83' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_81' />
+      </ownedMember>
+      <ownedMember xmi:id='A_87' xmi:type='cmof:Association' memberEnd='P_G_89 P_G_91'  name='A_managesUI_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_91' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_93' name='inManagesUI' lower='0' upper='*' isComposite='false' association='A_87' />
+      </ownedMember>
+      <ownedMember xmi:id='A_88' xmi:type='cmof:Association' memberEnd='P_G_90 P_G_92'  name='A_managesUI_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_92' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_93' name='outManagesUI' lower='0' upper='*' isComposite='false' association='A_88' />
+      </ownedMember>
+      <ownedMember xmi:id='C_93' xmi:type='cmof:Class'  name='ManagesUI' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_89' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_20' name='to' lower='1' upper='1' isComposite='false' association='A_87' />
+        <ownedAttribute xmi:id='P_G_90' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_88' />
+      </ownedMember>
+      <ownedMember xmi:id='A_94' xmi:type='cmof:Association' memberEnd='P_G_96 P_G_98'  name='A_producesUIEvent_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_98' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_100' name='inProducesUIEvent' lower='0' upper='*' isComposite='false' association='A_94' />
+      </ownedMember>
+      <ownedMember xmi:id='A_95' xmi:type='cmof:Association' memberEnd='P_G_97 P_G_99'  name='A_producesUIEvent_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_99' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_100' name='outProducesUIEvent' lower='0' upper='*' isComposite='false' association='A_95' />
+      </ownedMember>
+      <ownedMember xmi:id='C_100' xmi:type='cmof:Class'  name='ProducesUIEvent' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_96' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_71' name='to' lower='1' upper='1' isComposite='false' association='A_94' />
+        <ownedAttribute xmi:id='P_G_97' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_95' />
+      </ownedMember>
+    </ownedMember>
+    <ownedMember xmi:id='Pk_926' xmi:type='cmof:Package' name='platform' >
+      <ownedMember xmi:id='A_101' xmi:type='cmof:Association' memberEnd='P_O_102 P_D_102'  name='A_AbstractPlatformElement_relation' general='A_5'>
+        <ownedEnd xmi:id='P_D_102' xmi:type='cmof:Property'  type='C_104' name='abstractPlatformElement' lower='1' upper='1' isComposite='false' association='A_101' />
+      </ownedMember>
+      <ownedMember xmi:id='A_105' xmi:type='cmof:Association' memberEnd='P_O_106 P_D_106'  name='A_AbstractPlatformElement_abstraction' general='A_16'>
+        <ownedEnd xmi:id='P_D_106' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_104' name='owner' lower='0' upper='1' isComposite='false' association='A_105' />
+      </ownedMember>
+      <ownedMember xmi:id='A_107' xmi:type='cmof:Association' memberEnd='P_O_108 P_D_108'  name='A_AbstractPlatformElement_implementation' general='A_11'>
+        <ownedEnd xmi:id='P_D_108' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_104' name='group' lower='0' upper='*' isComposite='false' association='A_107' />
+      </ownedMember>
+      <ownedMember xmi:id='C_104' xmi:type='cmof:Class'  name='AbstractPlatformElement' superClass='C_67' isAbstract='true' >
+        <ownedAttribute xmi:id='P_O_102' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_4'  type='C_103' name='relation' lower='0' upper='*' isComposite='true' association='A_101' />
+        <ownedAttribute xmi:id='P_O_106' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_17' name='abstraction' lower='0' upper='*' isComposite='true' association='A_105' />
+        <ownedAttribute xmi:id='P_O_108' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_12' name='implementation' lower='0' upper='*' isComposite='false' association='A_107' />
+      </ownedMember>
+      <ownedMember xmi:id='A_109' xmi:type='cmof:Association' memberEnd='P_O_110 P_D_110'  name='A_PlatformModel_platformElement' general='A_24'>
+        <ownedEnd xmi:id='P_D_110' xmi:type='cmof:Property' subsettedProperty='P_D_23'  type='C_111' name='model' lower='0' upper='1' isComposite='false' association='A_109' />
+      </ownedMember>
+      <ownedMember xmi:id='C_111' xmi:type='cmof:Class'  name='PlatformModel' superClass='C_250'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_110' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_23'  type='C_104' name='platformElement' lower='0' upper='*' isComposite='true' association='A_109' />
+      </ownedMember>
+      <ownedMember xmi:id='C_103' xmi:type='cmof:Class'  name='AbstractPlatformRelationship' superClass='C_824'  isAbstract='true' />
+      <ownedMember xmi:id='A_112' xmi:type='cmof:Association' memberEnd='P_G_114 P_G_116'  name='A_requires_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_116' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_118' name='inRequires' lower='0' upper='*' isComposite='false' association='A_112' />
+      </ownedMember>
+      <ownedMember xmi:id='A_113' xmi:type='cmof:Association' memberEnd='P_G_115 P_G_117'  name='A_requires_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_117' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_118' name='outRequires' lower='0' upper='*' isComposite='false' association='A_113' />
+      </ownedMember>
+      <ownedMember xmi:id='C_118' xmi:type='cmof:Class'  name='Requires' superClass='C_103'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_114' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_104' name='to' lower='1' upper='1' isComposite='false' association='A_112' />
+        <ownedAttribute xmi:id='P_G_115' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_119' name='from' lower='1' upper='1' isComposite='false' association='A_113' />
+      </ownedMember>
+      <ownedMember xmi:id='A_120' xmi:type='cmof:Association' memberEnd='P_O_121 P_D_121'  name='A_PlatformResource_platformElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_121' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_122' name='owner' lower='0' upper='1' isComposite='false' association='A_120' />
+      </ownedMember>
+      <ownedMember xmi:id='C_122' xmi:type='cmof:Class'  name='PlatformResource' superClass='C_104' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_121' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_104' name='platformElement' lower='0' upper='*' isComposite='true' association='A_120' />
+      </ownedMember>
+      <ownedMember xmi:id='C_927' xmi:type='cmof:Class'  name='NamingResource' superClass='C_122' isAbstract='false' />
+      <ownedMember xmi:id='C_928' xmi:type='cmof:Class'  name='MarshalledResource' superClass='C_122' isAbstract='false' />
+      <ownedMember xmi:id='C_929' xmi:type='cmof:Class'  name='MessagingResource' superClass='C_122' isAbstract='false' />
+      <ownedMember xmi:id='C_930' xmi:type='cmof:Class'  name='FileResource' superClass='C_122' isAbstract='false' />
+      <ownedMember xmi:id='C_931' xmi:type='cmof:Class'  name='ExecutionResource' superClass='C_122' isAbstract='false' />
+      <ownedMember xmi:id='A_123' xmi:type='cmof:Association' memberEnd='P_O_124 P_D_124'  name='A_PlatformAction_platformElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_124' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_126' name='owner' lower='0' upper='1' isComposite='false' association='A_123' />
+      </ownedMember>
+      <ownedMember xmi:id='C_126' xmi:type='cmof:Class'  name='PlatformAction' superClass='C_104' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_124' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_125' name='platformElement' lower='0' upper='*' isComposite='true' association='A_123' />
+        <ownedAttribute xmi:id='P_932' xmi:type='cmof:Property' name='kind' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_933' xmi:type='cmof:Class'  name='ExternalActor' superClass='C_126' isAbstract='false' />
+      <ownedMember xmi:id='C_934' xmi:type='cmof:Class'  name='DataManager' superClass='C_122' isAbstract='false' />
+      <ownedMember xmi:id='A_127' xmi:type='cmof:Association' memberEnd='P_G_129 P_G_131'  name='A_bindsTo_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_131' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_133' name='inBindsTo' lower='0' upper='*' isComposite='false' association='A_127' />
+      </ownedMember>
+      <ownedMember xmi:id='A_128' xmi:type='cmof:Association' memberEnd='P_G_130 P_G_132'  name='A_bindsTo_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_132' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_133' name='outBindsTo' lower='0' upper='*' isComposite='false' association='A_128' />
+      </ownedMember>
+      <ownedMember xmi:id='C_133' xmi:type='cmof:Class'  name='BindsTo' superClass='C_103'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_129' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_127' />
+        <ownedAttribute xmi:id='P_G_130' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_122' name='from' lower='1' upper='1' isComposite='false' association='A_128' />
+      </ownedMember>
+      <ownedMember xmi:id='C_935' xmi:type='cmof:Class'  name='PlatformElement' superClass='C_104' isAbstract='false' />
+      <ownedMember xmi:id='A_134' xmi:type='cmof:Association' memberEnd='P_G_136 P_G_138'  name='A_platformRelationship_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_138' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_140' name='inPlatformRelationship' lower='0' upper='*' isComposite='false' association='A_134' />
+      </ownedMember>
+      <ownedMember xmi:id='A_135' xmi:type='cmof:Association' memberEnd='P_G_137 P_G_139'  name='A_platformRelationship_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_139' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_140' name='outPlatformRelationship' lower='0' upper='*' isComposite='false' association='A_135' />
+      </ownedMember>
+      <ownedMember xmi:id='C_140' xmi:type='cmof:Class'  name='PlatformRelationship' superClass='C_103'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_136' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_134' />
+        <ownedAttribute xmi:id='P_G_137' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_104' name='from' lower='1' upper='1' isComposite='false' association='A_135' />
+      </ownedMember>
+      <ownedMember xmi:id='C_125' xmi:type='cmof:Class'  name='PlatformEvent' superClass='C_104' isAbstract='false' >
+        <ownedAttribute xmi:id='P_936' xmi:type='cmof:Property' name='kind' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_937' xmi:type='cmof:Class'  name='LockResource' superClass='C_122' isAbstract='false' />
+      <ownedMember xmi:id='C_938' xmi:type='cmof:Class'  name='DeploymentElement' superClass='C_104' isAbstract='false' />
+      <ownedMember xmi:id='A_141' xmi:type='cmof:Association' memberEnd='P_O_142 P_D_142'  name='A_DeployedSoftwareSystem_groupedComponent' general='A_11'>
+        <ownedEnd xmi:id='P_D_142' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_143' name='group' lower='0' upper='*' isComposite='false' association='A_141' />
+      </ownedMember>
+      <ownedMember xmi:id='C_143' xmi:type='cmof:Class'  name='DeployedSoftwareSystem' superClass='C_938' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_142' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_119' name='groupedComponent' lower='0' upper='*' isComposite='false' association='A_141' />
+      </ownedMember>
+      <ownedMember xmi:id='A_144' xmi:type='cmof:Association' memberEnd='P_O_145 P_D_145'  name='A_Machine_deployedComponent' general='A_16'>
+        <ownedEnd xmi:id='P_D_145' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_146' name='owner' lower='0' upper='1' isComposite='false' association='A_144' />
+      </ownedMember>
+      <ownedMember xmi:id='A_147' xmi:type='cmof:Association' memberEnd='P_O_148 P_D_148'  name='A_Machine_deployedResource' general='A_16'>
+        <ownedEnd xmi:id='P_D_148' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_146' name='owner' lower='0' upper='1' isComposite='false' association='A_147' />
+      </ownedMember>
+      <ownedMember xmi:id='C_146' xmi:type='cmof:Class'  name='Machine' superClass='C_938' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_145' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_119' name='deployedComponent' lower='0' upper='*' isComposite='true' association='A_144' />
+        <ownedAttribute xmi:id='P_O_148' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_149' name='deployedResource' lower='0' upper='*' isComposite='true' association='A_147' />
+      </ownedMember>
+      <ownedMember xmi:id='A_150' xmi:type='cmof:Association' memberEnd='P_O_151 P_D_151'  name='A_DeployedComponent_groupedCode' general='A_11'>
+        <ownedEnd xmi:id='P_D_151' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_119' name='group' lower='0' upper='*' isComposite='false' association='A_150' />
+      </ownedMember>
+      <ownedMember xmi:id='C_119' xmi:type='cmof:Class'  name='DeployedComponent' superClass='C_938' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_151' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_152' name='groupedCode' lower='0' upper='*' isComposite='false' association='A_150' />
+      </ownedMember>
+      <ownedMember xmi:id='A_153' xmi:type='cmof:Association' memberEnd='P_O_154 P_D_154'  name='A_DeployedResource_platformElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_154' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_149' name='owner' lower='0' upper='1' isComposite='false' association='A_153' />
+      </ownedMember>
+      <ownedMember xmi:id='C_149' xmi:type='cmof:Class'  name='DeployedResource' superClass='C_938' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_154' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_122' name='platformElement' lower='0' upper='*' isComposite='true' association='A_153' />
+      </ownedMember>
+      <ownedMember xmi:id='A_155' xmi:type='cmof:Association' memberEnd='P_G_157 P_G_159'  name='A_loads_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_159' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_161' name='inLoads' lower='0' upper='*' isComposite='false' association='A_155' />
+      </ownedMember>
+      <ownedMember xmi:id='A_156' xmi:type='cmof:Association' memberEnd='P_G_158 P_G_160'  name='A_loads_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_160' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_161' name='outLoads' lower='0' upper='*' isComposite='false' association='A_156' />
+      </ownedMember>
+      <ownedMember xmi:id='C_161' xmi:type='cmof:Class'  name='Loads' superClass='C_103'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_157' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_119' name='to' lower='1' upper='1' isComposite='false' association='A_155' />
+        <ownedAttribute xmi:id='P_G_158' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_156' />
+      </ownedMember>
+      <ownedMember xmi:id='A_162' xmi:type='cmof:Association' memberEnd='P_G_164 P_G_166'  name='A_spawns_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_166' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_169' name='inSpawns' lower='0' upper='*' isComposite='false' association='A_162' />
+      </ownedMember>
+      <ownedMember xmi:id='A_163' xmi:type='cmof:Association' memberEnd='P_G_165 P_G_167'  name='A_spawns_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_167' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_169' name='outSpawns' lower='0' upper='*' isComposite='false' association='A_163' />
+      </ownedMember>
+      <ownedMember xmi:id='C_169' xmi:type='cmof:Class'  name='Spawns' superClass='C_103'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_164' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_168' name='to' lower='1' upper='1' isComposite='false' association='A_162' />
+        <ownedAttribute xmi:id='P_G_165' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_163' />
+      </ownedMember>
+      <ownedMember xmi:id='C_168' xmi:type='cmof:Class'  name='RuntimeResource' superClass='C_122' isAbstract='false' />
+      <ownedMember xmi:id='C_939' xmi:type='cmof:Class'  name='Thread' superClass='C_168' isAbstract='false' />
+      <ownedMember xmi:id='C_940' xmi:type='cmof:Class'  name='Process' superClass='C_168' isAbstract='false' />
+      <ownedMember xmi:id='A_170' xmi:type='cmof:Association' memberEnd='P_G_172 P_G_174'  name='A_readsResource_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_174' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_176' name='inReadsResource' lower='0' upper='*' isComposite='false' association='A_170' />
+      </ownedMember>
+      <ownedMember xmi:id='A_171' xmi:type='cmof:Association' memberEnd='P_G_173 P_G_175'  name='A_readsResource_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_175' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_176' name='outReadsResource' lower='0' upper='*' isComposite='false' association='A_171' />
+      </ownedMember>
+      <ownedMember xmi:id='C_176' xmi:type='cmof:Class'  name='ReadsResource' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_172' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_122' name='to' lower='1' upper='1' isComposite='false' association='A_170' />
+        <ownedAttribute xmi:id='P_G_173' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_171' />
+      </ownedMember>
+      <ownedMember xmi:id='A_177' xmi:type='cmof:Association' memberEnd='P_G_179 P_G_181'  name='A_writesResource_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_181' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_183' name='inWritesResource' lower='0' upper='*' isComposite='false' association='A_177' />
+      </ownedMember>
+      <ownedMember xmi:id='A_178' xmi:type='cmof:Association' memberEnd='P_G_180 P_G_182'  name='A_writesResource_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_182' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_183' name='outWritesResource' lower='0' upper='*' isComposite='false' association='A_178' />
+      </ownedMember>
+      <ownedMember xmi:id='C_183' xmi:type='cmof:Class'  name='WritesResource' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_179' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_122' name='to' lower='1' upper='1' isComposite='false' association='A_177' />
+        <ownedAttribute xmi:id='P_G_180' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_178' />
+      </ownedMember>
+      <ownedMember xmi:id='A_184' xmi:type='cmof:Association' memberEnd='P_G_186 P_G_188'  name='A_managesResource_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_188' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_190' name='inManagesResource' lower='0' upper='*' isComposite='false' association='A_184' />
+      </ownedMember>
+      <ownedMember xmi:id='A_185' xmi:type='cmof:Association' memberEnd='P_G_187 P_G_189'  name='A_managesResource_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_189' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_190' name='outManagesResource' lower='0' upper='*' isComposite='false' association='A_185' />
+      </ownedMember>
+      <ownedMember xmi:id='C_190' xmi:type='cmof:Class'  name='ManagesResource' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_186' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_122' name='to' lower='1' upper='1' isComposite='false' association='A_184' />
+        <ownedAttribute xmi:id='P_G_187' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_185' />
+      </ownedMember>
+      <ownedMember xmi:id='A_191' xmi:type='cmof:Association' memberEnd='P_G_193 P_G_195'  name='A_definedBy_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_195' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_198' name='inDefinedBy' lower='0' upper='*' isComposite='false' association='A_191' />
+      </ownedMember>
+      <ownedMember xmi:id='A_192' xmi:type='cmof:Association' memberEnd='P_G_194 P_G_196'  name='A_definedBy_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_196' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_198' name='outDefinedBy' lower='0' upper='*' isComposite='false' association='A_192' />
+      </ownedMember>
+      <ownedMember xmi:id='C_198' xmi:type='cmof:Class'  name='DefinedBy' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_193' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_197' name='to' lower='1' upper='1' isComposite='false' association='A_191' />
+        <ownedAttribute xmi:id='P_G_194' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_192' />
+      </ownedMember>
+      <ownedMember xmi:id='C_941' xmi:type='cmof:Class'  name='StreamResource' superClass='C_122' isAbstract='false' />
+      <ownedMember xmi:id='A_199' xmi:type='cmof:Association' memberEnd='P_G_201 P_G_203'  name='A_producesPlatformEvent_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_203' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_205' name='inProducesPlatformEvent' lower='0' upper='*' isComposite='false' association='A_199' />
+      </ownedMember>
+      <ownedMember xmi:id='A_200' xmi:type='cmof:Association' memberEnd='P_G_202 P_G_204'  name='A_producesPlatformEvent_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_204' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_205' name='outProducesPlatformEvent' lower='0' upper='*' isComposite='false' association='A_200' />
+      </ownedMember>
+      <ownedMember xmi:id='C_205' xmi:type='cmof:Class'  name='ProducesPlatformEvent' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_201' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_125' name='to' lower='1' upper='1' isComposite='false' association='A_199' />
+        <ownedAttribute xmi:id='P_G_202' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_200' />
+      </ownedMember>
+    </ownedMember>
+    <ownedMember xmi:id='Pk_942' xmi:type='cmof:Package' name='conceptual' >
+      <ownedMember xmi:id='A_206' xmi:type='cmof:Association' memberEnd='P_G_207 P_G_208' name='Role'>
+        <ownedEnd xmi:id='P_G_208' xmi:type='cmof:Property'  type='C_209' name='conceptualRole' lower='0' upper='*' isComposite='false' association='A_206' />
+      </ownedMember>
+      <ownedMember xmi:id='A_211' xmi:type='cmof:Association' memberEnd='P_O_212 P_D_212'  name='A_ConceptualModel_conceptualElement' general='A_24'>
+        <ownedEnd xmi:id='P_D_212' xmi:type='cmof:Property' subsettedProperty='P_D_23'  type='C_213' name='model' lower='0' upper='1' isComposite='false' association='A_211' />
+      </ownedMember>
+      <ownedMember xmi:id='C_213' xmi:type='cmof:Class'  name='ConceptualModel' superClass='C_250'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_212' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_23'  type='C_210' name='conceptualElement' lower='0' upper='*' isComposite='true' association='A_211' />
+      </ownedMember>
+      <ownedMember xmi:id='A_214' xmi:type='cmof:Association' memberEnd='P_O_215 P_D_215'  name='A_AbstractConceptualElement_implementation' general='A_11'>
+        <ownedEnd xmi:id='P_D_215' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_210' name='group' lower='0' upper='*' isComposite='false' association='A_214' />
+      </ownedMember>
+      <ownedMember xmi:id='A_216' xmi:type='cmof:Association' memberEnd='P_O_217 P_D_217'  name='A_AbstractConceptualElement_conceptualRelation' general='A_5'>
+        <ownedEnd xmi:id='P_D_217' xmi:type='cmof:Property'  type='C_210' name='abstractConceptualElement' lower='1' upper='1' isComposite='false' association='A_216' />
+      </ownedMember>
+      <ownedMember xmi:id='A_219' xmi:type='cmof:Association' memberEnd='P_O_220 P_D_220'  name='A_AbstractConceptualElement_abstraction' general='A_16'>
+        <ownedEnd xmi:id='P_D_220' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_210' name='owner' lower='0' upper='1' isComposite='false' association='A_219' />
+      </ownedMember>
+      <ownedMember xmi:id='C_210' xmi:type='cmof:Class'  name='AbstractConceptualElement' superClass='C_67' isAbstract='true' >
+        <ownedAttribute xmi:id='P_O_215' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_67' name='implementation' lower='0' upper='*' isComposite='false' association='A_214' />
+        <ownedAttribute xmi:id='P_O_217' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_4'  type='C_218' name='conceptualRelation' lower='0' upper='*' isComposite='true' association='A_216' />
+        <ownedAttribute xmi:id='P_O_220' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_17' name='abstraction' lower='0' upper='*' isComposite='true' association='A_219' />
+      </ownedMember>
+      <ownedMember xmi:id='C_943' xmi:type='cmof:Class'  name='TermUnit' superClass='C_210' isAbstract='false' />
+      <ownedMember xmi:id='A_221' xmi:type='cmof:Association' memberEnd='P_O_222 P_D_222'  name='A_ConceptualContainer_conceptualElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_222' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_223' name='owner' lower='0' upper='1' isComposite='false' association='A_221' />
+      </ownedMember>
+      <ownedMember xmi:id='C_223' xmi:type='cmof:Class'  name='ConceptualContainer' superClass='C_210' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_222' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_210' name='conceptualElement' lower='0' upper='*' isComposite='true' association='A_221' />
+      </ownedMember>
+      <ownedMember xmi:id='C_944' xmi:type='cmof:Class'  name='FactUnit' superClass='C_223' isAbstract='false' />
+      <ownedMember xmi:id='C_218' xmi:type='cmof:Class'  name='AbstractConceptualRelationship' superClass='C_824'  isAbstract='true' />
+      <ownedMember xmi:id='A_224' xmi:type='cmof:Association' memberEnd='P_G_226 P_G_228'  name='A_conceptualRelationship_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_228' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_230' name='inConceptualRelationship' lower='0' upper='*' isComposite='false' association='A_224' />
+      </ownedMember>
+      <ownedMember xmi:id='A_225' xmi:type='cmof:Association' memberEnd='P_G_227 P_G_229'  name='A_conceptualRelationship_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_229' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_230' name='outConceptualRelationship' lower='0' upper='*' isComposite='false' association='A_225' />
+      </ownedMember>
+      <ownedMember xmi:id='C_230' xmi:type='cmof:Class'  name='ConceptualRelationship' superClass='C_218'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_226' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_224' />
+        <ownedAttribute xmi:id='P_G_227' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_210' name='from' lower='1' upper='1' isComposite='false' association='A_225' />
+      </ownedMember>
+      <ownedMember xmi:id='C_945' xmi:type='cmof:Class'  name='BehaviorUnit' superClass='C_223' isAbstract='false' />
+      <ownedMember xmi:id='C_946' xmi:type='cmof:Class'  name='RuleUnit' superClass='C_223' isAbstract='false' />
+      <ownedMember xmi:id='C_947' xmi:type='cmof:Class'  name='ScenarioUnit' superClass='C_223' isAbstract='false' />
+      <ownedMember xmi:id='A_231' xmi:type='cmof:Association' memberEnd='P_G_233 P_G_235'  name='A_conceptualFlow_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_235' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_237' name='inConceptualFlow' lower='0' upper='*' isComposite='false' association='A_231' />
+      </ownedMember>
+      <ownedMember xmi:id='A_232' xmi:type='cmof:Association' memberEnd='P_G_234 P_G_236'  name='A_conceptualFlow_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_236' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_237' name='outConceptualFlow' lower='0' upper='*' isComposite='false' association='A_232' />
+      </ownedMember>
+      <ownedMember xmi:id='C_237' xmi:type='cmof:Class'  name='ConceptualFlow' superClass='C_218'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_233' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_210' name='to' lower='1' upper='1' isComposite='false' association='A_231' />
+        <ownedAttribute xmi:id='P_G_234' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_210' name='from' lower='1' upper='1' isComposite='false' association='A_232' />
+      </ownedMember>
+      <ownedMember xmi:id='C_948' xmi:type='cmof:Class'  name='ConceptualElement' superClass='C_210' isAbstract='false' />
+      <ownedMember xmi:id='C_209' xmi:type='cmof:Class'  name='ConceptualRole' superClass='C_210' isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_207' xmi:type='cmof:Property'  type='C_210' name='conceptualElement' lower='1' upper='1' isComposite='false' association='A_206' />
+      </ownedMember>
+    </ownedMember>
+    <ownedMember xmi:id='Pk_949' xmi:type='cmof:Package' name='kdm' >
+      <ownedMember xmi:id='A_238' xmi:type='cmof:Association' name='Extensions' memberEnd='P_G_239 P_G_240' />
+      <ownedMember xmi:id='A_243' xmi:type='cmof:Association' memberEnd='P_G_244 P_G_245' name='Segments'>
+        <ownedEnd xmi:id='P_G_245' xmi:type='cmof:Property'  type='C_246' name='owner' lower='0' upper='1' isComposite='false' association='A_243' />
+      </ownedMember>
+      <ownedMember xmi:id='A_247' xmi:type='cmof:Association' memberEnd='P_G_248 P_G_249' name='Models'>
+        <ownedEnd xmi:id='P_G_249' xmi:type='cmof:Property'  type='C_246' name='owner' lower='1' upper='1' isComposite='false' association='A_247' />
+      </ownedMember>
+      <ownedMember xmi:id='A_251' xmi:type='cmof:Association' memberEnd='P_G_252 P_G_253' name='Reference'>
+        <ownedEnd xmi:id='P_G_253' xmi:type='cmof:Property'  type='C_254' name='taggedRef' lower='0' upper='*' isComposite='false' association='A_251' />
+      </ownedMember>
+      <ownedMember xmi:id='A_256' xmi:type='cmof:Association' name='Stereotypes' memberEnd='P_G_257 P_G_258' />
+      <ownedMember xmi:id='A_260' xmi:type='cmof:Association' name='Tags' memberEnd='P_G_261 P_G_262' />
+      <ownedMember xmi:id='A_264' xmi:type='cmof:Association' memberEnd='P_G_265 P_G_266' name='TaggedValueDefinition'>
+        <ownedEnd xmi:id='P_G_266' xmi:type='cmof:Property'  type='C_267' name='extendedValue' lower='0' upper='*' isComposite='false' association='A_264' />
+      </ownedMember>
+      <ownedMember xmi:id='C_241' xmi:type='cmof:Class'  name='FrameworkElement' superClass='C_831'  isAbstract='true' >
+        <ownedAttribute xmi:id='P_G_239' xmi:type='cmof:Property'  type='C_242' name='extensionFamily' lower='0' upper='*' isComposite='true' association='A_238' />
+        <ownedAttribute xmi:id='P_950' xmi:type='cmof:Property' name='name' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='A_24' xmi:type='cmof:Association' name='A_KDMModel_ownedElement' memberEnd='P_O_23 P_D_23' />
+      <ownedMember xmi:id='C_250' xmi:type='cmof:Class'  name='KDMModel' superClass='C_241'  isAbstract='true' >
+        <ownedAttribute xmi:id='P_O_23' xmi:type='cmof:Property' isOrdered='false' isDerivedUnion='true' isDerived='true' isReadOnly='true'  type='C_67' name='ownedElement' lower='0' upper='*' isComposite='true' association='A_24' />
+      </ownedMember>
+      <ownedMember xmi:id='C_832' xmi:type='cmof:Class'  name='Audit' superClass='C_255'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_830' xmi:type='cmof:Property'  type='C_831' name='owner' lower='1' upper='1' isComposite='false' association='A_828' />
+        <ownedAttribute xmi:id='P_951' xmi:type='cmof:Property' name='description' type='D_923' />
+        <ownedAttribute xmi:id='P_952' xmi:type='cmof:Property' name='author' type='D_923' />
+        <ownedAttribute xmi:id='P_953' xmi:type='cmof:Property' name='date' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_246' xmi:type='cmof:Class'  name='Segment' superClass='C_241'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_244' xmi:type='cmof:Property'  type='C_246' name='segment' lower='0' upper='*' isComposite='true' association='A_243' />
+        <ownedAttribute xmi:id='P_G_248' xmi:type='cmof:Property'  type='C_250' name='model' lower='0' upper='*' isComposite='true' association='A_247' />
+      </ownedMember>
+      <ownedMember xmi:id='C_844' xmi:type='cmof:Class'  name='Attribute' superClass='C_954'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_843' xmi:type='cmof:Property'  type='C_839' name='owner' lower='1' upper='1' isComposite='false' association='A_841' />
+        <ownedAttribute xmi:id='P_955' xmi:type='cmof:Property' name='tag' type='D_923' />
+        <ownedAttribute xmi:id='P_956' xmi:type='cmof:Property' name='value' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_840' xmi:type='cmof:Class'  name='Annotation' superClass='C_954'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_838' xmi:type='cmof:Property'  type='C_839' name='owner' lower='1' upper='1' isComposite='false' association='A_836' />
+        <ownedAttribute xmi:id='P_957' xmi:type='cmof:Property' name='text' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_263' xmi:type='cmof:Class'  name='TagDefinition' superClass='C_958'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_262' xmi:type='cmof:Property'  type='C_259' name='owner' lower='1' upper='1' isComposite='false' association='A_260' />
+        <ownedAttribute xmi:id='P_959' xmi:type='cmof:Property' name='tag' type='D_923' />
+        <ownedAttribute xmi:id='P_960' xmi:type='cmof:Property' name='type' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_267' xmi:type='cmof:Class'  name='ExtendedValue' superClass='C_958'  isAbstract='true' >
+        <ownedAttribute xmi:id='P_G_265' xmi:type='cmof:Property'  type='C_263' name='tag' lower='1' upper='1' isComposite='false' association='A_264' />
+      </ownedMember>
+      <ownedMember xmi:id='C_259' xmi:type='cmof:Class'  name='Stereotype' superClass='C_958'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_258' xmi:type='cmof:Property'  type='C_242' name='owner' lower='1' upper='1' isComposite='false' association='A_256' />
+        <ownedAttribute xmi:id='P_G_261' xmi:type='cmof:Property'  type='C_263' name='tag' lower='0' upper='*' isComposite='true' association='A_260' />
+        <ownedAttribute xmi:id='P_961' xmi:type='cmof:Property' name='name' type='D_923' />
+        <ownedAttribute xmi:id='P_962' xmi:type='cmof:Property' name='type' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_242' xmi:type='cmof:Class'  name='ExtensionFamily' superClass='C_958'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_240' xmi:type='cmof:Property'  type='C_241' name='owner' lower='1' upper='1' isComposite='false' association='A_238' />
+        <ownedAttribute xmi:id='P_G_257' xmi:type='cmof:Property'  type='C_259' name='stereotype' lower='0' upper='*' isComposite='true' association='A_256' />
+        <ownedAttribute xmi:id='P_963' xmi:type='cmof:Property' name='name' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_254' xmi:type='cmof:Class'  name='TaggedRef' superClass='C_267'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_252' xmi:type='cmof:Property'  type='C_255' name='reference' lower='1' upper='1' isComposite='false' association='A_251' />
+      </ownedMember>
+      <ownedMember xmi:id='C_964' xmi:type='cmof:Class'  name='TaggedValue' superClass='C_267'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_965' xmi:type='cmof:Property' name='value' type='D_923' />
+      </ownedMember>
+    </ownedMember>
+    <ownedMember xmi:id='Pk_966' xmi:type='cmof:Package' name='structure' >
+      <ownedMember xmi:id='A_268' xmi:type='cmof:Association' memberEnd='P_O_269 P_D_269'  name='A_AbstractStructureElement_implementation' general='A_11'>
+        <ownedEnd xmi:id='P_D_269' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_270' name='group' lower='0' upper='*' isComposite='false' association='A_268' />
+      </ownedMember>
+      <ownedMember xmi:id='A_271' xmi:type='cmof:Association' memberEnd='P_O_272 P_D_272'  name='A_AbstractStructureElement_structureElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_272' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_270' name='owner' lower='0' upper='1' isComposite='false' association='A_271' />
+      </ownedMember>
+      <ownedMember xmi:id='A_273' xmi:type='cmof:Association' memberEnd='P_O_274 P_D_274'  name='A_AbstractStructureElement_structureRelationship' general='A_5'>
+        <ownedEnd xmi:id='P_D_274' xmi:type='cmof:Property'  type='C_270' name='abstractStructureElement' lower='1' upper='1' isComposite='false' association='A_273' />
+      </ownedMember>
+      <ownedMember xmi:id='C_270' xmi:type='cmof:Class'  name='AbstractStructureElement' superClass='C_67' isAbstract='true' >
+        <ownedAttribute xmi:id='P_O_269' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_67' name='implementation' lower='0' upper='*' isComposite='false' association='A_268' />
+        <ownedAttribute xmi:id='P_O_272' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_270' name='structureElement' lower='0' upper='*' isComposite='true' association='A_271' />
+        <ownedAttribute xmi:id='P_O_274' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_4'  type='C_275' name='structureRelationship' lower='0' upper='*' isComposite='true' association='A_273' />
+      </ownedMember>
+      <ownedMember xmi:id='C_967' xmi:type='cmof:Class'  name='Subsystem' superClass='C_270' isAbstract='false' />
+      <ownedMember xmi:id='C_968' xmi:type='cmof:Class'  name='Layer' superClass='C_270' isAbstract='false' />
+      <ownedMember xmi:id='A_276' xmi:type='cmof:Association' memberEnd='P_O_277 P_D_277'  name='A_StructureModel_structureElement' general='A_24'>
+        <ownedEnd xmi:id='P_D_277' xmi:type='cmof:Property' subsettedProperty='P_D_23'  type='C_278' name='model' lower='0' upper='1' isComposite='false' association='A_276' />
+      </ownedMember>
+      <ownedMember xmi:id='C_278' xmi:type='cmof:Class'  name='StructureModel' superClass='C_250'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_277' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_23'  type='C_270' name='structureElement' lower='0' upper='*' isComposite='true' association='A_276' />
+      </ownedMember>
+      <ownedMember xmi:id='C_969' xmi:type='cmof:Class'  name='Component' superClass='C_270' isAbstract='false' />
+      <ownedMember xmi:id='C_970' xmi:type='cmof:Class'  name='SoftwareSystem' superClass='C_270' isAbstract='false' />
+      <ownedMember xmi:id='C_275' xmi:type='cmof:Class'  name='AbstractStructureRelationship' superClass='C_824'  isAbstract='true' />
+      <ownedMember xmi:id='A_279' xmi:type='cmof:Association' memberEnd='P_G_281 P_G_283'  name='A_structureRelationship_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_283' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_285' name='inStructureRelationship' lower='0' upper='*' isComposite='false' association='A_279' />
+      </ownedMember>
+      <ownedMember xmi:id='A_280' xmi:type='cmof:Association' memberEnd='P_G_282 P_G_284'  name='A_structureRelationship_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_284' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_285' name='outStructureRelationship' lower='0' upper='*' isComposite='false' association='A_280' />
+      </ownedMember>
+      <ownedMember xmi:id='C_285' xmi:type='cmof:Class'  name='StructureRelationship' superClass='C_275'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_281' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_279' />
+        <ownedAttribute xmi:id='P_G_282' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_270' name='from' lower='1' upper='1' isComposite='false' association='A_280' />
+      </ownedMember>
+      <ownedMember xmi:id='C_971' xmi:type='cmof:Class'  name='ArchitectureView' superClass='C_270' isAbstract='false' />
+      <ownedMember xmi:id='C_972' xmi:type='cmof:Class'  name='StructureElement' superClass='C_270' isAbstract='false' />
+    </ownedMember>
+    <ownedMember xmi:id='Pk_973' xmi:type='cmof:Package' name='code' >
+      <ownedMember xmi:id='A_286' xmi:type='cmof:Association' memberEnd='P_G_287 P_G_288' name='BaseType'>
+        <ownedEnd xmi:id='P_G_288' xmi:type='cmof:Property'  type='C_289' name='definedType' lower='0' upper='*' isComposite='false' association='A_286' />
+      </ownedMember>
+      <ownedMember xmi:id='A_291' xmi:type='cmof:Association' memberEnd='P_G_292 P_G_293' name='Type'>
+        <ownedEnd xmi:id='P_G_293' xmi:type='cmof:Property'  type='C_294' name='dataElement' lower='0' upper='*' isComposite='false' association='A_291' />
+      </ownedMember>
+      <ownedMember xmi:id='A_295' xmi:type='cmof:Association' memberEnd='P_G_296 P_G_297' name='SignatureType'>
+        <ownedEnd xmi:id='P_G_297' xmi:type='cmof:Property'  type='C_298' name='controlElement' lower='0' upper='*' isComposite='false' association='A_295' />
+      </ownedMember>
+      <ownedMember xmi:id='A_299' xmi:type='cmof:Association' memberEnd='P_G_300 P_G_301' name='Comments'>
+        <ownedEnd xmi:id='P_G_301' xmi:type='cmof:Property'  type='C_12' name='owner' lower='1' upper='1' isComposite='false' association='A_299' />
+      </ownedMember>
+      <ownedMember xmi:id='A_303' xmi:type='cmof:Association' memberEnd='P_O_304 P_D_304'  name='A_AbstractCodeElement_codeRelation' general='A_5'>
+        <ownedEnd xmi:id='P_D_304' xmi:type='cmof:Property'  type='C_12' name='abstractCodeElement' lower='1' upper='1' isComposite='false' association='A_303' />
+      </ownedMember>
+      <ownedMember xmi:id='A_306' xmi:type='cmof:Association' memberEnd='P_O_307 P_D_307'  name='A_AbstractCodeElement_entryFlow' general='A_5'>
+        <ownedEnd xmi:id='P_D_307' xmi:type='cmof:Property'  type='C_12' name='abstractCodeElement' lower='0' upper='1' isComposite='false' association='A_306' />
+      </ownedMember>
+      <ownedMember xmi:id='C_12' xmi:type='cmof:Class'  name='AbstractCodeElement' superClass='C_67' isAbstract='true' >
+        <ownedAttribute xmi:id='P_G_300' xmi:type='cmof:Property'  type='C_302' name='comment' lower='0' upper='*' isComposite='true' association='A_299' />
+        <ownedAttribute xmi:id='P_O_304' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_4'  type='C_305' name='codeRelation' lower='0' upper='*' isComposite='true' association='A_303' />
+        <ownedAttribute xmi:id='P_O_307' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_4'  type='C_308' name='entryFlow' lower='0' upper='*' isComposite='true' association='A_306' />
+      </ownedMember>
+      <ownedMember xmi:id='C_197' xmi:type='cmof:Class'  name='CodeItem' superClass='C_12' isAbstract='true' />
+      <ownedMember xmi:id='C_768' xmi:type='cmof:Class'  name='ComputationalObject' superClass='C_197' isAbstract='false' />
+      <ownedMember xmi:id='A_309' xmi:type='cmof:Association' memberEnd='P_O_310 P_D_310'  name='A_ControlElement_codeElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_310' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_298' name='owner' lower='0' upper='1' isComposite='false' association='A_309' />
+      </ownedMember>
+      <ownedMember xmi:id='C_298' xmi:type='cmof:Class'  name='ControlElement' superClass='C_768' isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_296' xmi:type='cmof:Property'  type='C_290' name='type' lower='0' upper='1' isComposite='false' association='A_295' />
+        <ownedAttribute xmi:id='P_O_310' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_12' name='codeElement' lower='0' upper='*' isComposite='true' association='A_309' />
+      </ownedMember>
+      <ownedMember xmi:id='C_974' xmi:type='cmof:Class'  name='MethodUnit' superClass='C_298' isAbstract='false' >
+        <ownedAttribute xmi:id='P_976' xmi:type='cmof:Property' name='kind' type='D_975' />
+        <ownedAttribute xmi:id='P_978' xmi:type='cmof:Property' name='export' type='D_977' />
+        <ownedAttribute xmi:id='P_980' xmi:type='cmof:Property' name='isFinal' type='D_979' />
+        <ownedAttribute xmi:id='P_981' xmi:type='cmof:Property' name='isStatic' type='D_979' />
+        <ownedAttribute xmi:id='P_982' xmi:type='cmof:Property' name='isVirtual' type='D_979' />
+        <ownedAttribute xmi:id='P_983' xmi:type='cmof:Property' name='isAbstract' type='D_979' />
+      </ownedMember>
+      <ownedMember xmi:id='A_311' xmi:type='cmof:Association' memberEnd='P_O_312 P_D_312'  name='A_Module_codeElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_312' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_152' name='owner' lower='0' upper='1' isComposite='false' association='A_311' />
+      </ownedMember>
+      <ownedMember xmi:id='C_152' xmi:type='cmof:Class'  name='Module' superClass='C_197' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_312' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_12' name='codeElement' lower='0' upper='*' isComposite='true' association='A_311' />
+      </ownedMember>
+      <ownedMember xmi:id='C_984' xmi:type='cmof:Class'  name='CodeAssembly' superClass='C_152' isAbstract='false' />
+      <ownedMember xmi:id='C_985' xmi:type='cmof:Class'  name='CallableUnit' superClass='C_298' isAbstract='false' >
+        <ownedAttribute xmi:id='P_987' xmi:type='cmof:Property' name='kind' type='D_986' />
+        <ownedAttribute xmi:id='P_988' xmi:type='cmof:Property' name='isStatic' type='D_979' />
+      </ownedMember>
+      <ownedMember xmi:id='C_290' xmi:type='cmof:Class'  name='Datatype' superClass='C_197' isAbstract='false' />
+      <ownedMember xmi:id='C_989' xmi:type='cmof:Class'  name='TemplateElement' superClass='C_290' isAbstract='false' />
+      <ownedMember xmi:id='A_313' xmi:type='cmof:Association' memberEnd='P_O_314 P_D_314'  name='A_TemplateUnit_codeElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_314' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_315' name='owner' lower='0' upper='1' isComposite='false' association='A_313' />
+      </ownedMember>
+      <ownedMember xmi:id='C_315' xmi:type='cmof:Class'  name='TemplateUnit' superClass='C_989' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_314' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_12' name='codeElement' lower='0' upper='*' isComposite='true' association='A_313' />
+      </ownedMember>
+      <ownedMember xmi:id='C_990' xmi:type='cmof:Class'  name='TemplateParameter' superClass='C_989' isAbstract='false' />
+      <ownedMember xmi:id='C_305' xmi:type='cmof:Class'  name='AbstractCodeRelationship' superClass='C_824'  isAbstract='true' />
+      <ownedMember xmi:id='A_316' xmi:type='cmof:Association' memberEnd='P_G_318 P_G_320'  name='A_instanceOf_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_320' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_322' name='inInstanceOf' lower='0' upper='*' isComposite='false' association='A_316' />
+      </ownedMember>
+      <ownedMember xmi:id='A_317' xmi:type='cmof:Association' memberEnd='P_G_319 P_G_321'  name='A_instanceOf_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_321' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_322' name='outInstanceOf' lower='0' upper='*' isComposite='false' association='A_317' />
+      </ownedMember>
+      <ownedMember xmi:id='C_322' xmi:type='cmof:Class'  name='InstanceOf' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_318' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_315' name='to' lower='1' upper='1' isComposite='false' association='A_316' />
+        <ownedAttribute xmi:id='P_G_319' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_12' name='from' lower='1' upper='1' isComposite='false' association='A_317' />
+      </ownedMember>
+      <ownedMember xmi:id='C_991' xmi:type='cmof:Class'  name='CompilationUnit' superClass='C_152' isAbstract='false' />
+      <ownedMember xmi:id='A_323' xmi:type='cmof:Association' memberEnd='P_O_324 P_D_324'  name='A_CodeModel_codeElement' general='A_24'>
+        <ownedEnd xmi:id='P_D_324' xmi:type='cmof:Property' subsettedProperty='P_D_23'  type='C_325' name='model' lower='0' upper='1' isComposite='false' association='A_323' />
+      </ownedMember>
+      <ownedMember xmi:id='C_325' xmi:type='cmof:Class'  name='CodeModel' superClass='C_250'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_324' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_23'  type='C_12' name='codeElement' lower='0' upper='*' isComposite='true' association='A_323' />
+      </ownedMember>
+      <ownedMember xmi:id='A_326' xmi:type='cmof:Association' memberEnd='P_O_327 P_D_327'  name='A_DerivedType_itemUnit' general='A_16'>
+        <ownedEnd xmi:id='P_D_327' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_329' name='owner' lower='0' upper='1' isComposite='false' association='A_326' />
+      </ownedMember>
+      <ownedMember xmi:id='C_329' xmi:type='cmof:Class'  name='DerivedType' superClass='C_290' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_327' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_328' name='itemUnit' lower='1' upper='1' isComposite='true' association='A_326' />
+      </ownedMember>
+      <ownedMember xmi:id='A_330' xmi:type='cmof:Association' memberEnd='P_O_331 P_D_331'  name='A_ArrayType_indexUnit' general='A_16'>
+        <ownedEnd xmi:id='P_D_331' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_333' name='owner' lower='0' upper='1' isComposite='false' association='A_330' />
+      </ownedMember>
+      <ownedMember xmi:id='C_333' xmi:type='cmof:Class'  name='ArrayType' superClass='C_329' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_331' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_332' name='indexUnit' lower='0' upper='1' isComposite='true' association='A_330' />
+        <ownedAttribute xmi:id='P_993' xmi:type='cmof:Property' name='size' type='D_992' />
+      </ownedMember>
+      <ownedMember xmi:id='C_994' xmi:type='cmof:Class'  name='PrimitiveType' superClass='C_290' isAbstract='false' />
+      <ownedMember xmi:id='C_995' xmi:type='cmof:Class'  name='BooleanType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='C_996' xmi:type='cmof:Class'  name='CharType' superClass='C_994' isAbstract='false' >
+        <ownedAttribute xmi:id='P_997' xmi:type='cmof:Property' name='charset' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='A_334' xmi:type='cmof:Association' memberEnd='P_O_335 P_D_335'  name='A_ClassUnit_codeElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_335' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_336' name='owner' lower='0' upper='1' isComposite='false' association='A_334' />
+      </ownedMember>
+      <ownedMember xmi:id='C_336' xmi:type='cmof:Class'  name='ClassUnit' superClass='C_290' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_335' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_12' name='codeElement' lower='0' upper='*' isComposite='true' association='A_334' />
+        <ownedAttribute xmi:id='P_998' xmi:type='cmof:Property' name='isAbstract' type='D_979' />
+        <ownedAttribute xmi:id='P_999' xmi:type='cmof:Property' name='isFinal' type='D_979' />
+        <ownedAttribute xmi:id='P_1000' xmi:type='cmof:Property' name='exportKind' type='D_977' />
+      </ownedMember>
+      <ownedMember xmi:id='A_337' xmi:type='cmof:Association' memberEnd='P_O_338 P_D_338'  name='A_CompositeType_itemUnit' general='A_16'>
+        <ownedEnd xmi:id='P_D_338' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_339' name='owner' lower='0' upper='1' isComposite='false' association='A_337' />
+      </ownedMember>
+      <ownedMember xmi:id='C_339' xmi:type='cmof:Class'  name='CompositeType' superClass='C_290' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_338' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_328' name='itemUnit' lower='0' upper='*' isComposite='true' association='A_337' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1001' xmi:type='cmof:Class'  name='RecordType' superClass='C_339' isAbstract='false' />
+      <ownedMember xmi:id='A_340' xmi:type='cmof:Association' memberEnd='P_O_341 P_D_341'  name='A_EnumeratedType_value' general='A_16'>
+        <ownedEnd xmi:id='P_D_341' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_343' name='owner' lower='1' upper='1' isComposite='false' association='A_340' />
+      </ownedMember>
+      <ownedMember xmi:id='C_343' xmi:type='cmof:Class'  name='EnumeratedType' superClass='C_290' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_341' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_342' name='value' lower='0' upper='*' isComposite='true' association='A_340' />
+      </ownedMember>
+      <ownedMember xmi:id='A_344' xmi:type='cmof:Association' memberEnd='P_G_346 P_G_348'  name='A_extends_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_348' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_350' name='inExtends' lower='0' upper='*' isComposite='false' association='A_344' />
+      </ownedMember>
+      <ownedMember xmi:id='A_345' xmi:type='cmof:Association' memberEnd='P_G_347 P_G_349'  name='A_extends_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_349' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_350' name='outExtends' lower='0' upper='*' isComposite='false' association='A_345' />
+      </ownedMember>
+      <ownedMember xmi:id='C_350' xmi:type='cmof:Class'  name='Extends' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_346' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_290' name='to' lower='1' upper='1' isComposite='false' association='A_344' />
+        <ownedAttribute xmi:id='P_G_347' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_290' name='from' lower='1' upper='1' isComposite='false' association='A_345' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1002' xmi:type='cmof:Class'  name='ScaledType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='C_1003' xmi:type='cmof:Class'  name='FloatType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='A_351' xmi:type='cmof:Association' memberEnd='P_G_353 P_G_355'  name='A_hasType_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_355' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_357' name='inHasType' lower='0' upper='*' isComposite='false' association='A_351' />
+      </ownedMember>
+      <ownedMember xmi:id='A_352' xmi:type='cmof:Association' memberEnd='P_G_354 P_G_356'  name='A_hasType_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_356' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_357' name='outHasType' lower='0' upper='*' isComposite='false' association='A_352' />
+      </ownedMember>
+      <ownedMember xmi:id='C_357' xmi:type='cmof:Class'  name='HasType' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_353' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_290' name='to' lower='1' upper='1' isComposite='false' association='A_351' />
+        <ownedAttribute xmi:id='P_G_354' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_197' name='from' lower='1' upper='1' isComposite='false' association='A_352' />
+      </ownedMember>
+      <ownedMember xmi:id='A_358' xmi:type='cmof:Association' memberEnd='P_G_360 P_G_362'  name='A_implementationOf_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_362' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_364' name='inImplementationOf' lower='0' upper='*' isComposite='false' association='A_358' />
+      </ownedMember>
+      <ownedMember xmi:id='A_359' xmi:type='cmof:Association' memberEnd='P_G_361 P_G_363'  name='A_implementationOf_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_363' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_364' name='outImplementationOf' lower='0' upper='*' isComposite='false' association='A_359' />
+      </ownedMember>
+      <ownedMember xmi:id='C_364' xmi:type='cmof:Class'  name='ImplementationOf' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_360' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_197' name='to' lower='1' upper='1' isComposite='false' association='A_358' />
+        <ownedAttribute xmi:id='P_G_361' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_197' name='from' lower='1' upper='1' isComposite='false' association='A_359' />
+      </ownedMember>
+      <ownedMember xmi:id='A_365' xmi:type='cmof:Association' memberEnd='P_G_367 P_G_369'  name='A_implements_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_369' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_371' name='inImplements' lower='0' upper='*' isComposite='false' association='A_365' />
+      </ownedMember>
+      <ownedMember xmi:id='A_366' xmi:type='cmof:Association' memberEnd='P_G_368 P_G_370'  name='A_implements_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_370' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_371' name='outImplements' lower='0' upper='*' isComposite='false' association='A_366' />
+      </ownedMember>
+      <ownedMember xmi:id='C_371' xmi:type='cmof:Class'  name='Implements' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_367' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_197' name='to' lower='1' upper='1' isComposite='false' association='A_365' />
+        <ownedAttribute xmi:id='P_G_368' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_197' name='from' lower='1' upper='1' isComposite='false' association='A_366' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1004' xmi:type='cmof:Class'  name='IntegerType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='A_372' xmi:type='cmof:Association' memberEnd='P_O_373 P_D_373'  name='A_InterfaceUnit_codeElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_373' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_374' name='owner' lower='0' upper='1' isComposite='false' association='A_372' />
+      </ownedMember>
+      <ownedMember xmi:id='C_374' xmi:type='cmof:Class'  name='InterfaceUnit' superClass='C_290' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_373' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_12' name='codeElement' lower='0' upper='*' isComposite='true' association='A_372' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1005' xmi:type='cmof:Class'  name='PointerType' superClass='C_329' isAbstract='false' />
+      <ownedMember xmi:id='A_375' xmi:type='cmof:Association' memberEnd='P_O_376 P_D_376'  name='A_DefinedType_codeElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_376' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_289' name='owner' lower='0' upper='1' isComposite='false' association='A_375' />
+      </ownedMember>
+      <ownedMember xmi:id='C_289' xmi:type='cmof:Class'  name='DefinedType' superClass='C_290' isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_287' xmi:type='cmof:Property'  type='C_290' name='type' lower='1' upper='1' isComposite='false' association='A_286' />
+        <ownedAttribute xmi:id='P_O_376' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_290' name='codeElement' lower='0' upper='*' isComposite='true' association='A_375' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1006' xmi:type='cmof:Class'  name='TypeUnit' superClass='C_289' isAbstract='false' />
+      <ownedMember xmi:id='A_377' xmi:type='cmof:Association' memberEnd='P_O_378 P_D_378'  name='A_RangeType_lower' general='A_16'>
+        <ownedEnd xmi:id='P_D_378' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_379' name='owner' lower='0' upper='1' isComposite='false' association='A_377' />
+      </ownedMember>
+      <ownedMember xmi:id='A_380' xmi:type='cmof:Association' memberEnd='P_O_381 P_D_381'  name='A_RangeType_upper' general='A_16'>
+        <ownedEnd xmi:id='P_D_381' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_379' name='owner' lower='0' upper='1' isComposite='false' association='A_380' />
+      </ownedMember>
+      <ownedMember xmi:id='C_379' xmi:type='cmof:Class'  name='RangeType' superClass='C_329' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_378' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_342' name='lower' lower='0' upper='1' isComposite='true' association='A_377' />
+        <ownedAttribute xmi:id='P_O_381' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_342' name='upper' lower='0' upper='1' isComposite='true' association='A_380' />
+      </ownedMember>
+      <ownedMember xmi:id='A_382' xmi:type='cmof:Association' memberEnd='P_O_383 P_D_383'  name='A_Signature_parameterUnit' general='A_16'>
+        <ownedEnd xmi:id='P_D_383' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_385' name='owner' lower='0' upper='1' isComposite='false' association='A_382' />
+      </ownedMember>
+      <ownedMember xmi:id='C_385' xmi:type='cmof:Class'  name='Signature' superClass='C_290' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_383' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_384' name='parameterUnit' lower='0' upper='*' isComposite='true' association='A_382' />
+      </ownedMember>
+      <ownedMember xmi:id='A_386' xmi:type='cmof:Association' memberEnd='P_O_387 P_D_387'  name='A_DataElement_codeElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_387' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_294' name='owner' lower='0' upper='1' isComposite='false' association='A_386' />
+      </ownedMember>
+      <ownedMember xmi:id='C_294' xmi:type='cmof:Class'  name='DataElement' superClass='C_768' isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_292' xmi:type='cmof:Property'  type='C_290' name='type' lower='1' upper='1' isComposite='false' association='A_291' />
+        <ownedAttribute xmi:id='P_O_387' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_290' name='codeElement' lower='0' upper='*' isComposite='true' association='A_386' />
+        <ownedAttribute xmi:id='P_1007' xmi:type='cmof:Property' name='ext' type='D_923' />
+        <ownedAttribute xmi:id='P_1008' xmi:type='cmof:Property' name='size' type='D_992' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1009' xmi:type='cmof:Class'  name='StringType' superClass='C_994' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1010' xmi:type='cmof:Property' name='charset' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1011' xmi:type='cmof:Class'  name='ChoiceType' superClass='C_339' isAbstract='false' />
+      <ownedMember xmi:id='A_388' xmi:type='cmof:Association' memberEnd='P_O_389 P_D_389'  name='A_NamespaceUnit_groupedCode' general='A_11'>
+        <ownedEnd xmi:id='P_D_389' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_390' name='group' lower='0' upper='*' isComposite='false' association='A_388' />
+      </ownedMember>
+      <ownedMember xmi:id='C_390' xmi:type='cmof:Class'  name='NamespaceUnit' superClass='C_197' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_389' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_197' name='groupedCode' lower='0' upper='*' isComposite='false' association='A_388' />
+      </ownedMember>
+      <ownedMember xmi:id='A_391' xmi:type='cmof:Association' memberEnd='P_G_393 P_G_395'  name='A_visibleIn_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_395' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_397' name='inVisibleIn' lower='0' upper='*' isComposite='false' association='A_391' />
+      </ownedMember>
+      <ownedMember xmi:id='A_392' xmi:type='cmof:Association' memberEnd='P_G_394 P_G_396'  name='A_visibleIn_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_396' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_397' name='outVisibleIn' lower='0' upper='*' isComposite='false' association='A_392' />
+      </ownedMember>
+      <ownedMember xmi:id='C_397' xmi:type='cmof:Class'  name='VisibleIn' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_393' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_197' name='to' lower='1' upper='1' isComposite='false' association='A_391' />
+        <ownedAttribute xmi:id='P_G_394' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_197' name='from' lower='1' upper='1' isComposite='false' association='A_392' />
+      </ownedMember>
+      <ownedMember xmi:id='C_302' xmi:type='cmof:Class'  name='CommentUnit' superClass='C_831'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_1012' xmi:type='cmof:Property' name='text' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1013' xmi:type='cmof:Class'  name='SharedUnit' superClass='C_991' isAbstract='false' />
+      <ownedMember xmi:id='C_1014' xmi:type='cmof:Class'  name='DecimalType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='C_1015' xmi:type='cmof:Class'  name='DateType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='C_1016' xmi:type='cmof:Class'  name='TimeType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='C_1017' xmi:type='cmof:Class'  name='VoidType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='C_400' xmi:type='cmof:Class'  name='ValueElement' superClass='C_294' isAbstract='false' />
+      <ownedMember xmi:id='C_342' xmi:type='cmof:Class'  name='Value' superClass='C_400' isAbstract='false' />
+      <ownedMember xmi:id='A_398' xmi:type='cmof:Association' memberEnd='P_O_399 P_D_399'  name='A_ValueList_valueElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_399' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_401' name='owner' lower='0' upper='1' isComposite='false' association='A_398' />
+      </ownedMember>
+      <ownedMember xmi:id='C_401' xmi:type='cmof:Class'  name='ValueList' superClass='C_400' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_399' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_400' name='valueElement' lower='0' upper='*' isComposite='true' association='A_398' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1018' xmi:type='cmof:Class'  name='StorableUnit' superClass='C_294' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1020' xmi:type='cmof:Property' name='kind' type='D_1019' />
+        <ownedAttribute xmi:id='P_1021' xmi:type='cmof:Property' name='isStatic' type='D_979' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1022' xmi:type='cmof:Class'  name='MemberUnit' superClass='C_294' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1023' xmi:type='cmof:Property' name='export' type='D_977' />
+        <ownedAttribute xmi:id='P_1024' xmi:type='cmof:Property' name='isFinal' type='D_979' />
+        <ownedAttribute xmi:id='P_1025' xmi:type='cmof:Property' name='isStatic' type='D_979' />
+      </ownedMember>
+      <ownedMember xmi:id='C_384' xmi:type='cmof:Class'  name='ParameterUnit' superClass='C_294' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1027' xmi:type='cmof:Property' name='kind' type='D_1026' />
+        <ownedAttribute xmi:id='P_1028' xmi:type='cmof:Property' name='pos' type='D_992' />
+        <ownedAttribute xmi:id='P_1029' xmi:type='cmof:Property' name='isFinal' type='D_979' />
+      </ownedMember>
+      <ownedMember xmi:id='C_328' xmi:type='cmof:Class'  name='ItemUnit' superClass='C_294' isAbstract='false' />
+      <ownedMember xmi:id='C_332' xmi:type='cmof:Class'  name='IndexUnit' superClass='C_294' isAbstract='false' />
+      <ownedMember xmi:id='C_1030' xmi:type='cmof:Class'  name='SynonymType' superClass='C_289' isAbstract='false' />
+      <ownedMember xmi:id='C_1031' xmi:type='cmof:Class'  name='SequenceType' superClass='C_329' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1032' xmi:type='cmof:Property' name='size' type='D_992' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1033' xmi:type='cmof:Class'  name='BagType' superClass='C_329' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1034' xmi:type='cmof:Property' name='size' type='D_992' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1035' xmi:type='cmof:Class'  name='SetType' superClass='C_329' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1036' xmi:type='cmof:Property' name='size' type='D_992' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1037' xmi:type='cmof:Class'  name='CodeElement' superClass='C_197' isAbstract='false' />
+      <ownedMember xmi:id='A_402' xmi:type='cmof:Association' memberEnd='P_G_404 P_G_406'  name='A_codeRelationship_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_406' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_408' name='inCodeRelationship' lower='0' upper='*' isComposite='false' association='A_402' />
+      </ownedMember>
+      <ownedMember xmi:id='A_403' xmi:type='cmof:Association' memberEnd='P_G_405 P_G_407'  name='A_codeRelationship_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_407' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_408' name='outCodeRelationship' lower='0' upper='*' isComposite='false' association='A_403' />
+      </ownedMember>
+      <ownedMember xmi:id='C_408' xmi:type='cmof:Class'  name='CodeRelationship' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_404' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_402' />
+        <ownedAttribute xmi:id='P_G_405' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_197' name='from' lower='1' upper='1' isComposite='false' association='A_403' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1038' xmi:type='cmof:Class'  name='LanguageUnit' superClass='C_152' isAbstract='false' />
+      <ownedMember xmi:id='C_1039' xmi:type='cmof:Class'  name='OrdinalType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='C_1040' xmi:type='cmof:Class'  name='BitstringType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='C_1041' xmi:type='cmof:Class'  name='OctetType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='C_1042' xmi:type='cmof:Class'  name='OctetstringType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='C_1043' xmi:type='cmof:Class'  name='BitType' superClass='C_994' isAbstract='false' />
+      <ownedMember xmi:id='A_409' xmi:type='cmof:Association' memberEnd='P_G_411 P_G_413'  name='A_imports_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_413' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_415' name='inImports' lower='0' upper='*' isComposite='false' association='A_409' />
+      </ownedMember>
+      <ownedMember xmi:id='A_410' xmi:type='cmof:Association' memberEnd='P_G_412 P_G_414'  name='A_imports_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_414' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_415' name='outImports' lower='0' upper='*' isComposite='false' association='A_410' />
+      </ownedMember>
+      <ownedMember xmi:id='C_415' xmi:type='cmof:Class'  name='Imports' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_411' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_197' name='to' lower='1' upper='1' isComposite='false' association='A_409' />
+        <ownedAttribute xmi:id='P_G_412' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_197' name='from' lower='1' upper='1' isComposite='false' association='A_410' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1044' xmi:type='cmof:Class'  name='Package' superClass='C_152' isAbstract='false' />
+      <ownedMember xmi:id='A_416' xmi:type='cmof:Association' memberEnd='P_G_418 P_G_420'  name='A_parameterTo_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_420' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_422' name='inParameterTo' lower='0' upper='*' isComposite='false' association='A_416' />
+      </ownedMember>
+      <ownedMember xmi:id='A_417' xmi:type='cmof:Association' memberEnd='P_G_419 P_G_421'  name='A_parameterTo_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_421' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_422' name='outParameterTo' lower='0' upper='*' isComposite='false' association='A_417' />
+      </ownedMember>
+      <ownedMember xmi:id='C_422' xmi:type='cmof:Class'  name='ParameterTo' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_418' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_197' name='to' lower='1' upper='1' isComposite='false' association='A_416' />
+        <ownedAttribute xmi:id='P_G_419' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_12' name='from' lower='1' upper='1' isComposite='false' association='A_417' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1045' xmi:type='cmof:Class'  name='TemplateType' superClass='C_989' isAbstract='false' />
+      <ownedMember xmi:id='A_423' xmi:type='cmof:Association' memberEnd='P_O_424 P_D_424'  name='A_PreprocessorDirective_codeElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_424' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_425' name='owner' lower='0' upper='1' isComposite='false' association='A_423' />
+      </ownedMember>
+      <ownedMember xmi:id='C_425' xmi:type='cmof:Class'  name='PreprocessorDirective' superClass='C_12' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_424' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_12' name='codeElement' lower='0' upper='*' isComposite='true' association='A_423' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1046' xmi:type='cmof:Class'  name='MacroDirective' superClass='C_425' isAbstract='false' />
+      <ownedMember xmi:id='C_1047' xmi:type='cmof:Class'  name='MacroUnit' superClass='C_425' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1049' xmi:type='cmof:Property' name='kind' type='D_1048' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1050' xmi:type='cmof:Class'  name='ConditionalDirective' superClass='C_425' isAbstract='false' />
+      <ownedMember xmi:id='C_1051' xmi:type='cmof:Class'  name='IncludeDirective' superClass='C_425' isAbstract='false' />
+      <ownedMember xmi:id='A_426' xmi:type='cmof:Association' memberEnd='P_G_428 P_G_430'  name='A_variantTo_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_430' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_432' name='inVariantTo' lower='0' upper='*' isComposite='false' association='A_426' />
+      </ownedMember>
+      <ownedMember xmi:id='A_427' xmi:type='cmof:Association' memberEnd='P_G_429 P_G_431'  name='A_variantTo_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_431' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_432' name='outVariantTo' lower='0' upper='*' isComposite='false' association='A_427' />
+      </ownedMember>
+      <ownedMember xmi:id='C_432' xmi:type='cmof:Class'  name='VariantTo' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_428' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_425' name='to' lower='1' upper='1' isComposite='false' association='A_426' />
+        <ownedAttribute xmi:id='P_G_429' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_425' name='from' lower='1' upper='1' isComposite='false' association='A_427' />
+      </ownedMember>
+      <ownedMember xmi:id='A_433' xmi:type='cmof:Association' memberEnd='P_G_435 P_G_437'  name='A_expands_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_437' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_439' name='inExpands' lower='0' upper='*' isComposite='false' association='A_433' />
+      </ownedMember>
+      <ownedMember xmi:id='A_434' xmi:type='cmof:Association' memberEnd='P_G_436 P_G_438'  name='A_expands_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_438' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_439' name='outExpands' lower='0' upper='*' isComposite='false' association='A_434' />
+      </ownedMember>
+      <ownedMember xmi:id='C_439' xmi:type='cmof:Class'  name='Expands' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_435' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_425' name='to' lower='1' upper='1' isComposite='false' association='A_433' />
+        <ownedAttribute xmi:id='P_G_436' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_425' name='from' lower='1' upper='1' isComposite='false' association='A_434' />
+      </ownedMember>
+      <ownedMember xmi:id='A_440' xmi:type='cmof:Association' memberEnd='P_G_442 P_G_444'  name='A_redefines_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_444' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_446' name='inRedefines' lower='0' upper='*' isComposite='false' association='A_440' />
+      </ownedMember>
+      <ownedMember xmi:id='A_441' xmi:type='cmof:Association' memberEnd='P_G_443 P_G_445'  name='A_redefines_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_445' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_446' name='outRedefines' lower='0' upper='*' isComposite='false' association='A_441' />
+      </ownedMember>
+      <ownedMember xmi:id='C_446' xmi:type='cmof:Class'  name='Redefines' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_442' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_425' name='to' lower='1' upper='1' isComposite='false' association='A_440' />
+        <ownedAttribute xmi:id='P_G_443' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_425' name='from' lower='1' upper='1' isComposite='false' association='A_441' />
+      </ownedMember>
+      <ownedMember xmi:id='A_447' xmi:type='cmof:Association' memberEnd='P_G_449 P_G_451'  name='A_generatedFrom_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_451' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_453' name='inGeneratedFrom' lower='0' upper='*' isComposite='false' association='A_447' />
+      </ownedMember>
+      <ownedMember xmi:id='A_448' xmi:type='cmof:Association' memberEnd='P_G_450 P_G_452'  name='A_generatedFrom_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_452' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_453' name='outGeneratedFrom' lower='0' upper='*' isComposite='false' association='A_448' />
+      </ownedMember>
+      <ownedMember xmi:id='C_453' xmi:type='cmof:Class'  name='GeneratedFrom' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_449' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_425' name='to' lower='1' upper='1' isComposite='false' association='A_447' />
+        <ownedAttribute xmi:id='P_G_450' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_12' name='from' lower='1' upper='1' isComposite='false' association='A_448' />
+      </ownedMember>
+      <ownedMember xmi:id='A_454' xmi:type='cmof:Association' memberEnd='P_G_456 P_G_458'  name='A_includes_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_458' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_460' name='inIncludes' lower='0' upper='*' isComposite='false' association='A_454' />
+      </ownedMember>
+      <ownedMember xmi:id='A_455' xmi:type='cmof:Association' memberEnd='P_G_457 P_G_459'  name='A_includes_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_459' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_460' name='outIncludes' lower='0' upper='*' isComposite='false' association='A_455' />
+      </ownedMember>
+      <ownedMember xmi:id='C_460' xmi:type='cmof:Class'  name='Includes' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_456' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_12' name='to' lower='1' upper='1' isComposite='false' association='A_454' />
+        <ownedAttribute xmi:id='P_G_457' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_425' name='from' lower='1' upper='1' isComposite='false' association='A_455' />
+      </ownedMember>
+      <ownedMember xmi:id='A_461' xmi:type='cmof:Association' memberEnd='P_G_463 P_G_465'  name='A_hasValue_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_465' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_467' name='inHasValue' lower='0' upper='*' isComposite='false' association='A_461' />
+      </ownedMember>
+      <ownedMember xmi:id='A_462' xmi:type='cmof:Association' memberEnd='P_G_464 P_G_466'  name='A_hasValue_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_466' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_467' name='outHasValue' lower='0' upper='*' isComposite='false' association='A_462' />
+      </ownedMember>
+      <ownedMember xmi:id='C_467' xmi:type='cmof:Class'  name='HasValue' superClass='C_305'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_463' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_12' name='to' lower='1' upper='1' isComposite='false' association='A_461' />
+        <ownedAttribute xmi:id='P_G_464' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_197' name='from' lower='1' upper='1' isComposite='false' association='A_462' />
+      </ownedMember>
+      <ownedMember xmi:id='D_986' xmi:type='cmof:Enumeration' name='CallableKind' >
+        <ownedLiteral xmi:id='EL_1052' xmi:type='cmof:EnumerationLiteral' name='external' />
+        <ownedLiteral xmi:id='EL_1053' xmi:type='cmof:EnumerationLiteral' name='regular' />
+        <ownedLiteral xmi:id='EL_1054' xmi:type='cmof:EnumerationLiteral' name='operator' />
+        <ownedLiteral xmi:id='EL_1055' xmi:type='cmof:EnumerationLiteral' name='stored' />
+        <ownedLiteral xmi:id='EL_1056' xmi:type='cmof:EnumerationLiteral' name='unknown' />
+      </ownedMember>
+      <ownedMember xmi:id='D_975' xmi:type='cmof:Enumeration' name='MethodKind' >
+        <ownedLiteral xmi:id='EL_1057' xmi:type='cmof:EnumerationLiteral' name='method' />
+        <ownedLiteral xmi:id='EL_1058' xmi:type='cmof:EnumerationLiteral' name='constructor' />
+        <ownedLiteral xmi:id='EL_1059' xmi:type='cmof:EnumerationLiteral' name='destructor' />
+        <ownedLiteral xmi:id='EL_1060' xmi:type='cmof:EnumerationLiteral' name='operator' />
+        <ownedLiteral xmi:id='EL_1061' xmi:type='cmof:EnumerationLiteral' name='unknown' />
+      </ownedMember>
+      <ownedMember xmi:id='D_977' xmi:type='cmof:Enumeration' name='ExportKind' >
+        <ownedLiteral xmi:id='EL_1062' xmi:type='cmof:EnumerationLiteral' name='public' />
+        <ownedLiteral xmi:id='EL_1063' xmi:type='cmof:EnumerationLiteral' name='private' />
+        <ownedLiteral xmi:id='EL_1064' xmi:type='cmof:EnumerationLiteral' name='protected' />
+        <ownedLiteral xmi:id='EL_1065' xmi:type='cmof:EnumerationLiteral' name='unknown' />
+      </ownedMember>
+      <ownedMember xmi:id='D_1048' xmi:type='cmof:Enumeration' name='MacroKind' >
+        <ownedLiteral xmi:id='EL_1066' xmi:type='cmof:EnumerationLiteral' name='regular' />
+        <ownedLiteral xmi:id='EL_1067' xmi:type='cmof:EnumerationLiteral' name='option' />
+        <ownedLiteral xmi:id='EL_1068' xmi:type='cmof:EnumerationLiteral' name='undefined' />
+        <ownedLiteral xmi:id='EL_1069' xmi:type='cmof:EnumerationLiteral' name='external' />
+        <ownedLiteral xmi:id='EL_1070' xmi:type='cmof:EnumerationLiteral' name='unknown' />
+      </ownedMember>
+      <ownedMember xmi:id='D_1019' xmi:type='cmof:Enumeration' name='StorableKind' >
+        <ownedLiteral xmi:id='EL_1071' xmi:type='cmof:EnumerationLiteral' name='global' />
+        <ownedLiteral xmi:id='EL_1072' xmi:type='cmof:EnumerationLiteral' name='local' />
+        <ownedLiteral xmi:id='EL_1073' xmi:type='cmof:EnumerationLiteral' name='external' />
+        <ownedLiteral xmi:id='EL_1074' xmi:type='cmof:EnumerationLiteral' name='register' />
+        <ownedLiteral xmi:id='EL_1075' xmi:type='cmof:EnumerationLiteral' name='unknown' />
+      </ownedMember>
+      <ownedMember xmi:id='D_1026' xmi:type='cmof:Enumeration' name='ParameterKind' >
+        <ownedLiteral xmi:id='EL_1076' xmi:type='cmof:EnumerationLiteral' name='byValue' />
+        <ownedLiteral xmi:id='EL_1077' xmi:type='cmof:EnumerationLiteral' name='byName' />
+        <ownedLiteral xmi:id='EL_1078' xmi:type='cmof:EnumerationLiteral' name='byReference' />
+        <ownedLiteral xmi:id='EL_1079' xmi:type='cmof:EnumerationLiteral' name='variadic' />
+        <ownedLiteral xmi:id='EL_1080' xmi:type='cmof:EnumerationLiteral' name='return' />
+        <ownedLiteral xmi:id='EL_1081' xmi:type='cmof:EnumerationLiteral' name='throws' />
+        <ownedLiteral xmi:id='EL_1082' xmi:type='cmof:EnumerationLiteral' name='exception' />
+        <ownedLiteral xmi:id='EL_1083' xmi:type='cmof:EnumerationLiteral' name='catchall' />
+        <ownedLiteral xmi:id='EL_1084' xmi:type='cmof:EnumerationLiteral' name='unknown' />
+      </ownedMember>
+    </ownedMember>
+    <ownedMember xmi:id='Pk_1085' xmi:type='cmof:Package' name='build' >
+      <ownedMember xmi:id='A_468' xmi:type='cmof:Association' memberEnd='P_O_469 P_D_469'  name='A_AbstractBuildElement_buildRelation' general='A_5'>
+        <ownedEnd xmi:id='P_D_469' xmi:type='cmof:Property'  type='C_471' name='abstractBuildElement' lower='1' upper='1' isComposite='false' association='A_468' />
+      </ownedMember>
+      <ownedMember xmi:id='C_471' xmi:type='cmof:Class'  name='AbstractBuildElement' superClass='C_67' isAbstract='true' >
+        <ownedAttribute xmi:id='P_O_469' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_4'  type='C_470' name='buildRelation' lower='0' upper='*' isComposite='true' association='A_468' />
+      </ownedMember>
+      <ownedMember xmi:id='A_472' xmi:type='cmof:Association' memberEnd='P_O_473 P_D_473'  name='A_BuildResource_implementation' general='A_11'>
+        <ownedEnd xmi:id='P_D_473' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_474' name='group' lower='0' upper='*' isComposite='false' association='A_472' />
+      </ownedMember>
+      <ownedMember xmi:id='A_475' xmi:type='cmof:Association' memberEnd='P_O_476 P_D_476'  name='A_BuildResource_groupedBuild' general='A_11'>
+        <ownedEnd xmi:id='P_D_476' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_474' name='group' lower='0' upper='*' isComposite='false' association='A_475' />
+      </ownedMember>
+      <ownedMember xmi:id='A_477' xmi:type='cmof:Association' memberEnd='P_O_478 P_D_478'  name='A_BuildResource_buildElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_478' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_474' name='owner' lower='0' upper='1' isComposite='false' association='A_477' />
+      </ownedMember>
+      <ownedMember xmi:id='C_474' xmi:type='cmof:Class'  name='BuildResource' superClass='C_471' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_473' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_67' name='implementation' lower='0' upper='*' isComposite='false' association='A_472' />
+        <ownedAttribute xmi:id='P_O_476' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_471' name='groupedBuild' lower='0' upper='*' isComposite='false' association='A_475' />
+        <ownedAttribute xmi:id='P_O_478' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_471' name='buildElement' lower='0' upper='*' isComposite='true' association='A_477' />
+      </ownedMember>
+      <ownedMember xmi:id='C_534' xmi:type='cmof:Class'  name='BuildDescription' superClass='C_474' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1086' xmi:type='cmof:Property' name='text' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_486' xmi:type='cmof:Class'  name='SymbolicLink' superClass='C_471' isAbstract='false' />
+      <ownedMember xmi:id='C_470' xmi:type='cmof:Class'  name='AbstractBuildRelationship' superClass='C_824'  isAbstract='true' />
+      <ownedMember xmi:id='A_479' xmi:type='cmof:Association' memberEnd='P_G_481 P_G_483'  name='A_linksTo_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_483' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_485' name='inLinksTo' lower='0' upper='*' isComposite='false' association='A_479' />
+      </ownedMember>
+      <ownedMember xmi:id='A_480' xmi:type='cmof:Association' memberEnd='P_G_482 P_G_484'  name='A_linksTo_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_484' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_485' name='outLinksTo' lower='0' upper='*' isComposite='false' association='A_480' />
+      </ownedMember>
+      <ownedMember xmi:id='C_485' xmi:type='cmof:Class'  name='LinksTo' superClass='C_470'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_481' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_471' name='to' lower='1' upper='1' isComposite='false' association='A_479' />
+        <ownedAttribute xmi:id='P_G_482' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_486' name='from' lower='1' upper='1' isComposite='false' association='A_480' />
+      </ownedMember>
+      <ownedMember xmi:id='A_487' xmi:type='cmof:Association' memberEnd='P_G_489 P_G_491'  name='A_consumes_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_491' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_493' name='inConsumes' lower='0' upper='*' isComposite='false' association='A_487' />
+      </ownedMember>
+      <ownedMember xmi:id='A_488' xmi:type='cmof:Association' memberEnd='P_G_490 P_G_492'  name='A_consumes_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_492' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_493' name='outConsumes' lower='0' upper='*' isComposite='false' association='A_488' />
+      </ownedMember>
+      <ownedMember xmi:id='C_493' xmi:type='cmof:Class'  name='Consumes' superClass='C_470'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_489' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_471' name='to' lower='1' upper='1' isComposite='false' association='A_487' />
+        <ownedAttribute xmi:id='P_G_490' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_494' name='from' lower='1' upper='1' isComposite='false' association='A_488' />
+      </ownedMember>
+      <ownedMember xmi:id='A_495' xmi:type='cmof:Association' memberEnd='P_O_496 P_D_496'  name='A_BuildModel_buildElement' general='A_24'>
+        <ownedEnd xmi:id='P_D_496' xmi:type='cmof:Property' subsettedProperty='P_D_23'  type='C_497' name='model' lower='0' upper='1' isComposite='false' association='A_495' />
+      </ownedMember>
+      <ownedMember xmi:id='C_497' xmi:type='cmof:Class'  name='BuildModel' superClass='C_250'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_496' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_23'  type='C_471' name='buildElement' lower='0' upper='*' isComposite='true' association='A_495' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1087' xmi:type='cmof:Class'  name='BuildComponent' superClass='C_474' isAbstract='false' />
+      <ownedMember xmi:id='C_511' xmi:type='cmof:Class'  name='Supplier' superClass='C_471' isAbstract='false' />
+      <ownedMember xmi:id='C_526' xmi:type='cmof:Class'  name='Tool' superClass='C_471' isAbstract='false' />
+      <ownedMember xmi:id='C_1088' xmi:type='cmof:Class'  name='BuildElement' superClass='C_471' isAbstract='false' />
+      <ownedMember xmi:id='A_498' xmi:type='cmof:Association' memberEnd='P_G_500 P_G_502'  name='A_buildRelationship_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_502' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_504' name='inBuildRelationship' lower='0' upper='*' isComposite='false' association='A_498' />
+      </ownedMember>
+      <ownedMember xmi:id='A_499' xmi:type='cmof:Association' memberEnd='P_G_501 P_G_503'  name='A_buildRelationship_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_503' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_504' name='outBuildRelationship' lower='0' upper='*' isComposite='false' association='A_499' />
+      </ownedMember>
+      <ownedMember xmi:id='C_504' xmi:type='cmof:Class'  name='BuildRelationship' superClass='C_470'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_500' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_498' />
+        <ownedAttribute xmi:id='P_G_501' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_471' name='from' lower='1' upper='1' isComposite='false' association='A_499' />
+      </ownedMember>
+      <ownedMember xmi:id='A_505' xmi:type='cmof:Association' memberEnd='P_G_507 P_G_509'  name='A_suppliedBy_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_509' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_512' name='inSuppliedBy' lower='0' upper='*' isComposite='false' association='A_505' />
+      </ownedMember>
+      <ownedMember xmi:id='A_506' xmi:type='cmof:Association' memberEnd='P_G_508 P_G_510'  name='A_suppliedBy_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_510' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_512' name='outSuppliedBy' lower='0' upper='*' isComposite='false' association='A_506' />
+      </ownedMember>
+      <ownedMember xmi:id='C_512' xmi:type='cmof:Class'  name='SuppliedBy' superClass='C_470'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_507' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_511' name='to' lower='1' upper='1' isComposite='false' association='A_505' />
+        <ownedAttribute xmi:id='P_G_508' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_471' name='from' lower='1' upper='1' isComposite='false' association='A_506' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1089' xmi:type='cmof:Class'  name='BuildLibrary' superClass='C_474' isAbstract='false' />
+      <ownedMember xmi:id='C_494' xmi:type='cmof:Class'  name='BuildStep' superClass='C_474' isAbstract='false' />
+      <ownedMember xmi:id='A_513' xmi:type='cmof:Association' memberEnd='P_G_515 P_G_517'  name='A_produces_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_517' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_519' name='inProduces' lower='0' upper='*' isComposite='false' association='A_513' />
+      </ownedMember>
+      <ownedMember xmi:id='A_514' xmi:type='cmof:Association' memberEnd='P_G_516 P_G_518'  name='A_produces_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_518' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_519' name='outProduces' lower='0' upper='*' isComposite='false' association='A_514' />
+      </ownedMember>
+      <ownedMember xmi:id='C_519' xmi:type='cmof:Class'  name='Produces' superClass='C_470'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_515' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_471' name='to' lower='1' upper='1' isComposite='false' association='A_513' />
+        <ownedAttribute xmi:id='P_G_516' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_494' name='from' lower='1' upper='1' isComposite='false' association='A_514' />
+      </ownedMember>
+      <ownedMember xmi:id='A_520' xmi:type='cmof:Association' memberEnd='P_G_522 P_G_524'  name='A_supportedBy_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_524' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_527' name='inSupportedBy' lower='0' upper='*' isComposite='false' association='A_520' />
+      </ownedMember>
+      <ownedMember xmi:id='A_521' xmi:type='cmof:Association' memberEnd='P_G_523 P_G_525'  name='A_supportedBy_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_525' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_527' name='outSupportedBy' lower='0' upper='*' isComposite='false' association='A_521' />
+      </ownedMember>
+      <ownedMember xmi:id='C_527' xmi:type='cmof:Class'  name='SupportedBy' superClass='C_470'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_522' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_526' name='to' lower='1' upper='1' isComposite='false' association='A_520' />
+        <ownedAttribute xmi:id='P_G_523' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_494' name='from' lower='1' upper='1' isComposite='false' association='A_521' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1090' xmi:type='cmof:Class'  name='BuildProduct' superClass='C_474' isAbstract='false' />
+      <ownedMember xmi:id='A_528' xmi:type='cmof:Association' memberEnd='P_G_530 P_G_532'  name='A_describedBy_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_532' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_535' name='inDescribedBy' lower='0' upper='*' isComposite='false' association='A_528' />
+      </ownedMember>
+      <ownedMember xmi:id='A_529' xmi:type='cmof:Association' memberEnd='P_G_531 P_G_533'  name='A_describedBy_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_533' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_535' name='outDescribedBy' lower='0' upper='*' isComposite='false' association='A_529' />
+      </ownedMember>
+      <ownedMember xmi:id='C_535' xmi:type='cmof:Class'  name='DescribedBy' superClass='C_470'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_530' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_534' name='to' lower='1' upper='1' isComposite='false' association='A_528' />
+        <ownedAttribute xmi:id='P_G_531' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_494' name='from' lower='1' upper='1' isComposite='false' association='A_529' />
+      </ownedMember>
+    </ownedMember>
+    <ownedMember xmi:id='Pk_1091' xmi:type='cmof:Package' name='source' >
+      <ownedMember xmi:id='A_536' xmi:type='cmof:Association' memberEnd='P_G_537 P_G_538' name='SourceRegions'>
+        <ownedEnd xmi:id='P_G_538' xmi:type='cmof:Property'  type='C_539' name='sourceRef' lower='1' upper='1' isComposite='false' association='A_536' />
+      </ownedMember>
+      <ownedMember xmi:id='A_541' xmi:type='cmof:Association' memberEnd='P_G_542 P_G_543' name='Artifact'>
+        <ownedEnd xmi:id='P_G_543' xmi:type='cmof:Property'  type='C_540' name='region' lower='0' upper='*' isComposite='false' association='A_541' />
+      </ownedMember>
+      <ownedMember xmi:id='C_539' xmi:type='cmof:Class'  name='SourceRef' superClass='C_839'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_537' xmi:type='cmof:Property'  type='C_540' name='region' lower='0' upper='*' isComposite='true' association='A_536' />
+        <ownedAttribute xmi:id='P_1092' xmi:type='cmof:Property' name='language' type='D_923' />
+        <ownedAttribute xmi:id='P_1093' xmi:type='cmof:Property' name='snippet' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_540' xmi:type='cmof:Class'  name='Region' superClass='C_839'  isAbstract='true' >
+        <ownedAttribute xmi:id='P_G_542' xmi:type='cmof:Property'  type='C_544' name='file' lower='0' upper='1' isComposite='false' association='A_541' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1094' xmi:type='cmof:Class'  name='SourceRegion' superClass='C_540'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_1095' xmi:type='cmof:Property' name='startLine' type='D_992' />
+        <ownedAttribute xmi:id='P_1096' xmi:type='cmof:Property' name='startPosition' type='D_992' />
+        <ownedAttribute xmi:id='P_1097' xmi:type='cmof:Property' name='endLine' type='D_992' />
+        <ownedAttribute xmi:id='P_1098' xmi:type='cmof:Property' name='endPosition' type='D_992' />
+        <ownedAttribute xmi:id='P_1099' xmi:type='cmof:Property' name='language' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='A_545' xmi:type='cmof:Association' memberEnd='P_O_546 P_D_546'  name='A_InventoryModel_inventoryElement' general='A_24'>
+        <ownedEnd xmi:id='P_D_546' xmi:type='cmof:Property' subsettedProperty='P_D_23'  type='C_548' name='model' lower='0' upper='1' isComposite='false' association='A_545' />
+      </ownedMember>
+      <ownedMember xmi:id='C_548' xmi:type='cmof:Class'  name='InventoryModel' superClass='C_250'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_546' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_23'  type='C_547' name='inventoryElement' lower='0' upper='*' isComposite='true' association='A_545' />
+      </ownedMember>
+      <ownedMember xmi:id='A_549' xmi:type='cmof:Association' memberEnd='P_O_550 P_D_550'  name='A_AbstractInventoryElement_inventoryRelation' general='A_5'>
+        <ownedEnd xmi:id='P_D_550' xmi:type='cmof:Property'  type='C_547' name='abstractInventoryElement' lower='1' upper='1' isComposite='false' association='A_549' />
+      </ownedMember>
+      <ownedMember xmi:id='C_547' xmi:type='cmof:Class'  name='AbstractInventoryElement' superClass='C_67' isAbstract='true' >
+        <ownedAttribute xmi:id='P_O_550' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_4'  type='C_551' name='inventoryRelation' lower='0' upper='*' isComposite='true' association='A_549' />
+      </ownedMember>
+      <ownedMember xmi:id='C_544' xmi:type='cmof:Class'  name='InventoryItem' superClass='C_547' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1100' xmi:type='cmof:Property' name='version' type='D_923' />
+        <ownedAttribute xmi:id='P_1101' xmi:type='cmof:Property' name='path' type='D_923' />
+        <ownedAttribute xmi:id='P_1102' xmi:type='cmof:Property' name='format' type='D_923' />
+        <ownedAttribute xmi:id='P_1103' xmi:type='cmof:Property' name='md5' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1104' xmi:type='cmof:Class'  name='SourceFile' superClass='C_544' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1105' xmi:type='cmof:Property' name='language' type='D_923' />
+        <ownedAttribute xmi:id='P_1106' xmi:type='cmof:Property' name='encoding' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_45' xmi:type='cmof:Class'  name='ImageFile' superClass='C_544' isAbstract='false' />
+      <ownedMember xmi:id='C_1107' xmi:type='cmof:Class'  name='ConfigFile' superClass='C_544' isAbstract='false' />
+      <ownedMember xmi:id='A_552' xmi:type='cmof:Association' memberEnd='P_O_553 P_D_553'  name='A_InventoryContainer_inventoryElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_553' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_554' name='owner' lower='0' upper='1' isComposite='false' association='A_552' />
+      </ownedMember>
+      <ownedMember xmi:id='C_554' xmi:type='cmof:Class'  name='InventoryContainer' superClass='C_547' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_553' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_547' name='inventoryElement' lower='0' upper='*' isComposite='true' association='A_552' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1108' xmi:type='cmof:Class'  name='Directory' superClass='C_554' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1109' xmi:type='cmof:Property' name='path' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1110' xmi:type='cmof:Class'  name='Project' superClass='C_554' isAbstract='false' />
+      <ownedMember xmi:id='C_551' xmi:type='cmof:Class'  name='AbstractInventoryRelationship' superClass='C_824'  isAbstract='true' />
+      <ownedMember xmi:id='C_1111' xmi:type='cmof:Class'  name='LinkableFile' superClass='C_544' isAbstract='false' />
+      <ownedMember xmi:id='C_1112' xmi:type='cmof:Class'  name='ObjectFile' superClass='C_1111' isAbstract='false' />
+      <ownedMember xmi:id='C_1113' xmi:type='cmof:Class'  name='ExecutableFile' superClass='C_544' isAbstract='false' />
+      <ownedMember xmi:id='A_555' xmi:type='cmof:Association' memberEnd='P_G_557 P_G_559'  name='A_dependsOn_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_559' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_561' name='inDependsOn' lower='0' upper='*' isComposite='false' association='A_555' />
+      </ownedMember>
+      <ownedMember xmi:id='A_556' xmi:type='cmof:Association' memberEnd='P_G_558 P_G_560'  name='A_dependsOn_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_560' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_561' name='outDependsOn' lower='0' upper='*' isComposite='false' association='A_556' />
+      </ownedMember>
+      <ownedMember xmi:id='C_561' xmi:type='cmof:Class'  name='DependsOn' superClass='C_551'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_557' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_547' name='to' lower='1' upper='1' isComposite='false' association='A_555' />
+        <ownedAttribute xmi:id='P_G_558' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_547' name='from' lower='1' upper='1' isComposite='false' association='A_556' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1114' xmi:type='cmof:Class'  name='InventoryElement' superClass='C_547' isAbstract='false' />
+      <ownedMember xmi:id='A_562' xmi:type='cmof:Association' memberEnd='P_G_564 P_G_566'  name='A_inventoryRelationship_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_566' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_568' name='inInventoryRelationship' lower='0' upper='*' isComposite='false' association='A_562' />
+      </ownedMember>
+      <ownedMember xmi:id='A_563' xmi:type='cmof:Association' memberEnd='P_G_565 P_G_567'  name='A_inventoryRelationship_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_567' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_568' name='outInventoryRelationship' lower='0' upper='*' isComposite='false' association='A_563' />
+      </ownedMember>
+      <ownedMember xmi:id='C_568' xmi:type='cmof:Class'  name='InventoryRelationship' superClass='C_551'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_564' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_562' />
+        <ownedAttribute xmi:id='P_G_565' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_547' name='from' lower='1' upper='1' isComposite='false' association='A_563' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1115' xmi:type='cmof:Class'  name='LibraryFile' superClass='C_1111' isAbstract='false' />
+      <ownedMember xmi:id='C_1116' xmi:type='cmof:Class'  name='AudioFile' superClass='C_544' isAbstract='false' />
+      <ownedMember xmi:id='C_1117' xmi:type='cmof:Class'  name='DataFile' superClass='C_544' isAbstract='false' />
+      <ownedMember xmi:id='C_1118' xmi:type='cmof:Class'  name='Service' superClass='C_544' isAbstract='false' />
+      <ownedMember xmi:id='C_1119' xmi:type='cmof:Class'  name='Document' superClass='C_544' isAbstract='false' />
+      <ownedMember xmi:id='C_576' xmi:type='cmof:Class'  name='Track' superClass='C_547' isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_850' xmi:type='cmof:Property'  type='C_67' name='owner' lower='0' upper='1' isComposite='false' association='A_848' />
+        <ownedAttribute xmi:id='P_1120' xmi:type='cmof:Property' name='description' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1121' xmi:type='cmof:Class'  name='BinaryRegion' superClass='C_540'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_1122' xmi:type='cmof:Property' name='startAddr' type='D_992' />
+        <ownedAttribute xmi:id='P_1123' xmi:type='cmof:Property' name='endAddr' type='D_992' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1124' xmi:type='cmof:Class'  name='ReferenceableRegion' superClass='C_540'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_1125' xmi:type='cmof:Property' name='ref' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='A_569' xmi:type='cmof:Association' memberEnd='P_G_571 P_G_573'  name='A_traceableTo_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_573' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_575' name='inTraceableTo' lower='0' upper='*' isComposite='false' association='A_569' />
+      </ownedMember>
+      <ownedMember xmi:id='A_570' xmi:type='cmof:Association' memberEnd='P_G_572 P_G_574'  name='A_traceableTo_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_574' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_575' name='outTraceableTo' lower='0' upper='*' isComposite='false' association='A_570' />
+      </ownedMember>
+      <ownedMember xmi:id='C_575' xmi:type='cmof:Class'  name='TraceableTo' superClass='C_551'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_571' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_569' />
+        <ownedAttribute xmi:id='P_G_572' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_576' name='from' lower='1' upper='1' isComposite='false' association='A_570' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1126' xmi:type='cmof:Class'  name='Model' superClass='C_544' isAbstract='false' />
+    </ownedMember>
+    <ownedMember xmi:id='Pk_1127' xmi:type='cmof:Package' name='data' >
+      <ownedMember xmi:id='A_577' xmi:type='cmof:Association' memberEnd='P_G_578 P_G_579' name='ContentType'>
+        <ownedEnd xmi:id='P_G_579' xmi:type='cmof:Property'  type='C_580' name='contentItem' lower='0' upper='*' isComposite='false' association='A_577' />
+      </ownedMember>
+      <ownedMember xmi:id='A_582' xmi:type='cmof:Association' memberEnd='P_G_583 P_G_584' name='MemberTypes'>
+        <ownedEnd xmi:id='P_G_584' xmi:type='cmof:Property'  type='C_585' name='simpleContentType' lower='0' upper='*' isComposite='false' association='A_582' />
+      </ownedMember>
+      <ownedMember xmi:id='A_586' xmi:type='cmof:Association' memberEnd='P_O_587 P_D_587'  name='A_DataModel_dataElement' general='A_24'>
+        <ownedEnd xmi:id='P_D_587' xmi:type='cmof:Property' subsettedProperty='P_D_23'  type='C_589' name='model' lower='0' upper='1' isComposite='false' association='A_586' />
+      </ownedMember>
+      <ownedMember xmi:id='C_589' xmi:type='cmof:Class'  name='DataModel' superClass='C_250'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_587' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_23'  type='C_588' name='dataElement' lower='0' upper='*' isComposite='true' association='A_586' />
+      </ownedMember>
+      <ownedMember xmi:id='A_590' xmi:type='cmof:Association' memberEnd='P_O_591 P_D_591'  name='A_AbstractDataElement_dataRelation' general='A_5'>
+        <ownedEnd xmi:id='P_D_591' xmi:type='cmof:Property'  type='C_588' name='abstractDataElement' lower='1' upper='1' isComposite='false' association='A_590' />
+      </ownedMember>
+      <ownedMember xmi:id='A_593' xmi:type='cmof:Association' memberEnd='P_O_594 P_D_594'  name='A_AbstractDataElement_abstraction' general='A_16'>
+        <ownedEnd xmi:id='P_D_594' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_588' name='owner' lower='0' upper='1' isComposite='false' association='A_593' />
+      </ownedMember>
+      <ownedMember xmi:id='C_588' xmi:type='cmof:Class'  name='AbstractDataElement' superClass='C_67' isAbstract='true' >
+        <ownedAttribute xmi:id='P_O_591' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_4'  type='C_592' name='dataRelation' lower='0' upper='*' isComposite='true' association='A_590' />
+        <ownedAttribute xmi:id='P_O_594' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_17' name='abstraction' lower='0' upper='*' isComposite='true' association='A_593' />
+      </ownedMember>
+      <ownedMember xmi:id='C_609' xmi:type='cmof:Class'  name='DataResource' superClass='C_588' isAbstract='false' />
+      <ownedMember xmi:id='A_595' xmi:type='cmof:Association' memberEnd='P_O_596 P_D_596'  name='A_IndexElement_implementation' general='A_11'>
+        <ownedEnd xmi:id='P_D_596' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_597' name='group' lower='0' upper='*' isComposite='false' association='A_595' />
+      </ownedMember>
+      <ownedMember xmi:id='C_597' xmi:type='cmof:Class'  name='IndexElement' superClass='C_609' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_596' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_328' name='implementation' lower='0' upper='*' isComposite='false' association='A_595' />
+      </ownedMember>
+      <ownedMember xmi:id='C_604' xmi:type='cmof:Class'  name='UniqueKey' superClass='C_597' isAbstract='false' />
+      <ownedMember xmi:id='C_1128' xmi:type='cmof:Class'  name='Index' superClass='C_597' isAbstract='false' />
+      <ownedMember xmi:id='C_592' xmi:type='cmof:Class'  name='AbstractDataRelationship' superClass='C_824'  isAbstract='true' />
+      <ownedMember xmi:id='A_598' xmi:type='cmof:Association' memberEnd='P_G_600 P_G_602'  name='A_keyRelation_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_602' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_605' name='inKeyRelation' lower='0' upper='*' isComposite='false' association='A_598' />
+      </ownedMember>
+      <ownedMember xmi:id='A_599' xmi:type='cmof:Association' memberEnd='P_G_601 P_G_603'  name='A_keyRelation_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_603' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_605' name='outKeyRelation' lower='0' upper='*' isComposite='false' association='A_599' />
+      </ownedMember>
+      <ownedMember xmi:id='C_605' xmi:type='cmof:Class'  name='KeyRelation' superClass='C_592'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_600' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_604' name='to' lower='1' upper='1' isComposite='false' association='A_598' />
+        <ownedAttribute xmi:id='P_G_601' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_606' name='from' lower='1' upper='1' isComposite='false' association='A_599' />
+      </ownedMember>
+      <ownedMember xmi:id='C_606' xmi:type='cmof:Class'  name='ReferenceKey' superClass='C_597' isAbstract='false' />
+      <ownedMember xmi:id='A_607' xmi:type='cmof:Association' memberEnd='P_O_608 P_D_608'  name='A_DataContainer_dataElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_608' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_610' name='owner' lower='0' upper='1' isComposite='false' association='A_607' />
+      </ownedMember>
+      <ownedMember xmi:id='C_610' xmi:type='cmof:Class'  name='DataContainer' superClass='C_609' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_608' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_609' name='dataElement' lower='0' upper='*' isComposite='true' association='A_607' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1129' xmi:type='cmof:Class'  name='Catalog' superClass='C_610' isAbstract='false' />
+      <ownedMember xmi:id='A_611' xmi:type='cmof:Association' memberEnd='P_O_612 P_D_612'  name='A_RelationalSchema_codeElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_612' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_613' name='owner' lower='0' upper='1' isComposite='false' association='A_611' />
+      </ownedMember>
+      <ownedMember xmi:id='C_613' xmi:type='cmof:Class'  name='RelationalSchema' superClass='C_610' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_612' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_197' name='codeElement' lower='0' upper='*' isComposite='true' association='A_611' />
+      </ownedMember>
+      <ownedMember xmi:id='A_614' xmi:type='cmof:Association' memberEnd='P_O_615 P_D_615'  name='A_ColumnSet_itemUnit' general='A_16'>
+        <ownedEnd xmi:id='P_D_615' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_616' name='owner' lower='0' upper='1' isComposite='false' association='A_614' />
+      </ownedMember>
+      <ownedMember xmi:id='C_616' xmi:type='cmof:Class'  name='ColumnSet' superClass='C_610' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_615' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_328' name='itemUnit' lower='0' upper='*' isComposite='true' association='A_614' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1130' xmi:type='cmof:Class'  name='RelationalTable' superClass='C_616' isAbstract='false' />
+      <ownedMember xmi:id='C_1131' xmi:type='cmof:Class'  name='RelationalView' superClass='C_616' isAbstract='false' />
+      <ownedMember xmi:id='C_1132' xmi:type='cmof:Class'  name='RecordFile' superClass='C_616' isAbstract='false' />
+      <ownedMember xmi:id='C_637' xmi:type='cmof:Class'  name='DataEvent' superClass='C_609' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1133' xmi:type='cmof:Property' name='kind' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='A_617' xmi:type='cmof:Association' memberEnd='P_O_618 P_D_618'  name='A_XMLSchema_contentElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_618' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_620' name='owner' lower='0' upper='1' isComposite='false' association='A_617' />
+      </ownedMember>
+      <ownedMember xmi:id='C_620' xmi:type='cmof:Class'  name='XMLSchema' superClass='C_588' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_618' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_619' name='contentElement' lower='0' upper='*' isComposite='true' association='A_617' />
+      </ownedMember>
+      <ownedMember xmi:id='C_619' xmi:type='cmof:Class'  name='AbstractContentElement' superClass='C_588' isAbstract='true' />
+      <ownedMember xmi:id='A_621' xmi:type='cmof:Association' memberEnd='P_O_622 P_D_622'  name='A_ComplexContentType_contentElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_622' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_581' name='owner' lower='0' upper='1' isComposite='false' association='A_621' />
+      </ownedMember>
+      <ownedMember xmi:id='C_581' xmi:type='cmof:Class'  name='ComplexContentType' superClass='C_619' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_622' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_619' name='contentElement' lower='0' upper='*' isComposite='true' association='A_621' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1134' xmi:type='cmof:Class'  name='AllContent' superClass='C_581' isAbstract='false' />
+      <ownedMember xmi:id='C_1135' xmi:type='cmof:Class'  name='SeqContent' superClass='C_581' isAbstract='false' />
+      <ownedMember xmi:id='C_1136' xmi:type='cmof:Class'  name='ChoiceContent' superClass='C_581' isAbstract='false' />
+      <ownedMember xmi:id='A_623' xmi:type='cmof:Association' memberEnd='P_O_624 P_D_624'  name='A_ContentItem_contentElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_624' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_580' name='owner' lower='0' upper='1' isComposite='false' association='A_623' />
+      </ownedMember>
+      <ownedMember xmi:id='C_580' xmi:type='cmof:Class'  name='ContentItem' superClass='C_619' isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_578' xmi:type='cmof:Property'  type='C_581' name='type' lower='0' upper='1' isComposite='false' association='A_577' />
+        <ownedAttribute xmi:id='P_O_624' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_619' name='contentElement' lower='0' upper='*' isComposite='true' association='A_623' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1137' xmi:type='cmof:Class'  name='GroupContent' superClass='C_580' isAbstract='false' />
+      <ownedMember xmi:id='C_1138' xmi:type='cmof:Class'  name='ContentRestriction' superClass='C_619' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1139' xmi:type='cmof:Property' name='kind' type='D_923' />
+        <ownedAttribute xmi:id='P_1140' xmi:type='cmof:Property' name='value' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_585' xmi:type='cmof:Class'  name='SimpleContentType' superClass='C_581' isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_583' xmi:type='cmof:Property'  type='C_581' name='type' lower='0' upper='1' isComposite='false' association='A_582' />
+        <ownedAttribute xmi:id='P_1141' xmi:type='cmof:Property' name='kind' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1142' xmi:type='cmof:Class'  name='ExtendedDataElement' superClass='C_588' isAbstract='false' />
+      <ownedMember xmi:id='A_625' xmi:type='cmof:Association' memberEnd='P_G_627 P_G_629'  name='A_dataRelationship_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_629' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_631' name='inDataRelationship' lower='0' upper='*' isComposite='false' association='A_625' />
+      </ownedMember>
+      <ownedMember xmi:id='A_626' xmi:type='cmof:Association' memberEnd='P_G_628 P_G_630'  name='A_dataRelationship_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_630' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_631' name='outDataRelationship' lower='0' upper='*' isComposite='false' association='A_626' />
+      </ownedMember>
+      <ownedMember xmi:id='C_631' xmi:type='cmof:Class'  name='DataRelationship' superClass='C_592'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_627' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_625' />
+        <ownedAttribute xmi:id='P_G_628' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_588' name='from' lower='1' upper='1' isComposite='false' association='A_626' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1143' xmi:type='cmof:Class'  name='MixedContent' superClass='C_581' isAbstract='false' />
+      <ownedMember xmi:id='C_1144' xmi:type='cmof:Class'  name='ContentReference' superClass='C_580' isAbstract='false' />
+      <ownedMember xmi:id='A_632' xmi:type='cmof:Association' memberEnd='P_O_633 P_D_633'  name='A_DataAction_implementation' general='A_11'>
+        <ownedEnd xmi:id='P_D_633' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_634' name='group' lower='0' upper='*' isComposite='false' association='A_632' />
+      </ownedMember>
+      <ownedMember xmi:id='A_635' xmi:type='cmof:Association' memberEnd='P_O_636 P_D_636'  name='A_DataAction_dataElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_636' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_634' name='owner' lower='0' upper='1' isComposite='false' association='A_635' />
+      </ownedMember>
+      <ownedMember xmi:id='C_634' xmi:type='cmof:Class'  name='DataAction' superClass='C_588' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_633' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_17' name='implementation' lower='0' upper='*' isComposite='false' association='A_632' />
+        <ownedAttribute xmi:id='P_O_636' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_637' name='dataElement' lower='0' upper='*' isComposite='true' association='A_635' />
+        <ownedAttribute xmi:id='P_1145' xmi:type='cmof:Property' name='kind' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='A_638' xmi:type='cmof:Association' memberEnd='P_G_640 P_G_642'  name='A_readsColumnSet_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_642' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_644' name='inReadsColumnSet' lower='0' upper='*' isComposite='false' association='A_638' />
+      </ownedMember>
+      <ownedMember xmi:id='A_639' xmi:type='cmof:Association' memberEnd='P_G_641 P_G_643'  name='A_readsColumnSet_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_643' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_644' name='outReadsColumnSet' lower='0' upper='*' isComposite='false' association='A_639' />
+      </ownedMember>
+      <ownedMember xmi:id='C_644' xmi:type='cmof:Class'  name='ReadsColumnSet' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_640' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_616' name='to' lower='1' upper='1' isComposite='false' association='A_638' />
+        <ownedAttribute xmi:id='P_G_641' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_639' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1146' xmi:type='cmof:Class'  name='ContentAttribute' superClass='C_580' isAbstract='false' />
+      <ownedMember xmi:id='A_645' xmi:type='cmof:Association' memberEnd='P_G_647 P_G_649'  name='A_typedBy_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_649' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_651' name='inTypedBy' lower='0' upper='*' isComposite='false' association='A_645' />
+      </ownedMember>
+      <ownedMember xmi:id='A_646' xmi:type='cmof:Association' memberEnd='P_G_648 P_G_650'  name='A_typedBy_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_650' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_651' name='outTypedBy' lower='0' upper='*' isComposite='false' association='A_646' />
+      </ownedMember>
+      <ownedMember xmi:id='C_651' xmi:type='cmof:Class'  name='TypedBy' superClass='C_592'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_647' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_581' name='to' lower='1' upper='1' isComposite='false' association='A_645' />
+        <ownedAttribute xmi:id='P_G_648' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_580' name='from' lower='1' upper='1' isComposite='false' association='A_646' />
+      </ownedMember>
+      <ownedMember xmi:id='A_652' xmi:type='cmof:Association' memberEnd='P_G_654 P_G_656'  name='A_referenceTo_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_656' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_658' name='inReferenceTo' lower='0' upper='*' isComposite='false' association='A_652' />
+      </ownedMember>
+      <ownedMember xmi:id='A_653' xmi:type='cmof:Association' memberEnd='P_G_655 P_G_657'  name='A_referenceTo_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_657' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_658' name='outReferenceTo' lower='0' upper='*' isComposite='false' association='A_653' />
+      </ownedMember>
+      <ownedMember xmi:id='C_658' xmi:type='cmof:Class'  name='ReferenceTo' superClass='C_592'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_654' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_580' name='to' lower='1' upper='1' isComposite='false' association='A_652' />
+        <ownedAttribute xmi:id='P_G_655' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_580' name='from' lower='1' upper='1' isComposite='false' association='A_653' />
+      </ownedMember>
+      <ownedMember xmi:id='A_659' xmi:type='cmof:Association' memberEnd='P_G_661 P_G_663'  name='A_restrictionOf_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_663' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_665' name='inRestrictionOf' lower='0' upper='*' isComposite='false' association='A_659' />
+      </ownedMember>
+      <ownedMember xmi:id='A_660' xmi:type='cmof:Association' memberEnd='P_G_662 P_G_664'  name='A_restrictionOf_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_664' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_665' name='outRestrictionOf' lower='0' upper='*' isComposite='false' association='A_660' />
+      </ownedMember>
+      <ownedMember xmi:id='C_665' xmi:type='cmof:Class'  name='RestrictionOf' superClass='C_592'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_661' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_581' name='to' lower='1' upper='1' isComposite='false' association='A_659' />
+        <ownedAttribute xmi:id='P_G_662' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_581' name='from' lower='1' upper='1' isComposite='false' association='A_660' />
+      </ownedMember>
+      <ownedMember xmi:id='A_666' xmi:type='cmof:Association' memberEnd='P_G_668 P_G_670'  name='A_extensionTo_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_670' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_672' name='inExtensionTo' lower='0' upper='*' isComposite='false' association='A_666' />
+      </ownedMember>
+      <ownedMember xmi:id='A_667' xmi:type='cmof:Association' memberEnd='P_G_669 P_G_671'  name='A_extensionTo_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_671' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_672' name='outExtensionTo' lower='0' upper='*' isComposite='false' association='A_667' />
+      </ownedMember>
+      <ownedMember xmi:id='C_672' xmi:type='cmof:Class'  name='ExtensionTo' superClass='C_592'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_668' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_581' name='to' lower='1' upper='1' isComposite='false' association='A_666' />
+        <ownedAttribute xmi:id='P_G_669' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_581' name='from' lower='1' upper='1' isComposite='false' association='A_667' />
+      </ownedMember>
+      <ownedMember xmi:id='A_673' xmi:type='cmof:Association' memberEnd='P_G_675 P_G_677'  name='A_datatypeOf_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_677' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_679' name='inDatatypeOf' lower='0' upper='*' isComposite='false' association='A_673' />
+      </ownedMember>
+      <ownedMember xmi:id='A_674' xmi:type='cmof:Association' memberEnd='P_G_676 P_G_678'  name='A_datatypeOf_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_678' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_679' name='outDatatypeOf' lower='0' upper='*' isComposite='false' association='A_674' />
+      </ownedMember>
+      <ownedMember xmi:id='C_679' xmi:type='cmof:Class'  name='DatatypeOf' superClass='C_592'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_675' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_290' name='to' lower='1' upper='1' isComposite='false' association='A_673' />
+        <ownedAttribute xmi:id='P_G_676' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_581' name='from' lower='1' upper='1' isComposite='false' association='A_674' />
+      </ownedMember>
+      <ownedMember xmi:id='A_680' xmi:type='cmof:Association' memberEnd='P_G_682 P_G_684'  name='A_hasContent_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_684' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_686' name='inHasContent' lower='0' upper='*' isComposite='false' association='A_680' />
+      </ownedMember>
+      <ownedMember xmi:id='A_681' xmi:type='cmof:Association' memberEnd='P_G_683 P_G_685'  name='A_hasContent_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_685' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_686' name='outHasContent' lower='0' upper='*' isComposite='false' association='A_681' />
+      </ownedMember>
+      <ownedMember xmi:id='C_686' xmi:type='cmof:Class'  name='HasContent' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_682' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_588' name='to' lower='1' upper='1' isComposite='false' association='A_680' />
+        <ownedAttribute xmi:id='P_G_683' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_681' />
+      </ownedMember>
+      <ownedMember xmi:id='A_687' xmi:type='cmof:Association' memberEnd='P_G_689 P_G_691'  name='A_writesColumnSet_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_691' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_693' name='inWritesColumnSet' lower='0' upper='*' isComposite='false' association='A_687' />
+      </ownedMember>
+      <ownedMember xmi:id='A_688' xmi:type='cmof:Association' memberEnd='P_G_690 P_G_692'  name='A_writesColumnSet_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_692' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_693' name='outWritesColumnSet' lower='0' upper='*' isComposite='false' association='A_688' />
+      </ownedMember>
+      <ownedMember xmi:id='C_693' xmi:type='cmof:Class'  name='WritesColumnSet' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_689' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_616' name='to' lower='1' upper='1' isComposite='false' association='A_687' />
+        <ownedAttribute xmi:id='P_G_690' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_688' />
+      </ownedMember>
+      <ownedMember xmi:id='A_694' xmi:type='cmof:Association' memberEnd='P_G_696 P_G_698'  name='A_producesDataEvent_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_698' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_700' name='inProducesDataEvent' lower='0' upper='*' isComposite='false' association='A_694' />
+      </ownedMember>
+      <ownedMember xmi:id='A_695' xmi:type='cmof:Association' memberEnd='P_G_697 P_G_699'  name='A_producesDataEvent_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_699' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_700' name='outProducesDataEvent' lower='0' upper='*' isComposite='false' association='A_695' />
+      </ownedMember>
+      <ownedMember xmi:id='C_700' xmi:type='cmof:Class'  name='ProducesDataEvent' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_696' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_637' name='to' lower='1' upper='1' isComposite='false' association='A_694' />
+        <ownedAttribute xmi:id='P_G_697' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_695' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1147' xmi:type='cmof:Class'  name='DataSegment' superClass='C_616' isAbstract='false' />
+      <ownedMember xmi:id='C_1148' xmi:type='cmof:Class'  name='ContentElement' superClass='C_580' isAbstract='false' />
+      <ownedMember xmi:id='A_701' xmi:type='cmof:Association' memberEnd='P_G_703 P_G_705'  name='A_managesData_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_705' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_707' name='inManagesData' lower='0' upper='*' isComposite='false' association='A_701' />
+      </ownedMember>
+      <ownedMember xmi:id='A_702' xmi:type='cmof:Association' memberEnd='P_G_704 P_G_706'  name='A_managesData_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_706' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_707' name='outManagesData' lower='0' upper='*' isComposite='false' association='A_702' />
+      </ownedMember>
+      <ownedMember xmi:id='C_707' xmi:type='cmof:Class'  name='ManagesData' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_703' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_588' name='to' lower='1' upper='1' isComposite='false' association='A_701' />
+        <ownedAttribute xmi:id='P_G_704' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_702' />
+      </ownedMember>
+    </ownedMember>
+    <ownedMember xmi:id='Pk_1149' xmi:type='cmof:Package' name='action' >
+      <ownedMember xmi:id='C_710' xmi:type='cmof:Class'  name='AbstractActionRelationship' superClass='C_824'  isAbstract='true' />
+      <ownedMember xmi:id='A_708' xmi:type='cmof:Association' memberEnd='P_O_709 P_D_709'  name='A_ActionElement_actionRelation' general='A_5'>
+        <ownedEnd xmi:id='P_D_709' xmi:type='cmof:Property'  type='C_17' name='actionElement' lower='1' upper='1' isComposite='false' association='A_708' />
+      </ownedMember>
+      <ownedMember xmi:id='A_711' xmi:type='cmof:Association' memberEnd='P_O_712 P_D_712'  name='A_ActionElement_codeElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_712' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_17' name='owner' lower='0' upper='1' isComposite='false' association='A_711' />
+      </ownedMember>
+      <ownedMember xmi:id='C_17' xmi:type='cmof:Class'  name='ActionElement' superClass='C_12' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_709' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_4'  type='C_710' name='actionRelation' lower='0' upper='*' isComposite='true' association='A_708' />
+        <ownedAttribute xmi:id='P_O_712' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_12' name='codeElement' lower='0' upper='*' isComposite='true' association='A_711' />
+        <ownedAttribute xmi:id='P_1150' xmi:type='cmof:Property' name='kind' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='A_713' xmi:type='cmof:Association' memberEnd='P_G_715 P_G_717'  name='A_controlFlow_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_717' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_719' name='inControlFlow' lower='0' upper='*' isComposite='false' association='A_713' />
+      </ownedMember>
+      <ownedMember xmi:id='A_714' xmi:type='cmof:Association' memberEnd='P_G_716 P_G_718'  name='A_controlFlow_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_718' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_719' name='outControlFlow' lower='0' upper='*' isComposite='false' association='A_714' />
+      </ownedMember>
+      <ownedMember xmi:id='C_719' xmi:type='cmof:Class'  name='ControlFlow' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_715' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_17' name='to' lower='1' upper='1' isComposite='false' association='A_713' />
+        <ownedAttribute xmi:id='P_G_716' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_714' />
+      </ownedMember>
+      <ownedMember xmi:id='A_720' xmi:type='cmof:Association' memberEnd='P_G_722 P_G_724'  name='A_calls_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_724' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_726' name='inCalls' lower='0' upper='*' isComposite='false' association='A_720' />
+      </ownedMember>
+      <ownedMember xmi:id='A_721' xmi:type='cmof:Association' memberEnd='P_G_723 P_G_725'  name='A_calls_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_725' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_726' name='outCalls' lower='0' upper='*' isComposite='false' association='A_721' />
+      </ownedMember>
+      <ownedMember xmi:id='C_726' xmi:type='cmof:Class'  name='Calls' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_722' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_197' name='to' lower='1' upper='1' isComposite='false' association='A_720' />
+        <ownedAttribute xmi:id='P_G_723' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_721' />
+      </ownedMember>
+      <ownedMember xmi:id='A_727' xmi:type='cmof:Association' memberEnd='P_G_729 P_G_731'  name='A_creates_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_731' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_733' name='inCreates' lower='0' upper='*' isComposite='false' association='A_727' />
+      </ownedMember>
+      <ownedMember xmi:id='A_728' xmi:type='cmof:Association' memberEnd='P_G_730 P_G_732'  name='A_creates_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_732' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_733' name='outCreates' lower='0' upper='*' isComposite='false' association='A_728' />
+      </ownedMember>
+      <ownedMember xmi:id='C_733' xmi:type='cmof:Class'  name='Creates' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_729' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_290' name='to' lower='1' upper='1' isComposite='false' association='A_727' />
+        <ownedAttribute xmi:id='P_G_730' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_728' />
+      </ownedMember>
+      <ownedMember xmi:id='A_734' xmi:type='cmof:Association' memberEnd='P_G_736 P_G_738'  name='A_reads_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_738' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_740' name='inReads' lower='0' upper='*' isComposite='false' association='A_734' />
+      </ownedMember>
+      <ownedMember xmi:id='A_735' xmi:type='cmof:Association' memberEnd='P_G_737 P_G_739'  name='A_reads_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_739' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_740' name='outReads' lower='0' upper='*' isComposite='false' association='A_735' />
+      </ownedMember>
+      <ownedMember xmi:id='C_740' xmi:type='cmof:Class'  name='Reads' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_736' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_294' name='to' lower='1' upper='1' isComposite='false' association='A_734' />
+        <ownedAttribute xmi:id='P_G_737' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_735' />
+      </ownedMember>
+      <ownedMember xmi:id='A_741' xmi:type='cmof:Association' memberEnd='P_G_743 P_G_745'  name='A_writes_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_745' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_747' name='inWrites' lower='0' upper='*' isComposite='false' association='A_741' />
+      </ownedMember>
+      <ownedMember xmi:id='A_742' xmi:type='cmof:Association' memberEnd='P_G_744 P_G_746'  name='A_writes_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_746' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_747' name='outWrites' lower='0' upper='*' isComposite='false' association='A_742' />
+      </ownedMember>
+      <ownedMember xmi:id='C_747' xmi:type='cmof:Class'  name='Writes' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_743' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_294' name='to' lower='1' upper='1' isComposite='false' association='A_741' />
+        <ownedAttribute xmi:id='P_G_744' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_742' />
+      </ownedMember>
+      <ownedMember xmi:id='A_748' xmi:type='cmof:Association' memberEnd='P_G_750 P_G_752'  name='A_compliesTo_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_752' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_754' name='inCompliesTo' lower='0' upper='*' isComposite='false' association='A_748' />
+      </ownedMember>
+      <ownedMember xmi:id='A_749' xmi:type='cmof:Association' memberEnd='P_G_751 P_G_753'  name='A_compliesTo_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_753' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_754' name='outCompliesTo' lower='0' upper='*' isComposite='false' association='A_749' />
+      </ownedMember>
+      <ownedMember xmi:id='C_754' xmi:type='cmof:Class'  name='CompliesTo' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_750' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_197' name='to' lower='1' upper='1' isComposite='false' association='A_748' />
+        <ownedAttribute xmi:id='P_G_751' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_749' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1151' xmi:type='cmof:Class'  name='Flow' superClass='C_719'  isAbstract='false' />
+      <ownedMember xmi:id='C_1152' xmi:type='cmof:Class'  name='TrueFlow' superClass='C_719'  isAbstract='false' />
+      <ownedMember xmi:id='C_1153' xmi:type='cmof:Class'  name='FalseFlow' superClass='C_719'  isAbstract='false' />
+      <ownedMember xmi:id='C_1154' xmi:type='cmof:Class'  name='GuardedFlow' superClass='C_719'  isAbstract='false' />
+      <ownedMember xmi:id='A_755' xmi:type='cmof:Association' memberEnd='P_G_757 P_G_759'  name='A_usesType_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_759' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_761' name='inUsesType' lower='0' upper='*' isComposite='false' association='A_755' />
+      </ownedMember>
+      <ownedMember xmi:id='A_756' xmi:type='cmof:Association' memberEnd='P_G_758 P_G_760'  name='A_usesType_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_760' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_761' name='outUsesType' lower='0' upper='*' isComposite='false' association='A_756' />
+      </ownedMember>
+      <ownedMember xmi:id='C_761' xmi:type='cmof:Class'  name='UsesType' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_757' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_290' name='to' lower='1' upper='1' isComposite='false' association='A_755' />
+        <ownedAttribute xmi:id='P_G_758' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_756' />
+      </ownedMember>
+      <ownedMember xmi:id='A_762' xmi:type='cmof:Association' memberEnd='P_G_764 P_G_766'  name='A_addresses_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_766' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_769' name='inAddresses' lower='0' upper='*' isComposite='false' association='A_762' />
+      </ownedMember>
+      <ownedMember xmi:id='A_763' xmi:type='cmof:Association' memberEnd='P_G_765 P_G_767'  name='A_addresses_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_767' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_769' name='outAddresses' lower='0' upper='*' isComposite='false' association='A_763' />
+      </ownedMember>
+      <ownedMember xmi:id='C_769' xmi:type='cmof:Class'  name='Addresses' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_764' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_768' name='to' lower='1' upper='1' isComposite='false' association='A_762' />
+        <ownedAttribute xmi:id='P_G_765' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_763' />
+      </ownedMember>
+      <ownedMember xmi:id='A_770' xmi:type='cmof:Association' memberEnd='P_G_772 P_G_774'  name='A_actionRelationship_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_774' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_776' name='inActionRelationship' lower='0' upper='*' isComposite='false' association='A_770' />
+      </ownedMember>
+      <ownedMember xmi:id='A_771' xmi:type='cmof:Association' memberEnd='P_G_773 P_G_775'  name='A_actionRelationship_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_775' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_776' name='outActionRelationship' lower='0' upper='*' isComposite='false' association='A_771' />
+      </ownedMember>
+      <ownedMember xmi:id='C_776' xmi:type='cmof:Class'  name='ActionRelationship' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_772' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_770' />
+        <ownedAttribute xmi:id='P_G_773' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_771' />
+      </ownedMember>
+      <ownedMember xmi:id='A_777' xmi:type='cmof:Association' memberEnd='P_G_779 P_G_781'  name='A_throws_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_781' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_783' name='inThrows' lower='0' upper='*' isComposite='false' association='A_777' />
+      </ownedMember>
+      <ownedMember xmi:id='A_778' xmi:type='cmof:Association' memberEnd='P_G_780 P_G_782'  name='A_throws_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_782' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_783' name='outThrows' lower='0' upper='*' isComposite='false' association='A_778' />
+      </ownedMember>
+      <ownedMember xmi:id='C_783' xmi:type='cmof:Class'  name='Throws' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_779' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_294' name='to' lower='1' upper='1' isComposite='false' association='A_777' />
+        <ownedAttribute xmi:id='P_G_780' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_778' />
+      </ownedMember>
+      <ownedMember xmi:id='A_784' xmi:type='cmof:Association' memberEnd='P_G_786 P_G_788'  name='A_dispatches_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_788' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_790' name='inDispatches' lower='0' upper='*' isComposite='false' association='A_784' />
+      </ownedMember>
+      <ownedMember xmi:id='A_785' xmi:type='cmof:Association' memberEnd='P_G_787 P_G_789'  name='A_dispatches_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_789' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_790' name='outDispatches' lower='0' upper='*' isComposite='false' association='A_785' />
+      </ownedMember>
+      <ownedMember xmi:id='C_790' xmi:type='cmof:Class'  name='Dispatches' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_786' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_294' name='to' lower='1' upper='1' isComposite='false' association='A_784' />
+        <ownedAttribute xmi:id='P_G_787' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_785' />
+      </ownedMember>
+      <ownedMember xmi:id='A_791' xmi:type='cmof:Association' memberEnd='P_G_793 P_G_795'  name='A_entryFlow_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_795' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_308' name='inEntryFlow' lower='0' upper='*' isComposite='false' association='A_791' />
+      </ownedMember>
+      <ownedMember xmi:id='A_792' xmi:type='cmof:Association' memberEnd='P_G_794 P_G_796'  name='A_entryFlow_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_796' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_308' name='outEntryFlow' lower='0' upper='*' isComposite='false' association='A_792' />
+      </ownedMember>
+      <ownedMember xmi:id='C_308' xmi:type='cmof:Class'  name='EntryFlow' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_793' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_17' name='to' lower='1' upper='1' isComposite='false' association='A_791' />
+        <ownedAttribute xmi:id='P_G_794' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_12' name='from' lower='1' upper='1' isComposite='false' association='A_792' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1155' xmi:type='cmof:Class'  name='BlockUnit' superClass='C_17' isAbstract='false' />
+      <ownedMember xmi:id='C_1156' xmi:type='cmof:Class'  name='ExceptionUnit' superClass='C_1155' isAbstract='false' />
+      <ownedMember xmi:id='C_1157' xmi:type='cmof:Class'  name='TryUnit' superClass='C_1156' isAbstract='false' />
+      <ownedMember xmi:id='C_1158' xmi:type='cmof:Class'  name='FinallyUnit' superClass='C_1156' isAbstract='false' />
+      <ownedMember xmi:id='C_1159' xmi:type='cmof:Class'  name='CatchUnit' superClass='C_1156' isAbstract='false' />
+      <ownedMember xmi:id='A_797' xmi:type='cmof:Association' memberEnd='P_G_799 P_G_801'  name='A_exitFlow_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_801' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_803' name='inExitFlow' lower='0' upper='*' isComposite='false' association='A_797' />
+      </ownedMember>
+      <ownedMember xmi:id='A_798' xmi:type='cmof:Association' memberEnd='P_G_800 P_G_802'  name='A_exitFlow_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_802' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_803' name='outExitFlow' lower='0' upper='*' isComposite='false' association='A_798' />
+      </ownedMember>
+      <ownedMember xmi:id='C_803' xmi:type='cmof:Class'  name='ExitFlow' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_799' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_17' name='to' lower='1' upper='1' isComposite='false' association='A_797' />
+        <ownedAttribute xmi:id='P_G_800' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_798' />
+      </ownedMember>
+      <ownedMember xmi:id='A_804' xmi:type='cmof:Association' memberEnd='P_G_806 P_G_808'  name='A_exceptionFlow_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_808' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_810' name='inExceptionFlow' lower='0' upper='*' isComposite='false' association='A_804' />
+      </ownedMember>
+      <ownedMember xmi:id='A_805' xmi:type='cmof:Association' memberEnd='P_G_807 P_G_809'  name='A_exceptionFlow_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_809' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_810' name='outExceptionFlow' lower='0' upper='*' isComposite='false' association='A_805' />
+      </ownedMember>
+      <ownedMember xmi:id='C_810' xmi:type='cmof:Class'  name='ExceptionFlow' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_806' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_17' name='to' lower='1' upper='1' isComposite='false' association='A_804' />
+        <ownedAttribute xmi:id='P_G_807' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_805' />
+      </ownedMember>
+    </ownedMember>
+    <ownedMember xmi:id='Pk_1160' xmi:type='cmof:Package' name='core' >
+      <ownedMember xmi:id='A_811' xmi:type='cmof:Association' memberEnd='P_G_812 P_G_813' name='Extension'>
+        <ownedEnd xmi:id='P_G_813' xmi:type='cmof:Property'  type='C_255' name='extendableElement' lower='0' upper='*' isComposite='false' association='A_811' />
+      </ownedMember>
+      <ownedMember xmi:id='A_814' xmi:type='cmof:Association' memberEnd='P_G_815 P_G_816' name='Origin'>
+        <ownedEnd xmi:id='P_G_816' xmi:type='cmof:Property'  type='C_817' name='outAggregated' lower='0' upper='*' isComposite='false' association='A_814' />
+      </ownedMember>
+      <ownedMember xmi:id='A_818' xmi:type='cmof:Association' memberEnd='P_G_819 P_G_820' name='Destination'>
+        <ownedEnd xmi:id='P_G_820' xmi:type='cmof:Property'  type='C_817' name='inAggregated' lower='0' upper='*' isComposite='false' association='A_818' />
+      </ownedMember>
+      <ownedMember xmi:id='A_821' xmi:type='cmof:Association' memberEnd='P_G_822 P_G_823' name='RelationSet'>
+        <ownedEnd xmi:id='P_G_823' xmi:type='cmof:Property'  type='C_817' name='aggregate' lower='0' upper='*' isComposite='false' association='A_821' />
+      </ownedMember>
+      <ownedMember xmi:id='A_825' xmi:type='cmof:Association' memberEnd='P_G_826 P_G_827' name='AggregaredRelations'>
+        <ownedEnd xmi:id='P_G_827' xmi:type='cmof:Property'  type='C_67' name='owner' lower='0' upper='1' isComposite='false' association='A_825' />
+      </ownedMember>
+      <ownedMember xmi:id='A_828' xmi:type='cmof:Association' name='Audits' memberEnd='P_G_829 P_G_830' />
+      <ownedMember xmi:id='A_833' xmi:type='cmof:Association' memberEnd='P_G_834 P_G_835' name='ExtendedValues'>
+        <ownedEnd xmi:id='P_G_835' xmi:type='cmof:Property'  type='C_255' name='extendableElement' lower='1' upper='1' isComposite='false' association='A_833' />
+      </ownedMember>
+      <ownedMember xmi:id='A_836' xmi:type='cmof:Association' name='ElementAnnotation' memberEnd='P_G_837 P_G_838' />
+      <ownedMember xmi:id='A_841' xmi:type='cmof:Association' name='ElementAttribute' memberEnd='P_G_842 P_G_843' />
+      <ownedMember xmi:id='A_845' xmi:type='cmof:Association' memberEnd='P_G_846 P_G_847' name='Source'>
+        <ownedEnd xmi:id='P_G_847' xmi:type='cmof:Property'  type='C_67' name='kdmEntity' lower='0' upper='1' isComposite='false' association='A_845' />
+      </ownedMember>
+      <ownedMember xmi:id='A_848' xmi:type='cmof:Association' name='Track' memberEnd='P_G_849 P_G_850' />
+      <ownedMember xmi:id='C_1161' xmi:type='cmof:Class'  name='Element' isAbstract='true' />
+      <ownedMember xmi:id='C_839' xmi:type='cmof:Class'  name='AnnotatableElement' superClass='C_1161'  isAbstract='true' >
+        <ownedAttribute xmi:id='P_G_837' xmi:type='cmof:Property'  type='C_840' name='annotation' lower='0' upper='*' isComposite='true' association='A_836' />
+        <ownedAttribute xmi:id='P_G_842' xmi:type='cmof:Property'  type='C_844' name='attribute' lower='0' upper='*' isComposite='true' association='A_841' />
+      </ownedMember>
+      <ownedMember xmi:id='C_255' xmi:type='cmof:Class'  name='ExtendableElement' superClass='C_839'  isAbstract='true' >
+        <ownedAttribute xmi:id='P_G_812' xmi:type='cmof:Property'  type='C_259' name='stereotype' lower='0' upper='*' isComposite='false' association='A_811' />
+        <ownedAttribute xmi:id='P_G_834' xmi:type='cmof:Property'  type='C_267' name='taggedValue' lower='0' upper='*' isComposite='true' association='A_833' />
+      </ownedMember>
+      <ownedMember xmi:id='C_831' xmi:type='cmof:Class'  name='ModelElement' superClass='C_255'  isAbstract='true' >
+        <ownedAttribute xmi:id='P_G_829' xmi:type='cmof:Property'  type='C_832' name='audit' lower='0' upper='*' isComposite='true' association='A_828' />
+      </ownedMember>
+      <ownedMember xmi:id='A_16' xmi:type='cmof:Association' name='A_KDMEntity_ownedElement' memberEnd='P_O_15 P_D_15' />
+      <ownedMember xmi:id='A_11' xmi:type='cmof:Association' name='A_KDMEntity_groupedElement' memberEnd='P_O_10 P_D_10' />
+      <ownedMember xmi:id='A_5' xmi:type='cmof:Association' memberEnd='P_O_4 P_D_4'  name='A_KDMEntity_ownedRelation'>
+        <ownedEnd xmi:id='P_D_4' xmi:type='cmof:Property'  type='C_67' name='kdmEntity' lower='1' upper='1' isComposite='false' association='A_5' />
+      </ownedMember>
+      <ownedMember xmi:id='C_67' xmi:type='cmof:Class'  name='KDMEntity' superClass='C_831' isAbstract='true' >
+        <ownedAttribute xmi:id='P_D_23' xmi:type='cmof:Property' isDerivedUnion='true' isDerived='true' isReadOnly='true'  type='C_250' name='modelProperty' lower='0' upper='1' isComposite='false' association='A_24' />
+        <ownedAttribute xmi:id='P_G_826' xmi:type='cmof:Property'  type='C_817' name='aggregatedRelation' lower='0' upper='*' isComposite='true' association='A_825' />
+        <ownedAttribute xmi:id='P_G_846' xmi:type='cmof:Property'  type='C_539' name='source' lower='0' upper='*' isComposite='true' association='A_845' />
+        <ownedAttribute xmi:id='P_G_849' xmi:type='cmof:Property'  type='C_576' name='track' lower='0' upper='*' isComposite='true' association='A_848' />
+        <ownedOperation xmi:id='OP_852' xmi:type='cmof:Operation' name='createAggregation'>
+          <ownedParameter xmi:id='XX_851' xmi:type='cmof:Parameter' lower='1' upper='1' type='C_67' name='otherEntity' />
+        </ownedOperation>
+        <ownedOperation xmi:id='OP_854' xmi:type='cmof:Operation' name='deleteAggregation'>
+          <ownedParameter xmi:id='XX_853' xmi:type='cmof:Parameter' lower='1' upper='1' type='C_817' name='aggregation' />
+        </ownedOperation>
+        <ownedAttribute xmi:id='P_O_15' xmi:type='cmof:Property' isOrdered='false' isDerivedUnion='true' isDerived='true' isReadOnly='true'  type='C_67' name='ownedElement' lower='0' upper='*' isComposite='true' association='A_16' />
+        <ownedAttribute xmi:id='P_D_15' xmi:type='cmof:Property' isDerivedUnion='true' isDerived='true' isReadOnly='true'  type='C_67' name='ownerProperty' lower='0' upper='1' isComposite='false' association='A_16' />
+        <ownedAttribute xmi:id='P_O_10' xmi:type='cmof:Property' isOrdered='false' isDerivedUnion='true' isDerived='true' isReadOnly='true'  type='C_67' name='groupedElement' lower='0' upper='*' isComposite='false' association='A_11' />
+        <ownedAttribute xmi:id='P_D_10' xmi:type='cmof:Property' isDerivedUnion='true' isDerived='true' isReadOnly='true'  type='C_67' name='groupProperty' lower='0' upper='*' isComposite='false' association='A_11' />
+        <ownedAttribute xmi:id='P_O_4' xmi:type='cmof:Property' isOrdered='false' isDerivedUnion='true' isDerived='true' isReadOnly='true'  type='C_824' name='ownedRelation' lower='0' upper='*' isComposite='true' association='A_5' />
+        <ownedAttribute xmi:id='P_1162' xmi:type='cmof:Property' name='name' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='A_32' xmi:type='cmof:Association' memberEnd='P_G_34 P_G_36'  name='A_kdmRelationship_to'>
+        <ownedEnd xmi:id='P_G_36' xmi:type='cmof:Property' isDerivedUnion='true' isDerived='true' isReadOnly='true'  type='C_824' name='inKDMRelationship' lower='0' upper='*' isComposite='false' association='A_32' />
+      </ownedMember>
+      <ownedMember xmi:id='A_33' xmi:type='cmof:Association' memberEnd='P_G_35 P_G_37'  name='A_kdmRelationship_from'>
+        <ownedEnd xmi:id='P_G_37' xmi:type='cmof:Property' isDerivedUnion='true' isDerived='true' isReadOnly='true'  type='C_824' name='outKDMRelationship' lower='0' upper='*' isComposite='false' association='A_33' />
+      </ownedMember>
+      <ownedMember xmi:id='C_824' xmi:type='cmof:Class'  name='KDMRelationship' superClass='C_831'  isAbstract='true' >
+        <ownedAttribute xmi:id='P_G_34' xmi:type='cmof:Property'   type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_32' />
+        <ownedAttribute xmi:id='P_G_35' xmi:type='cmof:Property'   type='C_67' name='from' lower='1' upper='1' isComposite='false' association='A_33' />
+      </ownedMember>
+      <ownedMember xmi:id='C_954' xmi:type='cmof:Class'  name='AnnotationElement' superClass='C_1161'  isAbstract='true' />
+      <ownedMember xmi:id='C_958' xmi:type='cmof:Class'  name='ExtensionElement' superClass='C_839'  isAbstract='true' />
+      <ownedMember xmi:id='C_817' xmi:type='cmof:Class'  name='AggregatedRelationship' superClass='C_831'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_815' xmi:type='cmof:Property'  type='C_67' name='from' lower='1' upper='1' isComposite='false' association='A_814' />
+        <ownedAttribute xmi:id='P_G_819' xmi:type='cmof:Property'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_818' />
+        <ownedAttribute xmi:id='P_G_822' xmi:type='cmof:Property'  type='C_824' name='relation' lower='0' upper='*' isComposite='false' association='A_821' />
+        <ownedAttribute xmi:id='P_1163' xmi:type='cmof:Property' name='density' type='D_992' />
+      </ownedMember>
+      <ownedMember xmi:id='D_923' xmi:type='cmof:DataType' name='String'  />
+      <ownedMember xmi:id='D_979' xmi:type='cmof:DataType' name='Boolean'  />
+      <ownedMember xmi:id='D_992' xmi:type='cmof:DataType' name='Integer'  />
+    </ownedMember>
+    <ownedMember xmi:id='Pk_1164' xmi:type='cmof:Package' name='event' >
+      <ownedMember xmi:id='A_855' xmi:type='cmof:Association' memberEnd='P_O_856 P_D_856'  name='A_EventModel_eventElement' general='A_24'>
+        <ownedEnd xmi:id='P_D_856' xmi:type='cmof:Property' subsettedProperty='P_D_23'  type='C_858' name='model' lower='0' upper='1' isComposite='false' association='A_855' />
+      </ownedMember>
+      <ownedMember xmi:id='C_858' xmi:type='cmof:Class'  name='EventModel' superClass='C_250'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_856' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_23'  type='C_857' name='eventElement' lower='0' upper='*' isComposite='true' association='A_855' />
+      </ownedMember>
+      <ownedMember xmi:id='A_859' xmi:type='cmof:Association' memberEnd='P_O_860 P_D_860'  name='A_AbstractEventElement_eventRelation' general='A_5'>
+        <ownedEnd xmi:id='P_D_860' xmi:type='cmof:Property'  type='C_857' name='abstractEventElement' lower='1' upper='1' isComposite='false' association='A_859' />
+      </ownedMember>
+      <ownedMember xmi:id='A_862' xmi:type='cmof:Association' memberEnd='P_O_863 P_D_863'  name='A_AbstractEventElement_abstraction' general='A_16'>
+        <ownedEnd xmi:id='P_D_863' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_857' name='owner' lower='0' upper='1' isComposite='false' association='A_862' />
+      </ownedMember>
+      <ownedMember xmi:id='A_864' xmi:type='cmof:Association' memberEnd='P_O_865 P_D_865'  name='A_AbstractEventElement_implementation' general='A_11'>
+        <ownedEnd xmi:id='P_D_865' xmi:type='cmof:Property' subsettedProperty='P_D_10'  type='C_857' name='group' lower='0' upper='*' isComposite='false' association='A_864' />
+      </ownedMember>
+      <ownedMember xmi:id='C_857' xmi:type='cmof:Class'  name='AbstractEventElement' superClass='C_67' isAbstract='true' >
+        <ownedAttribute xmi:id='P_O_860' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_4'  type='C_861' name='eventRelation' lower='0' upper='*' isComposite='true' association='A_859' />
+        <ownedAttribute xmi:id='P_O_863' xmi:type='cmof:Property' isOrdered='true' subsettedProperty='P_O_15'  type='C_17' name='abstraction' lower='0' upper='*' isComposite='true' association='A_862' />
+        <ownedAttribute xmi:id='P_O_865' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_10'  type='C_12' name='implementation' lower='0' upper='*' isComposite='false' association='A_864' />
+      </ownedMember>
+      <ownedMember xmi:id='C_878' xmi:type='cmof:Class'  name='Event' superClass='C_857' isAbstract='false' >
+        <ownedAttribute xmi:id='P_1165' xmi:type='cmof:Property' name='kind' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='C_861' xmi:type='cmof:Class'  name='AbstractEventRelationship' superClass='C_824'  isAbstract='true' />
+      <ownedMember xmi:id='A_866' xmi:type='cmof:Association' memberEnd='P_G_868 P_G_870'  name='A_eventRelationship_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_870' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_872' name='inEventRelationship' lower='0' upper='*' isComposite='false' association='A_866' />
+      </ownedMember>
+      <ownedMember xmi:id='A_867' xmi:type='cmof:Association' memberEnd='P_G_869 P_G_871'  name='A_eventRelationship_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_871' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_872' name='outEventRelationship' lower='0' upper='*' isComposite='false' association='A_867' />
+      </ownedMember>
+      <ownedMember xmi:id='C_872' xmi:type='cmof:Class'  name='EventRelationship' superClass='C_861'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_868' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_67' name='to' lower='1' upper='1' isComposite='false' association='A_866' />
+        <ownedAttribute xmi:id='P_G_869' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_857' name='from' lower='1' upper='1' isComposite='false' association='A_867' />
+      </ownedMember>
+      <ownedMember xmi:id='A_873' xmi:type='cmof:Association' memberEnd='P_O_874 P_D_874'  name='A_EventResource_eventElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_874' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_875' name='owner' lower='0' upper='1' isComposite='false' association='A_873' />
+      </ownedMember>
+      <ownedMember xmi:id='C_875' xmi:type='cmof:Class'  name='EventResource' superClass='C_857' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_874' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_857' name='eventElement' lower='0' upper='*' isComposite='true' association='A_873' />
+      </ownedMember>
+      <ownedMember xmi:id='C_886' xmi:type='cmof:Class'  name='State' superClass='C_875' isAbstract='false' />
+      <ownedMember xmi:id='C_902' xmi:type='cmof:Class'  name='Transition' superClass='C_875' isAbstract='false' />
+      <ownedMember xmi:id='C_1166' xmi:type='cmof:Class'  name='OnEntry' superClass='C_902' isAbstract='false' />
+      <ownedMember xmi:id='C_1167' xmi:type='cmof:Class'  name='OnExit' superClass='C_902' isAbstract='false' />
+      <ownedMember xmi:id='A_876' xmi:type='cmof:Association' memberEnd='P_O_877 P_D_877'  name='A_EventAction_eventElement' general='A_16'>
+        <ownedEnd xmi:id='P_D_877' xmi:type='cmof:Property' subsettedProperty='P_D_15'  type='C_879' name='owner' lower='0' upper='1' isComposite='false' association='A_876' />
+      </ownedMember>
+      <ownedMember xmi:id='C_879' xmi:type='cmof:Class'  name='EventAction' superClass='C_857' isAbstract='false' >
+        <ownedAttribute xmi:id='P_O_877' xmi:type='cmof:Property' isOrdered='false' subsettedProperty='P_O_15'  type='C_878' name='eventElement' lower='0' upper='*' isComposite='true' association='A_876' />
+        <ownedAttribute xmi:id='P_1168' xmi:type='cmof:Property' name='kind' type='D_923' />
+      </ownedMember>
+      <ownedMember xmi:id='A_880' xmi:type='cmof:Association' memberEnd='P_G_882 P_G_884'  name='A_readsState_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_884' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_887' name='inReadsState' lower='0' upper='*' isComposite='false' association='A_880' />
+      </ownedMember>
+      <ownedMember xmi:id='A_881' xmi:type='cmof:Association' memberEnd='P_G_883 P_G_885'  name='A_readsState_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_885' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_887' name='outReadsState' lower='0' upper='*' isComposite='false' association='A_881' />
+      </ownedMember>
+      <ownedMember xmi:id='C_887' xmi:type='cmof:Class'  name='ReadsState' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_882' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_886' name='to' lower='1' upper='1' isComposite='false' association='A_880' />
+        <ownedAttribute xmi:id='P_G_883' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_881' />
+      </ownedMember>
+      <ownedMember xmi:id='A_888' xmi:type='cmof:Association' memberEnd='P_G_890 P_G_892'  name='A_producesEvent_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_892' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_894' name='inProducesEvent' lower='0' upper='*' isComposite='false' association='A_888' />
+      </ownedMember>
+      <ownedMember xmi:id='A_889' xmi:type='cmof:Association' memberEnd='P_G_891 P_G_893'  name='A_producesEvent_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_893' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_894' name='outProducesEvent' lower='0' upper='*' isComposite='false' association='A_889' />
+      </ownedMember>
+      <ownedMember xmi:id='C_894' xmi:type='cmof:Class'  name='ProducesEvent' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_890' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_878' name='to' lower='1' upper='1' isComposite='false' association='A_888' />
+        <ownedAttribute xmi:id='P_G_891' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_889' />
+      </ownedMember>
+      <ownedMember xmi:id='A_895' xmi:type='cmof:Association' memberEnd='P_G_897 P_G_899'  name='A_consumesEvent_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_899' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_901' name='inConsumesEvent' lower='0' upper='*' isComposite='false' association='A_895' />
+      </ownedMember>
+      <ownedMember xmi:id='A_896' xmi:type='cmof:Association' memberEnd='P_G_898 P_G_900'  name='A_consumesEvent_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_900' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_901' name='outConsumesEvent' lower='0' upper='*' isComposite='false' association='A_896' />
+      </ownedMember>
+      <ownedMember xmi:id='C_901' xmi:type='cmof:Class'  name='ConsumesEvent' superClass='C_861'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_897' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_878' name='to' lower='1' upper='1' isComposite='false' association='A_895' />
+        <ownedAttribute xmi:id='P_G_898' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_902' name='from' lower='1' upper='1' isComposite='false' association='A_896' />
+      </ownedMember>
+      <ownedMember xmi:id='A_903' xmi:type='cmof:Association' memberEnd='P_G_905 P_G_907'  name='A_nextState_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_907' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_909' name='inNextState' lower='0' upper='*' isComposite='false' association='A_903' />
+      </ownedMember>
+      <ownedMember xmi:id='A_904' xmi:type='cmof:Association' memberEnd='P_G_906 P_G_908'  name='A_nextState_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_908' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_909' name='outNextState' lower='0' upper='*' isComposite='false' association='A_904' />
+      </ownedMember>
+      <ownedMember xmi:id='C_909' xmi:type='cmof:Class'  name='NextState' superClass='C_861'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_905' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_886' name='to' lower='1' upper='1' isComposite='false' association='A_903' />
+        <ownedAttribute xmi:id='P_G_906' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_902' name='from' lower='1' upper='1' isComposite='false' association='A_904' />
+      </ownedMember>
+      <ownedMember xmi:id='C_1169' xmi:type='cmof:Class'  name='InitialState' superClass='C_886' isAbstract='false' />
+      <ownedMember xmi:id='C_1170' xmi:type='cmof:Class'  name='EventElement' superClass='C_857' isAbstract='false' />
+      <ownedMember xmi:id='A_910' xmi:type='cmof:Association' memberEnd='P_G_912 P_G_914'  name='A_hasState_to' general='A_32'>
+        <ownedEnd xmi:id='P_G_914' xmi:type='cmof:Property' subsettedProperty='P_G_36'  type='C_916' name='inHasState' lower='0' upper='*' isComposite='false' association='A_910' />
+      </ownedMember>
+      <ownedMember xmi:id='A_911' xmi:type='cmof:Association' memberEnd='P_G_913 P_G_915'  name='A_hasState_from' general='A_33'>
+        <ownedEnd xmi:id='P_G_915' xmi:type='cmof:Property' subsettedProperty='P_G_37'  type='C_916' name='outHasState' lower='0' upper='*' isComposite='false' association='A_911' />
+      </ownedMember>
+      <ownedMember xmi:id='C_916' xmi:type='cmof:Class'  name='HasState' superClass='C_710'  isAbstract='false' >
+        <ownedAttribute xmi:id='P_G_912' xmi:type='cmof:Property' redefinedProperty='P_G_34'  type='C_857' name='to' lower='1' upper='1' isComposite='false' association='A_910' />
+        <ownedAttribute xmi:id='P_G_913' xmi:type='cmof:Property' redefinedProperty='P_G_35'  type='C_17' name='from' lower='1' upper='1' isComposite='false' association='A_911' />
+      </ownedMember>
+    </ownedMember>
+  </cmof:Package>
+</xmi:XMI>
