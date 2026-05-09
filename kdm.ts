@@ -7815,3 +7815,2461 @@ export class HasState extends AbstractActionRelationship implements IHasState {
 // ═══════════════════════════════════════════════════════════════════════════
 // END Implementer #3: Action + Platform + UI + Event packages
 // ═══════════════════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BEGIN Implementer #4: Data + Build + Conceptual + Structure packages (final wave)
+//
+// Scope: KDM Resource Layer (Data, §18) + KDM Abstractions Layer (Structure
+// §19, Conceptual §20, Build §21). This is the last implementation wave —
+// no forward placeholders remain after this banner.
+// ═══════════════════════════════════════════════════════════════════════════
+
+// ───────────────────────────────────────────────────────────────────────────
+// Data Package (§18 — formal/16-09-01)
+// ───────────────────────────────────────────────────────────────────────────
+
+// ─── 232. DataModel (§18.3.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.3.1
+ * @metaclass DataModel (concrete)
+ * @generalization KDMModel
+ * @definition The DataModel Class is the specific KDM model that corresponds
+ *   to the logical organization of data of the existing software system, in
+ *   particular, related to persistent data. DataModel follows the uniform
+ *   pattern for KDM models.
+ * @ownedAttributes
+ *   • dataElement : AbstractDataElement [0..*] (composite) -- §18.3.1: data
+ *     elements owned by the given DataModel.
+ * @associationEnds
+ *   • A_DataModel_dataElement -- A_586 -- dataElement end (composite)
+ * @operations (none)
+ * @constraints (none declared in §18.3.1)
+ */
+export interface IDataModel extends IKDMModel {
+  readonly dataElement: ReadonlyArray<IAbstractDataElement>;
+}
+
+export class DataModel extends KDMModel implements IDataModel {
+  readonly metaClass = "DataModel" as const;
+  readonly dataElement: ReadonlyArray<IAbstractDataElement>;
+  constructor(args: { name?: string; dataElement?: ReadonlyArray<IAbstractDataElement> } = {}) {
+    super();
+    if (args.name !== undefined) (this as { name: string }).name = args.name;
+    this.dataElement = args.dataElement ?? [];
+  }
+  override getOwnedElement(): ReadonlyArray<IKDMEntity> {
+    return this.dataElement as ReadonlyArray<IKDMEntity>;
+  }
+}
+
+// ─── 233. AbstractDataElement (§18.3.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.3.2
+ * @metaclass AbstractDataElement (abstract)
+ * @generalization KDMEntity
+ * @definition The AbstractDataElement class is an abstract meta-model element
+ *   that represents the discreet instance of a given data element within a
+ *   system. For example, a Customer_Number is one type of data element that
+ *   might be found within a system. Data model defines several specific
+ *   subclasses of AbstractDataElement, corresponding to common subcategories
+ *   of data elements. The key subclasses of AbstractDataElement are
+ *   DataResource, DataAction, XMLSchema and AbstractContentElement.
+ * @ownedAttributes
+ *   • abstraction  : ActionElement [1] (composite) -- §18.3.2: the
+ *     "abstracted" actions that are owned by the current element.
+ *   • dataRelation : AbstractDataRelationship [0..*] (composite) -- §18.3.2:
+ *     Data relationships that originate from this data element.
+ * @associationEnds
+ *   • A_AbstractDataElement_dataRelation  -- A_590 -- dataRelation end (composite)
+ *   • A_AbstractDataElement_abstraction   -- A_593 -- abstraction end (composite)
+ * @operations (none)
+ * @constraints (none declared in §18.3.2)
+ */
+export interface IAbstractDataElement extends IKDMEntity {
+  readonly abstraction: ReadonlyArray<IActionElement>;
+  readonly dataRelation: ReadonlyArray<IAbstractDataRelationship>;
+}
+
+export abstract class AbstractDataElement extends KDMEntity implements IAbstractDataElement {
+  readonly abstraction: ReadonlyArray<IActionElement> = [];
+  readonly dataRelation: ReadonlyArray<IAbstractDataRelationship> = [];
+  override getOwner(): IKDMEntity | undefined { return undefined; }
+  override getOwnedElement(): ReadonlyArray<IKDMEntity> { return []; }
+  override getGroup(): ReadonlyArray<IKDMEntity> { return []; }
+  override getGroupedElement(): ReadonlyArray<IKDMEntity> { return []; }
+  override getInbound(): ReadonlyArray<IKDMRelationship> { return []; }
+  override getOutbound(): ReadonlyArray<IKDMRelationship> { return this.dataRelation; }
+  override getOwnedRelation(): ReadonlyArray<IKDMRelationship> { return this.dataRelation; }
+  override getModel(): IKDMModel | undefined { return undefined; }
+  override createAggregation(_otherEntity: IKDMEntity): IAggregatedRelationship {
+    throw new Error("AbstractDataElement.createAggregation must be supplied by a runtime adapter.");
+  }
+  override deleteAggregation(_aggregation: IAggregatedRelationship): void {
+    throw new Error("AbstractDataElement.deleteAggregation must be supplied by a runtime adapter.");
+  }
+}
+
+// ─── 234. AbstractDataRelationship (§18.3.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.3.3
+ * @metaclass AbstractDataRelationship (abstract)
+ * @generalization KDMRelationship
+ * @definition An AbstractDataRelationship class is an abstract superclass of
+ *   the meta-model elements that represent associations between data elements.
+ *   AbstractDataRelationship is an abstract class that is used to constrain
+ *   the subclasses of KDMRelationship in the Data model.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared in §18.3.3)
+ */
+export interface IAbstractDataRelationship extends IKDMRelationship {}
+
+export abstract class AbstractDataRelationship extends KDMRelationship implements IAbstractDataRelationship {}
+
+// ─── 235. DataResource (§18.5.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.5.1
+ * @metaclass DataResource (concrete; generic)
+ * @generalization AbstractDataElement
+ * @definition The DataResource class is a generic meta-model element that
+ *   represents various database resources, such as DataEvent and IndexElement.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints
+ *   1. DataResource should have at least one stereotype. (§18.5.1)
+ */
+export interface IDataResource extends IAbstractDataElement {}
+
+export class DataResource extends AbstractDataElement implements IDataResource {
+  readonly metaClass: string = "DataResource";
+}
+
+// ─── 236. DataContainer (§18.5.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.5.2
+ * @metaclass DataContainer (concrete; generic)
+ * @generalization DataResource
+ * @definition The DataContainer class is a generic meta-model element that
+ *   represents various database containers.
+ * @ownedAttributes
+ *   • dataElement : DataResource [0..*] (composite) -- §18.5.2: Owned data
+ *     resources.
+ * @associationEnds
+ *   • A_DataContainer_dataElement -- A_607 -- dataElement end (composite)
+ * @operations (none)
+ * @constraints (none declared in §18.5.2)
+ */
+export interface IDataContainer extends IDataResource {
+  readonly dataElement: ReadonlyArray<IDataResource>;
+}
+
+export class DataContainer extends DataResource implements IDataContainer {
+  override readonly metaClass: string = "DataContainer";
+  readonly dataElement: ReadonlyArray<IDataResource>;
+  constructor(args: { dataElement?: ReadonlyArray<IDataResource> } = {}) {
+    super();
+    this.dataElement = args.dataElement ?? [];
+  }
+}
+
+// ─── 237. Catalog (§18.5.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.5.3
+ * @metaclass Catalog (concrete)
+ * @generalization DataContainer
+ * @definition The Catalog class is the top level container that represents a
+ *   relational or a hierarchical database.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ICatalog extends IDataContainer {}
+
+export class Catalog extends DataContainer implements ICatalog {
+  override readonly metaClass = "Catalog" as const;
+}
+
+// ─── 238. RelationalSchema (§18.5.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.5.4
+ * @metaclass RelationalSchema (concrete)
+ * @generalization DataContainer
+ * @definition The RelationalSchema class is a relational database schema.
+ * @ownedAttributes
+ *   • codeElement : CodeItem [0..*] (composite) -- §18.5.4: Stored procedures
+ *     owned by this schema.
+ * @associationEnds
+ *   • A_RelationalSchema_codeElement -- A_611 -- codeElement end (composite)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IRelationalSchema extends IDataContainer {
+  readonly codeElement: ReadonlyArray<ICodeItem>;
+}
+
+export class RelationalSchema extends DataContainer implements IRelationalSchema {
+  override readonly metaClass = "RelationalSchema" as const;
+  readonly codeElement: ReadonlyArray<ICodeItem>;
+  constructor(args: { codeElement?: ReadonlyArray<ICodeItem>; dataElement?: ReadonlyArray<IDataResource> } = {}) {
+    super({ dataElement: args.dataElement });
+    this.codeElement = args.codeElement ?? [];
+  }
+}
+
+// ─── 239. ColumnSet (§18.6.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.6.1
+ * @metaclass ColumnSet (concrete; generic)
+ * @generalization DataContainer
+ * @definition The ColumnSet class is a generic meta-model element that
+ *   represents collections of columns (also referred to as fields). Columns
+ *   are modeled as ItemUnits.
+ * @ownedAttributes
+ *   • itemUnit : ItemUnit [0..*] (composite) -- §18.6.1: Individual columns
+ *     owned by this ColumnSet are represented as data elements.
+ * @associationEnds
+ *   • A_ColumnSet_itemUnit -- A_614 -- itemUnit end (composite, ordered)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IColumnSet extends IDataContainer {
+  readonly itemUnit: ReadonlyArray<IItemUnit>;
+}
+
+export class ColumnSet extends DataContainer implements IColumnSet {
+  override readonly metaClass: string = "ColumnSet";
+  readonly itemUnit: ReadonlyArray<IItemUnit>;
+  constructor(args: { itemUnit?: ReadonlyArray<IItemUnit>; dataElement?: ReadonlyArray<IDataResource> } = {}) {
+    super({ dataElement: args.dataElement });
+    this.itemUnit = args.itemUnit ?? [];
+  }
+}
+
+// ─── 240. RelationalTable (§18.6.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.6.2
+ * @metaclass RelationalTable (concrete)
+ * @generalization ColumnSet
+ * @definition A RelationalTable is a specific subclass of ColumnSet class
+ *   that represents tables of relational databases.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IRelationalTable extends IColumnSet {}
+
+export class RelationalTable extends ColumnSet implements IRelationalTable {
+  override readonly metaClass = "RelationalTable" as const;
+}
+
+// ─── 241. RelationalView (§18.6.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.6.3
+ * @metaclass RelationalView (concrete)
+ * @generalization ColumnSet
+ * @definition A RelationalView class is a specific subclass of the ColumnSet
+ *   class that represents Views of relational databases. A view is a virtual
+ *   table whose contents are defined by a query.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IRelationalView extends IColumnSet {}
+
+export class RelationalView extends ColumnSet implements IRelationalView {
+  override readonly metaClass = "RelationalView" as const;
+}
+
+// ─── 242. DataSegment (§18.6.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.6.4
+ * @metaclass DataSegment (concrete)
+ * @generalization ColumnSet
+ * @definition A DataSegment class is a meta-model element that represents a
+ *   segment of a hierarchical database, such as IMS.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IDataSegment extends IColumnSet {}
+
+export class DataSegment extends ColumnSet implements IDataSegment {
+  override readonly metaClass = "DataSegment" as const;
+}
+
+// ─── 243. RecordFile (§18.6.5) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.6.5
+ * @metaclass RecordFile (concrete)
+ * @generalization ColumnSet
+ * @definition The RecordFile class is a meta-model element that represents
+ *   files as a set of records. RecordFile can be indexed or sequential.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IRecordFile extends IColumnSet {}
+
+export class RecordFile extends ColumnSet implements IRecordFile {
+  override readonly metaClass = "RecordFile" as const;
+}
+
+// ─── 244. IndexElement (§18.7.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.7.1
+ * @metaclass IndexElement (concrete; generic)
+ * @generalization DataResource
+ * @definition IndexElement class is a generic meta-model element that defines
+ *   the common properties of the index items and key items of persistent data
+ *   stores. IndexElement uses the KDM group mechanism. IndexElement is
+ *   subclassed by concrete classes with more precise semantics. IndexElement
+ *   is itself a concrete class that can be used as an extended meta-model
+ *   element with an appropriate stereotype.
+ * @ownedAttributes
+ *   • implementation : ItemUnit [1] -- §18.7.1: The set of ItemUnits that
+ *     constitute the index.
+ * @associationEnds
+ *   • A_IndexElement_implementation -- A_595 -- implementation end (group)
+ * @operations (none)
+ * @constraints
+ *   1. Index owned by a data element should group elements that are owned by
+ *      that data element. (§18.7.1)
+ *   2. IndexElement should have a stereotype. (§18.7.1)
+ */
+export interface IIndexElement extends IDataResource {
+  readonly implementation: ReadonlyArray<IItemUnit>;
+}
+
+export class IndexElement extends DataResource implements IIndexElement {
+  override readonly metaClass: string = "IndexElement";
+  readonly implementation: ReadonlyArray<IItemUnit>;
+  constructor(args: { implementation?: ReadonlyArray<IItemUnit> } = {}) {
+    super();
+    this.implementation = args.implementation ?? [];
+  }
+}
+
+// ─── 245. UniqueKey (§18.7.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.7.2
+ * @metaclass UniqueKey (concrete)
+ * @generalization IndexElement
+ * @definition A UniqueKey is a meta-model element that represents primary
+ *   keys in relational database tables, segments of hierarchical databases,
+ *   or indexed files. UniqueKey is a group of columns.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints
+ *   1. UniqueKey owned by a data element should group ItemUnit elements that
+ *      are owned by that data element. (§18.7.2)
+ */
+export interface IUniqueKey extends IIndexElement {}
+
+export class UniqueKey extends IndexElement implements IUniqueKey {
+  override readonly metaClass = "UniqueKey" as const;
+}
+
+// ─── 246. ReferenceKey (§18.7.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.7.3
+ * @metaclass ReferenceKey (concrete)
+ * @generalization IndexElement
+ * @definition A ReferenceKey is a meta-model element that represents foreign
+ *   key in databases or indexed files. ReferenceKey is a group of columns.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints
+ *   1. ReferenceKey owned by a data element should group ItemUnit elements
+ *      that are owned by that data element. (§18.7.3)
+ */
+export interface IReferenceKey extends IIndexElement {}
+
+export class ReferenceKey extends IndexElement implements IReferenceKey {
+  override readonly metaClass = "ReferenceKey" as const;
+}
+
+// ─── 247. Index (§18.7.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.7.4
+ * @metaclass Index (concrete)
+ * @generalization IndexElement
+ * @definition An Index class is a meta-model element that represents an
+ *   index to a relational or hierarchical database or an indexed file.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints
+ *   1. Index owned by a data element should group ItemUnit elements that
+ *      are owned by that data element. (§18.7.4)
+ */
+export interface IIndex extends IIndexElement {}
+
+export class Index extends IndexElement implements IIndex {
+  override readonly metaClass = "Index" as const;
+}
+
+// ─── 248. KeyRelation (§18.8.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.8.1
+ * @metaclass KeyRelation (concrete)
+ * @generalization AbstractDataRelationship
+ * @definition A KeyRelationship is a meta-model element that represents an
+ *   association between a ReferenceKey with the corresponding UniqueKey.
+ * @ownedAttributes
+ *   • from : ReferenceKey [1] -- §18.8.1: Foreign key in a certain table,
+ *     segment, or file.
+ *   • to   : UniqueKey [1] -- §18.8.1: Primary key in a certain table,
+ *     segment, or key.
+ * @associationEnds
+ *   • A_keyRelation_to   -- A_598
+ *   • A_keyRelation_from -- A_599
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IKeyRelation extends IAbstractDataRelationship {
+  readonly from: IReferenceKey;
+  readonly to: IUniqueKey;
+}
+
+export class KeyRelation extends AbstractDataRelationship implements IKeyRelation {
+  readonly metaClass = "KeyRelation" as const;
+  readonly from: IReferenceKey;
+  readonly to: IUniqueKey;
+  constructor(args: { from: IReferenceKey; to: IUniqueKey }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 249. DataEvent (§18.5.5) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.5.5
+ * @metaclass DataEvent (concrete)
+ * @generalization DataResource
+ * @definition The DataEvent class is a meta-model element that represents
+ *   various events in databases that can trigger execution of stored
+ *   procedures, the so-called triggers. KDM models database events as "first
+ *   class citizens" of the KDM representation.
+ * @ownedAttributes
+ *   • kind : String -- §18.5.5: Semantic description of the data event.
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IDataEvent extends IDataResource {
+  readonly kind?: string;
+}
+
+export class DataEvent extends DataResource implements IDataEvent {
+  override readonly metaClass = "DataEvent" as const;
+  readonly kind?: string;
+  constructor(args: { kind?: string } = {}) {
+    super();
+    this.kind = args.kind;
+  }
+}
+
+// ─── 250. DataAction (§18.5.6) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.5.6
+ * @metaclass DataAction (concrete)
+ * @generalization AbstractDataElement
+ * @definition DataAction class follows the pattern of a "resource action"
+ *   class, specific to the data package. The nature of the action represented
+ *   by a particular element is designated by its "kind" attribute.
+ * @ownedAttributes
+ *   • kind          : String                 -- §18.5.6: Represents the
+ *     nature of the action performed by this element.
+ *   • implementation: ActionElement [0..*]   -- §18.5.6: Group association to
+ *     ActionElement represented by the current DataAction.
+ *   • dataElement   : DataEvent [0..*]       -- §18.5.6: Event elements owned
+ *     by the current DataAction.
+ * @associationEnds
+ *   • A_DataAction_implementation -- A_632 -- implementation end (group)
+ *   • A_DataAction_dataElement    -- A_635 -- dataElement end (composite)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IDataAction extends IAbstractDataElement {
+  readonly kind?: string;
+  readonly implementation: ReadonlyArray<IActionElement>;
+  readonly dataElement: ReadonlyArray<IDataEvent>;
+}
+
+export class DataAction extends AbstractDataElement implements IDataAction {
+  readonly metaClass = "DataAction" as const;
+  readonly kind?: string;
+  readonly implementation: ReadonlyArray<IActionElement>;
+  readonly dataElement: ReadonlyArray<IDataEvent>;
+  constructor(args: { kind?: string; implementation?: ReadonlyArray<IActionElement>; dataElement?: ReadonlyArray<IDataEvent> } = {}) {
+    super();
+    this.kind = args.kind;
+    this.implementation = args.implementation ?? [];
+    this.dataElement = args.dataElement ?? [];
+  }
+}
+
+// ─── 251. ReadsColumnSet (§18.9.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.9.1
+ * @metaclass ReadsColumnSet (concrete)
+ * @generalization Action::AbstractActionRelationship
+ * @definition ReadsColumnSet class follows the pattern of a "resource action
+ *   relationship." It represents various types of accesses to data resources
+ *   where there is a flow of data from the resource. ReadsColumnSet
+ *   relationship is similar to Reads relationship from Action Package.
+ * @ownedAttributes
+ *   • from : ActionElement [1] -- "abstracted" action owned by some resource.
+ *   • to   : ColumnSet     [1] -- The data resource being accessed.
+ * @associationEnds
+ *   • A_readsColumnSet_to   -- A_638
+ *   • A_readsColumnSet_from -- A_639
+ * @operations (none)
+ * @constraints
+ *   1. This relationship should not be used in Code models. (§18.9.1)
+ */
+export interface IReadsColumnSet extends IAbstractActionRelationship {
+  readonly from: IActionElement;
+  readonly to: IColumnSet;
+}
+
+export class ReadsColumnSet extends AbstractActionRelationship implements IReadsColumnSet {
+  readonly metaClass = "ReadsColumnSet" as const;
+  readonly from: IActionElement;
+  readonly to: IColumnSet;
+  constructor(args: { from: IActionElement; to: IColumnSet }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 252. WritesColumnSet (§18.9.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.9.2
+ * @metaclass WritesColumnSet (concrete)
+ * @generalization Action::AbstractActionRelationship
+ * @definition WritesColumnSet class follows the pattern of a "resource
+ *   action relationship." It represents various types of accesses to data
+ *   resources where there is a flow of data to the resource.
+ * @ownedAttributes
+ *   • from : ActionElement [1] -- "abstracted" action owned by some resource.
+ *   • to   : ColumnSet     [1] -- The data resource being accessed.
+ * @associationEnds
+ *   • A_writesColumnSet_to   -- A_687
+ *   • A_writesColumnSet_from -- A_688
+ * @operations (none)
+ * @constraints
+ *   1. This relationship should not be used in Code models. (§18.9.2)
+ */
+export interface IWritesColumnSet extends IAbstractActionRelationship {
+  readonly from: IActionElement;
+  readonly to: IColumnSet;
+}
+
+export class WritesColumnSet extends AbstractActionRelationship implements IWritesColumnSet {
+  readonly metaClass = "WritesColumnSet" as const;
+  readonly from: IActionElement;
+  readonly to: IColumnSet;
+  constructor(args: { from: IActionElement; to: IColumnSet }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 253. ManagesData (§18.9.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.9.3
+ * @metaclass ManagesData (concrete)
+ * @generalization Action::AbstractActionRelationship
+ * @definition Manages class follows the pattern of a "resource action
+ *   relationship." It represents various types of accesses to data resources
+ *   where there is no flow of data to or from the resource. ManagesData
+ *   relationship is similar to Addresses relationship from Action Package.
+ * @ownedAttributes
+ *   • from : ActionElement        [1] -- "abstracted" action owned by some resource.
+ *   • to   : AbstractDataElement  [1] -- The data resource being accessed.
+ * @associationEnds
+ *   • A_managesData_to   -- A_701
+ *   • A_managesData_from -- A_702
+ * @operations (none)
+ * @constraints
+ *   1. This relationship should not be used in Code models. (§18.9.3)
+ */
+export interface IManagesData extends IAbstractActionRelationship {
+  readonly from: IActionElement;
+  readonly to: IAbstractDataElement;
+}
+
+export class ManagesData extends AbstractActionRelationship implements IManagesData {
+  readonly metaClass = "ManagesData" as const;
+  readonly from: IActionElement;
+  readonly to: IAbstractDataElement;
+  constructor(args: { from: IActionElement; to: IAbstractDataElement }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 254. HasContent (§18.9.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.9.4
+ * @metaclass HasContent (concrete)
+ * @generalization Action::AbstractActionRelationship
+ * @definition HasContent class follows the pattern of a "resource action
+ *   relationship." HasContent is a structural relationship. It does not
+ *   represent resource manipulations.
+ * @ownedAttributes
+ *   • from : ActionElement       [1] -- "abstracted" action owned by some resource.
+ *   • to   : AbstractDataElement [1] -- The data resource being accessed.
+ * @associationEnds
+ *   • A_hasContent_to   -- A_680
+ *   • A_hasContent_from -- A_681
+ * @operations (none)
+ * @constraints
+ *   1. This relationship should not be used in Code models. (§18.9.4)
+ */
+export interface IHasContent extends IAbstractActionRelationship {
+  readonly from: IActionElement;
+  readonly to: IAbstractDataElement;
+}
+
+export class HasContent extends AbstractActionRelationship implements IHasContent {
+  readonly metaClass = "HasContent" as const;
+  readonly from: IActionElement;
+  readonly to: IAbstractDataElement;
+  constructor(args: { from: IActionElement; to: IAbstractDataElement }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 255. ProducesDataEvent (§18.9.5) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.9.5
+ * @metaclass ProducesDataEvent (concrete)
+ * @generalization Action::AbstractActionRelationship
+ * @definition ProducesDataEvent class follows the pattern of a "resource
+ *   action relationship." This relation represents various situations where
+ *   an ActionElement produces a DataEvent.
+ * @ownedAttributes
+ *   • from : ActionElement [1] -- "abstracted" action owned by some resource.
+ *   • to   : DataEvent     [1] -- The data event being produced.
+ * @associationEnds
+ *   • A_producesDataEvent_to   -- A_694
+ *   • A_producesDataEvent_from -- A_695
+ * @operations (none)
+ * @constraints
+ *   1. This relationship should not be used in Code models. (§18.9.5)
+ */
+export interface IProducesDataEvent extends IAbstractActionRelationship {
+  readonly from: IActionElement;
+  readonly to: IDataEvent;
+}
+
+export class ProducesDataEvent extends AbstractActionRelationship implements IProducesDataEvent {
+  readonly metaClass = "ProducesDataEvent" as const;
+  readonly from: IActionElement;
+  readonly to: IDataEvent;
+  constructor(args: { from: IActionElement; to: IDataEvent }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 256. XMLSchema (§18.10.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.10.1
+ * @metaclass XMLSchema (concrete)
+ * @generalization AbstractDataElement
+ * @definition The XMLSchema class represents the top level container for a
+ *   KDM metamodel of an XML document.
+ * @ownedAttributes
+ *   • contentElement : AbstractContentElement [0..*] (composite) -- §18.10.1:
+ *     Individual content elements owned by this schema.
+ * @associationEnds
+ *   • A_XMLSchema_contentElement -- A_617 -- contentElement end (composite)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IXMLSchema extends IAbstractDataElement {
+  readonly contentElement: ReadonlyArray<IAbstractContentElement>;
+}
+
+export class XMLSchema extends AbstractDataElement implements IXMLSchema {
+  readonly metaClass = "XMLSchema" as const;
+  readonly contentElement: ReadonlyArray<IAbstractContentElement>;
+  constructor(args: { contentElement?: ReadonlyArray<IAbstractContentElement> } = {}) {
+    super();
+    this.contentElement = args.contentElement ?? [];
+  }
+}
+
+// ─── 257. AbstractContentElement (§18.10.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.10.2
+ * @metaclass AbstractContentElement (abstract)
+ * @generalization AbstractDataElement
+ * @definition The AbstractContentElement class is an abstract parent for
+ *   several concrete classes whose purpose is to represent the content of
+ *   XML schemas and documents as well as various structured data items.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IAbstractContentElement extends IAbstractDataElement {}
+
+export abstract class AbstractContentElement extends AbstractDataElement implements IAbstractContentElement {}
+
+// ─── 258. ComplexContentType (§18.11.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.2
+ * @metaclass ComplexContentType (concrete)
+ * @generalization AbstractContentElement
+ * @definition The ComplexContentType class represents Complex Types of an
+ *   XML schema definition. XSD indicators are modeled as subclasses of
+ *   ComplexContentType.
+ * @ownedAttributes
+ *   • contentElement : AbstractContentElement [0..*] (composite) -- §18.11.2:
+ *     owned content elements.
+ * @associationEnds
+ *   • A_ComplexContentType_contentElement -- A_621 -- contentElement end (composite, ordered)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IComplexContentType extends IAbstractContentElement {
+  readonly contentElement: ReadonlyArray<IAbstractContentElement>;
+}
+
+export class ComplexContentType extends AbstractContentElement implements IComplexContentType {
+  readonly metaClass: string = "ComplexContentType";
+  readonly contentElement: ReadonlyArray<IAbstractContentElement>;
+  constructor(args: { contentElement?: ReadonlyArray<IAbstractContentElement> } = {}) {
+    super();
+    this.contentElement = args.contentElement ?? [];
+  }
+}
+
+// ─── 259. ContentItem (§18.11.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.1
+ * @metaclass ContentItem (concrete; generic)
+ * @generalization AbstractContentElement
+ * @definition The ContentItem class is a generic meta-model element that
+ *   represents named items and references of the XML schema: elements,
+ *   attributes, references, and groups.
+ * @ownedAttributes
+ *   • contentElement : AbstractContentElement [0..*] (composite) -- owned content elements.
+ *   • type           : ComplexContentType     [0..1]              -- content type of the current ContentItem.
+ * @associationEnds
+ *   • A_ContentItem_contentElement -- A_623 -- contentElement end (composite)
+ *   • ContentType                  -- A_577 -- type end
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IContentItem extends IAbstractContentElement {
+  readonly contentElement: ReadonlyArray<IAbstractContentElement>;
+  readonly type?: IComplexContentType;
+}
+
+export class ContentItem extends AbstractContentElement implements IContentItem {
+  readonly metaClass: string = "ContentItem";
+  readonly contentElement: ReadonlyArray<IAbstractContentElement>;
+  readonly type?: IComplexContentType;
+  constructor(args: { contentElement?: ReadonlyArray<IAbstractContentElement>; type?: IComplexContentType } = {}) {
+    super();
+    this.contentElement = args.contentElement ?? [];
+    this.type = args.type;
+  }
+}
+
+// ─── 260. SimpleContentType (§18.11.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.3
+ * @metaclass SimpleContentType (concrete)
+ * @generalization ComplexContentType
+ * @definition The SimpleContentType class represents Simple Types of an XML
+ *   schema definition.
+ * @ownedAttributes
+ *   • kind : String                              -- §18.11.3: content kind of the current SimpleContentType.
+ *   • type : ComplexContentType [0..*]           -- §18.11.3: content type of the current ContentItem.
+ * @associationEnds
+ *   • MemberTypes -- A_582 -- type end
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ISimpleContentType extends IComplexContentType {
+  readonly kind?: string;
+  readonly memberType: ReadonlyArray<IComplexContentType>;
+}
+
+export class SimpleContentType extends ComplexContentType implements ISimpleContentType {
+  override readonly metaClass = "SimpleContentType" as const;
+  readonly kind?: string;
+  readonly memberType: ReadonlyArray<IComplexContentType>;
+  constructor(args: { kind?: string; memberType?: ReadonlyArray<IComplexContentType>; contentElement?: ReadonlyArray<IAbstractContentElement> } = {}) {
+    super({ contentElement: args.contentElement });
+    this.kind = args.kind;
+    this.memberType = args.memberType ?? [];
+  }
+}
+
+// ─── 261. ContentRestriction (§18.11.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.4
+ * @metaclass ContentRestriction (concrete)
+ * @generalization AbstractContentElement
+ * @definition The ContentRestriction class represents restrictions to Simple
+ *   Types, Elements, Attributes, and References.
+ * @ownedAttributes
+ *   • kind  : String -- §18.11.4: Type of the content restriction (XML).
+ *   • value : String -- §18.11.4: Value of the constraint.
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IContentRestriction extends IAbstractContentElement {
+  readonly kind?: string;
+  readonly value?: string;
+}
+
+export class ContentRestriction extends AbstractContentElement implements IContentRestriction {
+  readonly metaClass = "ContentRestriction" as const;
+  readonly kind?: string;
+  readonly value?: string;
+  constructor(args: { kind?: string; value?: string } = {}) {
+    super();
+    this.kind = args.kind;
+    this.value = args.value;
+  }
+}
+
+// ─── 262. AllContent (§18.11.5) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.5
+ * @metaclass AllContent (concrete)
+ * @generalization ComplexContentType
+ * @definition An AllContent class is a meta-model element that represents
+ *   complex types with the "all" order indicator.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IAllContent extends IComplexContentType {}
+
+export class AllContent extends ComplexContentType implements IAllContent {
+  override readonly metaClass = "AllContent" as const;
+}
+
+// ─── 263. SeqContent (§18.11.6) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.6
+ * @metaclass SeqContent (concrete)
+ * @generalization ComplexContentType
+ * @definition The SeqContent class is a meta-model element that represents
+ *   complex types with the "sequence" order indicator.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ISeqContent extends IComplexContentType {}
+
+export class SeqContent extends ComplexContentType implements ISeqContent {
+  override readonly metaClass = "SeqContent" as const;
+}
+
+// ─── 264. ChoiceContent (§18.11.7) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.7
+ * @metaclass ChoiceContent (concrete)
+ * @generalization ComplexContentType
+ * @definition A ChoiceContent class is a meta-model element that represents
+ *   complex types with the "choice" order indicator.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ *
+ * @specAmbiguity Prose at §18.11.7 cites superclass as "XMLComplexType" — a
+ *   typo for ComplexContentType (the CMOF declares superClass='C_581'
+ *   ComplexContentType). The CMOF supersedes the prose.
+ */
+export interface IChoiceContent extends IComplexContentType {}
+
+export class ChoiceContent extends ComplexContentType implements IChoiceContent {
+  override readonly metaClass = "ChoiceContent" as const;
+}
+
+// ─── 265. GroupContent (§18.11.8) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.8
+ * @metaclass GroupContent (concrete)
+ * @generalization ContentItem
+ * @definition A GroupContent class is a meta-model element that represents
+ *   complex types with the "group" group indicator.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ *
+ * @specAmbiguity Prose at §18.11.8 cites superclass as "ComplexContentType";
+ *   the CMOF declares superClass='C_580' (ContentItem). The CMOF supersedes
+ *   the prose.
+ */
+export interface IGroupContent extends IContentItem {}
+
+export class GroupContent extends ContentItem implements IGroupContent {
+  override readonly metaClass = "GroupContent" as const;
+}
+
+// ─── 266. MixedContent (§18.11.9) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.9
+ * @metaclass MixedContent (concrete)
+ * @generalization ComplexContentType
+ * @definition A MixedContent class is a meta-model element that represents
+ *   complex types with the "mixed" indicator.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IMixedContent extends IComplexContentType {}
+
+export class MixedContent extends ComplexContentType implements IMixedContent {
+  override readonly metaClass = "MixedContent" as const;
+}
+
+// ─── 267. ContentAttribute (§18.11.10) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.10
+ * @metaclass ContentAttribute (concrete)
+ * @generalization ContentItem
+ * @definition A ContentAttribute class is a meta-model element that
+ *   represents the XML "attribute" declaration mechanism of XML Schemas.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IContentAttribute extends IContentItem {}
+
+export class ContentAttribute extends ContentItem implements IContentAttribute {
+  override readonly metaClass = "ContentAttribute" as const;
+}
+
+// ─── 268. ContentElement (§18.11.11) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.11
+ * @metaclass ContentElement (concrete)
+ * @generalization ContentItem
+ * @definition A ContentElement class is a meta-model element that represents
+ *   the XML "element" declaration mechanism of XML Schemas.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IContentElement extends IContentItem {}
+
+export class ContentElement extends ContentItem implements IContentElement {
+  override readonly metaClass = "ContentElement" as const;
+}
+
+// ─── 269. ContentReference (§18.11.12) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.11.12
+ * @metaclass ContentReference (concrete)
+ * @generalization ContentItem
+ * @definition A ContentReference class is a meta-model element that
+ *   represents the XML "reference" declaration mechanism of XML Schemas.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IContentReference extends IContentItem {}
+
+export class ContentReference extends ContentItem implements IContentReference {
+  override readonly metaClass = "ContentReference" as const;
+}
+
+// ─── 270. TypedBy (§18.12.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.12.1
+ * @metaclass TypedBy (concrete)
+ * @generalization AbstractDataRelationship
+ * @definition The TypedBy class represents the relationship between a
+ *   ContentItem and a content type, that can be represented by a
+ *   ComplexContentType class or one of its subclasses.
+ * @ownedAttributes
+ *   • from : ContentItem        [1] -- the content element or attribute.
+ *   • to   : ComplexContentType [1] -- the content type element.
+ * @associationEnds
+ *   • A_typedBy_to   -- A_645
+ *   • A_typedBy_from -- A_646
+ * @operations (none)
+ * @constraints
+ *   1. The "from" endpoint should be a ContentElement or a ContentAttribute. (§18.12.1)
+ */
+export interface ITypedBy extends IAbstractDataRelationship {
+  readonly from: IContentItem;
+  readonly to: IComplexContentType;
+}
+
+export class TypedBy extends AbstractDataRelationship implements ITypedBy {
+  readonly metaClass = "TypedBy" as const;
+  readonly from: IContentItem;
+  readonly to: IComplexContentType;
+  constructor(args: { from: IContentItem; to: IComplexContentType }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 271. DatatypeOf (§18.12.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.12.2
+ * @metaclass DatatypeOf (concrete)
+ * @generalization AbstractDataRelationship
+ * @definition The DatatypeOf class represents the relationship between a
+ *   ComplexContentType and a Datatype defined in some Code model.
+ * @ownedAttributes
+ *   • from : ComplexContentType [1] -- the content type.
+ *   • to   : Datatype           [1] -- the datatype element.
+ * @associationEnds
+ *   • A_datatypeOf_to   -- A_673
+ *   • A_datatypeOf_from -- A_674
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IDatatypeOf extends IAbstractDataRelationship {
+  readonly from: IComplexContentType;
+  readonly to: IDatatype;
+}
+
+export class DatatypeOf extends AbstractDataRelationship implements IDatatypeOf {
+  readonly metaClass = "DatatypeOf" as const;
+  readonly from: IComplexContentType;
+  readonly to: IDatatype;
+  constructor(args: { from: IComplexContentType; to: IDatatype }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 272. ReferenceTo (§18.12.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.12.3
+ * @metaclass ReferenceTo (concrete)
+ * @generalization AbstractDataRelationship
+ * @definition The ReferenceTo class represents the relationship between a
+ *   ContentReference and a ContentElement, ContentAttribute, or ContentGroup
+ *   definition.
+ * @ownedAttributes
+ *   • from : ContentItem [1] -- the content reference.
+ *   • to   : ContentItem [1] -- the content element or attribute or group.
+ * @associationEnds
+ *   • A_referenceTo_to   -- A_652
+ *   • A_referenceTo_from -- A_653
+ * @operations (none)
+ * @constraints
+ *   1. The "from" endpoint should be a ContentReference. (§18.12.3)
+ *   2. The "to" endpoint should be a ContentElement, a ContentAttribute, or
+ *      GroupContent. (§18.12.3)
+ */
+export interface IReferenceTo extends IAbstractDataRelationship {
+  readonly from: IContentItem;
+  readonly to: IContentItem;
+}
+
+export class ReferenceTo extends AbstractDataRelationship implements IReferenceTo {
+  readonly metaClass = "ReferenceTo" as const;
+  readonly from: IContentItem;
+  readonly to: IContentItem;
+  constructor(args: { from: IContentItem; to: IContentItem }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 273. ExtensionTo (§18.12.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.12.4
+ * @metaclass ExtensionTo (concrete)
+ * @generalization AbstractDataRelationship
+ * @definition The ExtensionTo class represents the relationship between two
+ *   content types, where one type is an extension to another.
+ * @ownedAttributes
+ *   • from : ComplexContentType [1] -- the new (extended) content type.
+ *   • to   : ComplexContentType [1] -- the base content type.
+ * @associationEnds
+ *   • A_extensionTo_to   -- A_666
+ *   • A_extensionTo_from -- A_667
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IExtensionTo extends IAbstractDataRelationship {
+  readonly from: IComplexContentType;
+  readonly to: IComplexContentType;
+}
+
+export class ExtensionTo extends AbstractDataRelationship implements IExtensionTo {
+  readonly metaClass = "ExtensionTo" as const;
+  readonly from: IComplexContentType;
+  readonly to: IComplexContentType;
+  constructor(args: { from: IComplexContentType; to: IComplexContentType }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 274. RestrictionOf (§18.12.5) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.12.5
+ * @metaclass RestrictionOf (concrete)
+ * @generalization AbstractDataRelationship
+ * @definition The RestrictionOf class represents the relationship between two
+ *   content types, where one type is a restriction to another.
+ * @ownedAttributes
+ *   • from : ComplexContentType [1] -- the new (restricted) content type.
+ *   • to   : ComplexContentType [1] -- the base content type.
+ * @associationEnds
+ *   • A_restrictionOf_to   -- A_659
+ *   • A_restrictionOf_from -- A_660
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IRestrictionOf extends IAbstractDataRelationship {
+  readonly from: IComplexContentType;
+  readonly to: IComplexContentType;
+}
+
+export class RestrictionOf extends AbstractDataRelationship implements IRestrictionOf {
+  readonly metaClass = "RestrictionOf" as const;
+  readonly from: IComplexContentType;
+  readonly to: IComplexContentType;
+  constructor(args: { from: IComplexContentType; to: IComplexContentType }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 275. ExtendedDataElement (§18.13.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.13.1
+ * @metaclass ExtendedDataElement (concrete)
+ * @generalization AbstractDataElement
+ * @definition The ExtendedDataElement class is a generic meta-model element
+ *   that can be used to define new extended meta-model elements through the
+ *   KDM light-weight extension mechanism.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints
+ *   1. ExtendedDataElement should have at least one stereotype. (§18.13.1)
+ */
+export interface IExtendedDataElement extends IAbstractDataElement {}
+
+export class ExtendedDataElement extends AbstractDataElement implements IExtendedDataElement {
+  readonly metaClass = "ExtendedDataElement" as const;
+}
+
+// ─── 276. DataRelationship (§18.13.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §18.13.2
+ * @metaclass DataRelationship (concrete; generic)
+ * @generalization AbstractDataRelationship
+ * @definition The DataRelationship class is a generic meta-model element
+ *   that can be used to define new extended meta-model elements through the
+ *   KDM light-weight extension mechanism.
+ * @ownedAttributes
+ *   • from : AbstractDataElement [1] -- the data element origin endpoint.
+ *   • to   : KDMEntity           [1] -- the target of the relationship.
+ * @associationEnds
+ *   • A_dataRelationship_to   -- A_625
+ *   • A_dataRelationship_from -- A_626
+ * @operations (none)
+ * @constraints
+ *   1. DataRelationship should have at least one stereotype. (§18.13.2)
+ */
+export interface IDataRelationship extends IAbstractDataRelationship {
+  readonly from: IAbstractDataElement;
+  readonly to: IKDMEntity;
+}
+
+export class DataRelationship extends AbstractDataRelationship implements IDataRelationship {
+  readonly metaClass = "DataRelationship" as const;
+  readonly from: IAbstractDataElement;
+  readonly to: IKDMEntity;
+  constructor(args: { from: IAbstractDataElement; to: IKDMEntity }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// Structure Package (§19 — formal/16-09-01)
+// ───────────────────────────────────────────────────────────────────────────
+
+// ─── 277. StructureModel (§19.3.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §19.3.1
+ * @metaclass StructureModel (concrete)
+ * @generalization KDMModel
+ * @definition The StructureModel is a specific KDM model that represents the
+ *   logical organization of a software system and owns all of the system's
+ *   StructuralElements.
+ * @ownedAttributes
+ *   • structureElement : AbstractStructureElement [0..*] (composite) --
+ *     §19.3.1: structure elements owned by the model.
+ * @associationEnds
+ *   • A_StructureModel_structureElement -- A_276 -- structureElement end (composite)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IStructureModel extends IKDMModel {
+  readonly structureElement: ReadonlyArray<IAbstractStructureElement>;
+}
+
+export class StructureModel extends KDMModel implements IStructureModel {
+  readonly metaClass = "StructureModel" as const;
+  readonly structureElement: ReadonlyArray<IAbstractStructureElement>;
+  constructor(args: { name?: string; structureElement?: ReadonlyArray<IAbstractStructureElement> } = {}) {
+    super();
+    if (args.name !== undefined) (this as { name: string }).name = args.name;
+    this.structureElement = args.structureElement ?? [];
+  }
+  override getOwnedElement(): ReadonlyArray<IKDMEntity> {
+    return this.structureElement as ReadonlyArray<IKDMEntity>;
+  }
+}
+
+// ─── 278. AbstractStructureElement (§19.3.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §19.3.2
+ * @metaclass AbstractStructureElement (abstract)
+ * @generalization KDMEntity
+ * @definition The AbstractStructureElement represents an architectural part,
+ *   related to the organization of the existing software system into modules.
+ * @ownedAttributes
+ *   • structureElement      : AbstractStructureElement      [0..*] (composite) -- structure elements owned by the model.
+ *   • structureRelationship : AbstractStructureRelationship [0..*] (composite) -- structure relations originating here.
+ *   • implementation        : KDMEntity                     [0..*] (group)     -- group association to KDMEntity that are
+ *     represented by the current StructureElement.
+ * @associationEnds
+ *   • A_AbstractStructureElement_implementation         -- A_268 -- implementation end (group)
+ *   • A_AbstractStructureElement_structureElement       -- A_271 -- structureElement end (composite)
+ *   • A_AbstractStructureElement_structureRelationship  -- A_273 -- structureRelationship end (composite)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IAbstractStructureElement extends IKDMEntity {
+  readonly structureElement: ReadonlyArray<IAbstractStructureElement>;
+  readonly structureRelationship: ReadonlyArray<IAbstractStructureRelationship>;
+  readonly implementation: ReadonlyArray<IKDMEntity>;
+}
+
+export abstract class AbstractStructureElement extends KDMEntity implements IAbstractStructureElement {
+  readonly structureElement: ReadonlyArray<IAbstractStructureElement> = [];
+  readonly structureRelationship: ReadonlyArray<IAbstractStructureRelationship> = [];
+  readonly implementation: ReadonlyArray<IKDMEntity> = [];
+  override getOwner(): IKDMEntity | undefined { return undefined; }
+  override getOwnedElement(): ReadonlyArray<IKDMEntity> { return this.structureElement as ReadonlyArray<IKDMEntity>; }
+  override getGroup(): ReadonlyArray<IKDMEntity> { return this.implementation; }
+  override getGroupedElement(): ReadonlyArray<IKDMEntity> { return []; }
+  override getInbound(): ReadonlyArray<IKDMRelationship> { return []; }
+  override getOutbound(): ReadonlyArray<IKDMRelationship> { return this.structureRelationship; }
+  override getOwnedRelation(): ReadonlyArray<IKDMRelationship> { return this.structureRelationship; }
+  override getModel(): IKDMModel | undefined { return undefined; }
+  override createAggregation(_otherEntity: IKDMEntity): IAggregatedRelationship {
+    throw new Error("AbstractStructureElement.createAggregation must be supplied by a runtime adapter.");
+  }
+  override deleteAggregation(_aggregation: IAggregatedRelationship): void {
+    throw new Error("AbstractStructureElement.deleteAggregation must be supplied by a runtime adapter.");
+  }
+}
+
+// ─── 279. AbstractStructureRelationship (§19.3.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §19.3.3
+ * @metaclass AbstractStructureRelationship (abstract)
+ * @generalization KDMRelationship
+ * @definition The AbstractStructureRelationship class.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IAbstractStructureRelationship extends IKDMRelationship {}
+
+export abstract class AbstractStructureRelationship extends KDMRelationship implements IAbstractStructureRelationship {}
+
+// ─── 280. Subsystem (§19.3.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §19.3.4
+ * @metaclass Subsystem (concrete)
+ * @generalization AbstractStructureElement
+ * @definition The Subsystem collects the architectural parts of a software
+ *   subsystem. The parts may be any other StructuralElement.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ISubsystem extends IAbstractStructureElement {}
+
+export class Subsystem extends AbstractStructureElement implements ISubsystem {
+  readonly metaClass = "Subsystem" as const;
+}
+
+// ─── 281. Layer (§19.3.5) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §19.3.5
+ * @metaclass Layer (concrete)
+ * @generalization AbstractStructureElement
+ * @definition The Layer collects the architectural parts of a software
+ *   subsystem to represent a software layer. The parts may be any other
+ *   StructuralElement.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ILayer extends IAbstractStructureElement {}
+
+export class Layer extends AbstractStructureElement implements ILayer {
+  readonly metaClass = "Layer" as const;
+}
+
+// ─── 282. Component (§19.3.6) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §19.3.6
+ * @metaclass Component (concrete)
+ * @generalization AbstractStructureElement
+ * @definition The Component represents a collection, directly or indirectly,
+ *   of code resources, which comprises an architectural component.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IComponent extends IAbstractStructureElement {}
+
+export class Component extends AbstractStructureElement implements IComponent {
+  readonly metaClass = "Component" as const;
+}
+
+// ─── 283. SoftwareSystem (§19.3.7) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §19.3.7
+ * @metaclass SoftwareSystem (concrete)
+ * @generalization AbstractStructureElement
+ * @definition The SoftwareSystem represents the entire system organization.
+ *   It may contain subsystem or other StructureElements.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ISoftwareSystem extends IAbstractStructureElement {}
+
+export class SoftwareSystem extends AbstractStructureElement implements ISoftwareSystem {
+  readonly metaClass = "SoftwareSystem" as const;
+}
+
+// ─── 284. ArchitectureView (§19.3.8) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §19.3.8
+ * @metaclass ArchitectureView (concrete)
+ * @generalization AbstractStructureElement
+ * @definition The ArchitectureView class represents an arbitrary architectural
+ *   view, as defined by ISO 42010. Within a KDM instance an ArchitectureView
+ *   element may be used in a Structure model either stand-alone or in
+ *   combination with other elements defined by the Structure package.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IArchitectureView extends IAbstractStructureElement {}
+
+export class ArchitectureView extends AbstractStructureElement implements IArchitectureView {
+  readonly metaClass = "ArchitectureView" as const;
+}
+
+// ─── 285. StructureElement (§19.5.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §19.5.1
+ * @metaclass StructureElement (concrete; generic)
+ * @generalization AbstractStructureElement
+ * @definition The StructureElement class is a generic meta-model element
+ *   that can be used to define new extended meta-model elements through the
+ *   KDM light-weight extension mechanism.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints
+ *   1. StructureElement should have at least one stereotype. (§19.5.1)
+ */
+export interface IStructureElement extends IAbstractStructureElement {}
+
+export class StructureElement extends AbstractStructureElement implements IStructureElement {
+  readonly metaClass = "StructureElement" as const;
+}
+
+// ─── 286. StructureRelationship (§19.5.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §19.5.2
+ * @metaclass StructureRelationship (concrete; generic)
+ * @generalization AbstractStructureRelationship
+ * @definition The StructureRelationship class is a generic meta-model
+ *   element that can be used to define new extended meta-model elements
+ *   through the KDM light-weight extension mechanism.
+ * @ownedAttributes
+ *   • from : AbstractStructureElement [1] -- the structure element origin endpoint.
+ *   • to   : KDMEntity                [1] -- the target of the relationship.
+ * @associationEnds
+ *   • A_structureRelationship_to   -- A_279
+ *   • A_structureRelationship_from -- A_280
+ * @operations (none)
+ * @constraints
+ *   1. StructureRelationship should have at least one stereotype. (§19.5.2)
+ */
+export interface IStructureRelationship extends IAbstractStructureRelationship {
+  readonly from: IAbstractStructureElement;
+  readonly to: IKDMEntity;
+}
+
+export class StructureRelationship extends AbstractStructureRelationship implements IStructureRelationship {
+  readonly metaClass = "StructureRelationship" as const;
+  readonly from: IAbstractStructureElement;
+  readonly to: IKDMEntity;
+  constructor(args: { from: IAbstractStructureElement; to: IKDMEntity }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// Conceptual Package (§20 — formal/16-09-01)
+// ───────────────────────────────────────────────────────────────────────────
+
+// ─── 287. ConceptualModel (§20.3.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.3.1
+ * @metaclass ConceptualModel (concrete)
+ * @generalization KDMModel
+ * @definition The ConceptualModel class is a specific KDM model that owns
+ *   collections of facts about conceptual elements implemented by a given
+ *   existing software system.
+ * @ownedAttributes
+ *   • conceptualElement : AbstractConceptualElement [0..*] (composite) --
+ *     §20.3.1: Identifies the root "concept" elements of the hierarchy of
+ *     the conceptual elements contained in the model.
+ * @associationEnds
+ *   • A_ConceptualModel_conceptualElement -- A_211 -- conceptualElement end (composite)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IConceptualModel extends IKDMModel {
+  readonly conceptualElement: ReadonlyArray<IAbstractConceptualElement>;
+}
+
+export class ConceptualModel extends KDMModel implements IConceptualModel {
+  readonly metaClass = "ConceptualModel" as const;
+  readonly conceptualElement: ReadonlyArray<IAbstractConceptualElement>;
+  constructor(args: { name?: string; conceptualElement?: ReadonlyArray<IAbstractConceptualElement> } = {}) {
+    super();
+    if (args.name !== undefined) (this as { name: string }).name = args.name;
+    this.conceptualElement = args.conceptualElement ?? [];
+  }
+  override getOwnedElement(): ReadonlyArray<IKDMEntity> {
+    return this.conceptualElement as ReadonlyArray<IKDMEntity>;
+  }
+}
+
+// ─── 288. AbstractConceptualElement (§20.3.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.3.2
+ * @metaclass AbstractConceptualElement (abstract)
+ * @generalization KDMEntity
+ * @definition AbstractConceptualElement class is the top superclass for the
+ *   ConceptualModel. It defines several common properties for all further
+ *   meta-model elements in the Conceptual Package. In particular, it defines
+ *   the fundamental "implementation" property — a KDM grouping mechanism to
+ *   link conceptual elements to the implementation elements.
+ * @ownedAttributes
+ *   • conceptualRelation : AbstractConceptualRelationship [0..*] (composite) --
+ *     §20.3.2: conceptual relationships originating here.
+ *   • implementation     : KDMEntity                     [0..*] (group)     --
+ *     §20.3.2: the set of KDM entities that realize the high-level concept.
+ *   • abstraction        : ActionElement                 [0..*] (composite) --
+ *     §20.3.2: action elements owned by the conceptual element.
+ * @associationEnds
+ *   • A_AbstractConceptualElement_implementation       -- A_214 -- implementation end (group)
+ *   • A_AbstractConceptualElement_conceptualRelation   -- A_216 -- conceptualRelation end (composite)
+ *   • A_AbstractConceptualElement_abstraction          -- A_219 -- abstraction end (composite)
+ * @operations (none)
+ * @constraints
+ *   1. For each conceptual element, the value of the from property of each
+ *      conceptual relationship, owned by this element, should be equal to the
+ *      identity of this element (the "relationship encapsulation" pattern). (§20.3.2)
+ */
+export interface IAbstractConceptualElement extends IKDMEntity {
+  readonly conceptualRelation: ReadonlyArray<IAbstractConceptualRelationship>;
+  readonly implementation: ReadonlyArray<IKDMEntity>;
+  readonly abstraction: ReadonlyArray<IActionElement>;
+}
+
+export abstract class AbstractConceptualElement extends KDMEntity implements IAbstractConceptualElement {
+  readonly conceptualRelation: ReadonlyArray<IAbstractConceptualRelationship> = [];
+  readonly implementation: ReadonlyArray<IKDMEntity> = [];
+  readonly abstraction: ReadonlyArray<IActionElement> = [];
+  override getOwner(): IKDMEntity | undefined { return undefined; }
+  override getOwnedElement(): ReadonlyArray<IKDMEntity> { return []; }
+  override getGroup(): ReadonlyArray<IKDMEntity> { return this.implementation; }
+  override getGroupedElement(): ReadonlyArray<IKDMEntity> { return []; }
+  override getInbound(): ReadonlyArray<IKDMRelationship> { return []; }
+  override getOutbound(): ReadonlyArray<IKDMRelationship> { return this.conceptualRelation; }
+  override getOwnedRelation(): ReadonlyArray<IKDMRelationship> { return this.conceptualRelation; }
+  override getModel(): IKDMModel | undefined { return undefined; }
+  override createAggregation(_otherEntity: IKDMEntity): IAggregatedRelationship {
+    throw new Error("AbstractConceptualElement.createAggregation must be supplied by a runtime adapter.");
+  }
+  override deleteAggregation(_aggregation: IAggregatedRelationship): void {
+    throw new Error("AbstractConceptualElement.deleteAggregation must be supplied by a runtime adapter.");
+  }
+}
+
+// ─── 289. AbstractConceptualRelationship (§20.3.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.3.3
+ * @metaclass AbstractConceptualRelationship (abstract)
+ * @generalization KDMRelationship
+ * @definition The AbstractConceptualRelationship class is determined by the
+ *   KDM model pattern. It provides a common superclass for specific KDM
+ *   relationships, defined in the Conceptual package.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IAbstractConceptualRelationship extends IKDMRelationship {}
+
+export abstract class AbstractConceptualRelationship extends KDMRelationship implements IAbstractConceptualRelationship {}
+
+// ─── 290. ConceptualContainer (§20.5.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.5.1
+ * @metaclass ConceptualContainer (concrete; generic)
+ * @generalization AbstractConceptualElement
+ * @definition The ConceptualContainer class is a generic meta-model element
+ *   that represents a container for conceptual entities. Several other
+ *   concrete conceptual elements are subclasses of ConceptualContainer, so
+ *   that they can also own other conceptual elements.
+ * @ownedAttributes
+ *   • conceptualElement : AbstractConceptualElement [0..*] (composite) --
+ *     §20.5.1: Elements that are owned by this container.
+ * @associationEnds
+ *   • A_ConceptualContainer_conceptualElement -- A_221 -- conceptualElement end (composite)
+ * @operations (none)
+ * @constraints
+ *   1. ConceptualUnit should not own ConceptualRole elements. (§20.5.1)
+ */
+export interface IConceptualContainer extends IAbstractConceptualElement {
+  readonly conceptualElement: ReadonlyArray<IAbstractConceptualElement>;
+}
+
+export class ConceptualContainer extends AbstractConceptualElement implements IConceptualContainer {
+  readonly metaClass: string = "ConceptualContainer";
+  readonly conceptualElement: ReadonlyArray<IAbstractConceptualElement>;
+  constructor(args: { conceptualElement?: ReadonlyArray<IAbstractConceptualElement> } = {}) {
+    super();
+    this.conceptualElement = args.conceptualElement ?? [];
+  }
+}
+
+// ─── 291. TermUnit (§20.5.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.5.2
+ * @metaclass TermUnit (concrete)
+ * @generalization AbstractConceptualElement
+ * @definition The TermUnit class represents an arbitrary collection of KDM
+ *   entities from the Program Elements layer or PlatformResource layer. The
+ *   TermUnit class is aligned with SBVR term or name concepts. Semantically,
+ *   a TermUnit represents some "noun concept."
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ITermUnit extends IAbstractConceptualElement {}
+
+export class TermUnit extends AbstractConceptualElement implements ITermUnit {
+  readonly metaClass = "TermUnit" as const;
+}
+
+// ─── 292. FactUnit (§20.5.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.5.3
+ * @metaclass FactUnit (concrete)
+ * @generalization ConceptualContainer
+ * @definition The FactUnit class represents an association between multiple
+ *   Conceptual entities, such as TermUnit or FactUnit. The FactUnit class is
+ *   aligned with SBVR fact type concept. Semantically, a FactUnit represents
+ *   a "verb concept," or an "objectified verb concept."
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IFactUnit extends IConceptualContainer {}
+
+export class FactUnit extends ConceptualContainer implements IFactUnit {
+  override readonly metaClass = "FactUnit" as const;
+}
+
+// ─── 293. RuleUnit (§20.5.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.5.4
+ * @metaclass RuleUnit (concrete)
+ * @generalization ConceptualContainer
+ * @definition The RuleUnit class represents an association between multiple
+ *   Conceptual entities, such as TermUnit or FactUnit. The RuleUnit class is
+ *   aligned with SBVR rule concept. Semantically, a RuleUnit uses some base
+ *   "verb concept" (usually represented as a fact type) and adds to it
+ *   obligation, necessity, qualifications, quantifications, conditions, etc.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IRuleUnit extends IConceptualContainer {}
+
+export class RuleUnit extends ConceptualContainer implements IRuleUnit {
+  override readonly metaClass = "RuleUnit" as const;
+}
+
+// ─── 294. ConceptualRole (§20.5.5) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.5.5
+ * @metaclass ConceptualRole (concrete)
+ * @generalization AbstractConceptualElement
+ * @definition The ConceptualRole class represents a role played by a
+ *   participant in a conceptual association, such as a FactUnit or a
+ *   RuleUnit. ConceptualRole elements are owned by some container.
+ * @ownedAttributes
+ *   • conceptualElement : AbstractConceptualElement [1] -- §20.5.5:
+ *     Represents the participant in the association for the given role.
+ * @associationEnds
+ *   • Role -- A_206 -- conceptualElement end
+ * @operations (none)
+ * @constraints (none declared)
+ *
+ * @specAmbiguity Prose at §20.5.5 cites superclass as "AbstractConceptualUnit"
+ *   (a class that does not exist in the metamodel). The CMOF declares
+ *   superClass='C_210' (AbstractConceptualElement). The CMOF supersedes prose.
+ */
+export interface IConceptualRole extends IAbstractConceptualElement {
+  readonly conceptualElement: IAbstractConceptualElement;
+}
+
+export class ConceptualRole extends AbstractConceptualElement implements IConceptualRole {
+  readonly metaClass = "ConceptualRole" as const;
+  readonly conceptualElement: IAbstractConceptualElement;
+  constructor(args: { conceptualElement: IAbstractConceptualElement }) {
+    super();
+    this.conceptualElement = args.conceptualElement;
+  }
+}
+
+// ─── 295. BehaviorUnit (§20.5.6) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.5.6
+ * @metaclass BehaviorUnit (concrete)
+ * @generalization ConceptualContainer
+ * @definition The BehaviorUnit class represents an arbitrary collection of
+ *   KDM entities from the Program Elements layer or Platform Resource layer.
+ *   The BehaviorUnit class represents a behavior graph with several paths
+ *   through the application logic. BehaviorUnit is an "abstraction" of
+ *   ActionElements.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IBehaviorUnit extends IConceptualContainer {}
+
+export class BehaviorUnit extends ConceptualContainer implements IBehaviorUnit {
+  override readonly metaClass = "BehaviorUnit" as const;
+}
+
+// ─── 296. ScenarioUnit (§20.5.7) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.5.7
+ * @metaclass ScenarioUnit (concrete)
+ * @generalization ConceptualContainer
+ * @definition ScenarioUnit represents a path (or multiple related paths)
+ *   through the behavior graph of the application logic. For example,
+ *   ScenarioUnit corresponds to a trace through the systems, or a "use case."
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IScenarioUnit extends IConceptualContainer {}
+
+export class ScenarioUnit extends ConceptualContainer implements IScenarioUnit {
+  override readonly metaClass = "ScenarioUnit" as const;
+}
+
+// ─── 297. ConceptualFlow (§20.6.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.6.1
+ * @metaclass ConceptualFlow (concrete)
+ * @generalization AbstractConceptualRelationship
+ * @definition The ConceptualFlow class is a KDM relationship defined for the
+ *   conceptual model. It represents the fact that one behavior may be
+ *   continued into some other behavior.
+ * @ownedAttributes
+ *   • from : AbstractConceptualElement [1] -- represents the initial behavior.
+ *   • to   : AbstractConceptualElement [1] -- represents a potential follow-up behavior.
+ * @associationEnds
+ *   • A_conceptualFlow_to   -- A_231
+ *   • A_conceptualFlow_from -- A_232
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IConceptualFlow extends IAbstractConceptualRelationship {
+  readonly from: IAbstractConceptualElement;
+  readonly to: IAbstractConceptualElement;
+}
+
+export class ConceptualFlow extends AbstractConceptualRelationship implements IConceptualFlow {
+  readonly metaClass = "ConceptualFlow" as const;
+  readonly from: IAbstractConceptualElement;
+  readonly to: IAbstractConceptualElement;
+  constructor(args: { from: IAbstractConceptualElement; to: IAbstractConceptualElement }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 298. ConceptualElement (§20.7.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.7.1
+ * @metaclass ConceptualElement (concrete; generic)
+ * @generalization AbstractConceptualElement
+ * @definition The ConceptualElement is a generic meta-model element that
+ *   can be used to define new extended meta-model elements through the KDM
+ *   light-weight extension mechanism.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints
+ *   1. ConceptualElement should have at least one stereotype. (§20.7.1)
+ */
+export interface IConceptualElement extends IAbstractConceptualElement {}
+
+export class ConceptualElement extends AbstractConceptualElement implements IConceptualElement {
+  readonly metaClass = "ConceptualElement" as const;
+}
+
+// ─── 299. ConceptualRelationship (§20.7.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §20.7.2
+ * @metaclass ConceptualRelationship (concrete; generic)
+ * @generalization AbstractConceptualRelationship
+ * @definition The ConceptualRelationship is a generic meta-model element
+ *   that can be used to define new extended meta-model elements through the
+ *   KDM light-weight extension mechanism.
+ * @ownedAttributes
+ *   • from : AbstractConceptualElement [1] -- the conceptual element origin of the relationship.
+ *   • to   : KDMEntity                  [1] -- the KDMEntity target of the relationship.
+ * @associationEnds
+ *   • A_conceptualRelationship_to   -- A_224
+ *   • A_conceptualRelationship_from -- A_225
+ * @operations (none)
+ * @constraints
+ *   1. ConceptualRelationship should have at least one stereotype. (§20.7.2)
+ */
+export interface IConceptualRelationship extends IAbstractConceptualRelationship {
+  readonly from: IAbstractConceptualElement;
+  readonly to: IKDMEntity;
+}
+
+export class ConceptualRelationship extends AbstractConceptualRelationship implements IConceptualRelationship {
+  readonly metaClass = "ConceptualRelationship" as const;
+  readonly from: IAbstractConceptualElement;
+  readonly to: IKDMEntity;
+  constructor(args: { from: IAbstractConceptualElement; to: IKDMEntity }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// Build Package (§21 — formal/16-09-01)
+// ───────────────────────────────────────────────────────────────────────────
+
+// ─── 300. BuildModel (§21.3.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.3.1
+ * @metaclass BuildModel (concrete)
+ * @generalization KDMModel
+ * @definition The BuildModel encapsulates meta-model constructs needed to
+ *   model the building of a particular software system.
+ * @ownedAttributes
+ *   • buildElement : AbstractBuildElement [0..*] (composite) -- §21.3.1: The
+ *     set of build elements owned by the model.
+ * @associationEnds
+ *   • A_BuildModel_buildElement -- A_495 -- buildElement end (composite)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IBuildModel extends IKDMModel {
+  readonly buildElement: ReadonlyArray<IAbstractBuildElement>;
+}
+
+export class BuildModel extends KDMModel implements IBuildModel {
+  readonly metaClass = "BuildModel" as const;
+  readonly buildElement: ReadonlyArray<IAbstractBuildElement>;
+  constructor(args: { name?: string; buildElement?: ReadonlyArray<IAbstractBuildElement> } = {}) {
+    super();
+    if (args.name !== undefined) (this as { name: string }).name = args.name;
+    this.buildElement = args.buildElement ?? [];
+  }
+  override getOwnedElement(): ReadonlyArray<IKDMEntity> {
+    return this.buildElement as ReadonlyArray<IKDMEntity>;
+  }
+}
+
+// ─── 301. AbstractBuildElement (§21.3.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.3.2
+ * @metaclass AbstractBuildElement (abstract)
+ * @generalization KDMEntity
+ * @definition The AbstractBuildElement is the abstract base class from which
+ *   all other build model elements are extended.
+ * @ownedAttributes
+ *   • buildRelation : AbstractBuildRelationship [0..*] (composite) -- §21.3.2:
+ *     the set of build relations.
+ * @associationEnds
+ *   • A_AbstractBuildElement_buildRelation -- A_468 -- buildRelation end (composite)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IAbstractBuildElement extends IKDMEntity {
+  readonly buildRelation: ReadonlyArray<IAbstractBuildRelationship>;
+}
+
+export abstract class AbstractBuildElement extends KDMEntity implements IAbstractBuildElement {
+  readonly buildRelation: ReadonlyArray<IAbstractBuildRelationship> = [];
+  override getOwner(): IKDMEntity | undefined { return undefined; }
+  override getOwnedElement(): ReadonlyArray<IKDMEntity> { return []; }
+  override getGroup(): ReadonlyArray<IKDMEntity> { return []; }
+  override getGroupedElement(): ReadonlyArray<IKDMEntity> { return []; }
+  override getInbound(): ReadonlyArray<IKDMRelationship> { return []; }
+  override getOutbound(): ReadonlyArray<IKDMRelationship> { return this.buildRelation; }
+  override getOwnedRelation(): ReadonlyArray<IKDMRelationship> { return this.buildRelation; }
+  override getModel(): IKDMModel | undefined { return undefined; }
+  override createAggregation(_otherEntity: IKDMEntity): IAggregatedRelationship {
+    throw new Error("AbstractBuildElement.createAggregation must be supplied by a runtime adapter.");
+  }
+  override deleteAggregation(_aggregation: IAggregatedRelationship): void {
+    throw new Error("AbstractBuildElement.deleteAggregation must be supplied by a runtime adapter.");
+  }
+}
+
+// ─── 302. AbstractBuildRelationship (§21.3.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.3.3
+ * @metaclass AbstractBuildRelationship (abstract)
+ * @generalization KDMRelationship
+ * @definition The AbstractBuildRelationship is the abstract base class.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IAbstractBuildRelationship extends IKDMRelationship {}
+
+export abstract class AbstractBuildRelationship extends KDMRelationship implements IAbstractBuildRelationship {}
+
+// ─── 303. Supplier (§21.3.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.3.4
+ * @metaclass Supplier (concrete)
+ * @generalization AbstractBuildElement
+ * @definition The Supplier class models producers of the 3rd party software
+ *   components as they contribute to the build process.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ISupplier extends IAbstractBuildElement {}
+
+export class Supplier extends AbstractBuildElement implements ISupplier {
+  readonly metaClass = "Supplier" as const;
+}
+
+// ─── 304. Tool (§21.3.5) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.3.5
+ * @metaclass Tool (concrete)
+ * @generalization AbstractBuildElement
+ * @definition The Tool class represents software tools as they are used in
+ *   the build process.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ITool extends IAbstractBuildElement {}
+
+export class Tool extends AbstractBuildElement implements ITool {
+  readonly metaClass = "Tool" as const;
+}
+
+// ─── 305. SymbolicLink (§21.3.6) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.3.6
+ * @metaclass SymbolicLink (concrete)
+ * @generalization AbstractBuildElement
+ * @definition The SymbolicLink is used to represent symbolic links.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ISymbolicLink extends IAbstractBuildElement {}
+
+export class SymbolicLink extends AbstractBuildElement implements ISymbolicLink {
+  readonly metaClass = "SymbolicLink" as const;
+}
+
+// ─── 306. BuildResource (§21.5.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.5.1
+ * @metaclass BuildResource (concrete; generic)
+ * @generalization AbstractBuildElement
+ * @definition BuildResource class is a generic meta-model element that
+ *   represents a container for build elements. It provides a common
+ *   superclass for the build elements that can own other build elements.
+ * @ownedAttributes
+ *   • buildElement   : AbstractBuildElement [0..*] (composite) -- §21.5.1: owned build element.
+ *   • groupedBuild   : AbstractBuildElement [0..*] (group)     -- §21.5.1: grouped build elements (KDM group mechanism).
+ *   • implementation : KDMEntity            [0..*] (group)     -- §21.5.1: Group association to KDMEntity that are
+ *     represented by the current BuildResource element.
+ * @associationEnds
+ *   • A_BuildResource_implementation -- A_472 -- implementation end (group)
+ *   • A_BuildResource_groupedBuild   -- A_475 -- groupedBuild end (group)
+ *   • A_BuildResource_buildElement   -- A_477 -- buildElement end (composite)
+ * @operations (none)
+ * @constraints
+ *   1. BuildResource should either own elements or group elements, but not both. (§21.5.1)
+ *   2. "Implementation" group should not include other Build elements. (§21.5.1)
+ *   3. Build element should not be included in its own groupedBuild group. (§21.5.1)
+ */
+export interface IBuildResource extends IAbstractBuildElement {
+  readonly buildElement: ReadonlyArray<IAbstractBuildElement>;
+  readonly groupedBuild: ReadonlyArray<IAbstractBuildElement>;
+  readonly implementation: ReadonlyArray<IKDMEntity>;
+}
+
+export class BuildResource extends AbstractBuildElement implements IBuildResource {
+  readonly metaClass: string = "BuildResource";
+  readonly buildElement: ReadonlyArray<IAbstractBuildElement>;
+  readonly groupedBuild: ReadonlyArray<IAbstractBuildElement>;
+  readonly implementation: ReadonlyArray<IKDMEntity>;
+  constructor(args: {
+    buildElement?: ReadonlyArray<IAbstractBuildElement>;
+    groupedBuild?: ReadonlyArray<IAbstractBuildElement>;
+    implementation?: ReadonlyArray<IKDMEntity>;
+  } = {}) {
+    super();
+    this.buildElement = args.buildElement ?? [];
+    this.groupedBuild = args.groupedBuild ?? [];
+    this.implementation = args.implementation ?? [];
+  }
+}
+
+// ─── 307. BuildComponent (§21.5.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.5.2
+ * @metaclass BuildComponent (concrete)
+ * @generalization BuildResource
+ * @definition The BuildComponent class represents an arbitrary collection
+ *   of InventoryItems (or other KDM entities). Usually a BuildComponent
+ *   defines SourceFiles as inputs to BuildSteps or any other anonymous
+ *   collections of resources as they are used as inputs of outputs of a
+ *   build process.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IBuildComponent extends IBuildResource {}
+
+export class BuildComponent extends BuildResource implements IBuildComponent {
+  override readonly metaClass = "BuildComponent" as const;
+}
+
+// ─── 308. BuildDescription (§21.5.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.5.3
+ * @metaclass BuildDescription (concrete)
+ * @generalization BuildResource
+ * @definition The BuildDescription class represents objects such as make
+ *   files or ant scripts, which describe the build process itself.
+ * @ownedAttributes
+ *   • text : String -- §21.5.3: textual description (CMOF-declared).
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IBuildDescription extends IBuildResource {
+  readonly text?: string;
+}
+
+export class BuildDescription extends BuildResource implements IBuildDescription {
+  override readonly metaClass = "BuildDescription" as const;
+  readonly text?: string;
+  constructor(args: {
+    text?: string;
+    buildElement?: ReadonlyArray<IAbstractBuildElement>;
+    groupedBuild?: ReadonlyArray<IAbstractBuildElement>;
+    implementation?: ReadonlyArray<IKDMEntity>;
+  } = {}) {
+    super({ buildElement: args.buildElement, groupedBuild: args.groupedBuild, implementation: args.implementation });
+    this.text = args.text;
+  }
+}
+
+// ─── 309. BuildLibrary (§21.5.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.5.4
+ * @metaclass BuildLibrary (concrete)
+ * @generalization BuildResource
+ * @definition The BuildLibrary class represents a named collection of
+ *   InventoryItems (usually BinaryFiles, or SourceFiles) which is used as
+ *   an intermediate product of a build process.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IBuildLibrary extends IBuildResource {}
+
+export class BuildLibrary extends BuildResource implements IBuildLibrary {
+  override readonly metaClass = "BuildLibrary" as const;
+}
+
+// ─── 310. BuildProduct (§21.5.5) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.5.5
+ * @metaclass BuildProduct (concrete)
+ * @generalization BuildResource
+ * @definition The BuildProduct class represents a named collection of
+ *   InventoryItems that is the output of a build process (usually BinaryFile
+ *   or ExecutableFile).
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IBuildProduct extends IBuildResource {}
+
+export class BuildProduct extends BuildResource implements IBuildProduct {
+  override readonly metaClass = "BuildProduct" as const;
+}
+
+// ─── 311. BuildStep (§21.5.6) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.5.6
+ * @metaclass BuildStep (concrete)
+ * @generalization BuildResource
+ * @definition BuildStep class is the key meta-model element of the Build
+ *   model. It represents a unit of transformation performed by the build
+ *   process, during which certain input resources are processed and certain
+ *   output resources are produced.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IBuildStep extends IBuildResource {}
+
+export class BuildStep extends BuildResource implements IBuildStep {
+  override readonly metaClass = "BuildStep" as const;
+}
+
+// ─── 312. LinksTo (§21.6.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.6.1
+ * @metaclass LinksTo (concrete)
+ * @generalization AbstractBuildRelationship
+ * @definition The LinksTo class models the relationship between two linked
+ *   build resources.
+ * @ownedAttributes
+ *   • from : SymbolicLink         [1] -- the symbolic-link origin endpoint.
+ *   • to   : AbstractBuildElement [1] -- the linked-to build element.
+ * @associationEnds
+ *   • A_linksTo_to   -- A_479
+ *   • A_linksTo_from -- A_480
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ILinksTo extends IAbstractBuildRelationship {
+  readonly from: ISymbolicLink;
+  readonly to: IAbstractBuildElement;
+}
+
+export class LinksTo extends AbstractBuildRelationship implements ILinksTo {
+  readonly metaClass = "LinksTo" as const;
+  readonly from: ISymbolicLink;
+  readonly to: IAbstractBuildElement;
+  constructor(args: { from: ISymbolicLink; to: IAbstractBuildElement }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 313. Consumes (§21.6.2) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.6.2
+ * @metaclass Consumes (concrete)
+ * @generalization AbstractBuildRelationship
+ * @definition Consumes class defines association between a certain BuildStep
+ *   element and certain build elements, called the input build elements.
+ * @ownedAttributes
+ *   • from : BuildStep            [1] -- the build step.
+ *   • to   : AbstractBuildElement [1] -- the input build elements for the given step.
+ * @associationEnds
+ *   • A_consumes_to   -- A_487
+ *   • A_consumes_from -- A_488
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IConsumes extends IAbstractBuildRelationship {
+  readonly from: IBuildStep;
+  readonly to: IAbstractBuildElement;
+}
+
+export class Consumes extends AbstractBuildRelationship implements IConsumes {
+  readonly metaClass = "Consumes" as const;
+  readonly from: IBuildStep;
+  readonly to: IAbstractBuildElement;
+  constructor(args: { from: IBuildStep; to: IAbstractBuildElement }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 314. Produces (§21.6.3) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.6.3
+ * @metaclass Produces (concrete)
+ * @generalization AbstractBuildRelationship
+ * @definition Produces class defines association between a certain BuildStep
+ *   element and certain build elements, called the output build elements.
+ * @ownedAttributes
+ *   • from : BuildStep            [1] -- the build step.
+ *   • to   : AbstractBuildElement [1] -- the output build elements for the given step.
+ * @associationEnds
+ *   • A_produces_to   -- A_513
+ *   • A_produces_from -- A_514
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IProduces extends IAbstractBuildRelationship {
+  readonly from: IBuildStep;
+  readonly to: IAbstractBuildElement;
+}
+
+export class Produces extends AbstractBuildRelationship implements IProduces {
+  readonly metaClass = "Produces" as const;
+  readonly from: IBuildStep;
+  readonly to: IAbstractBuildElement;
+  constructor(args: { from: IBuildStep; to: IAbstractBuildElement }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 315. SupportedBy (§21.6.4) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.6.4
+ * @metaclass SupportedBy (concrete)
+ * @generalization AbstractBuildRelationship
+ * @definition SupportedBy class defines association between a certain
+ *   BuildStep element and certain Tool element. The Tool element is required
+ *   to perform the build step.
+ * @ownedAttributes
+ *   • from : BuildStep [1] -- the build step.
+ *   • to   : Tool      [1] -- The Tool element that represents the tool performing the transformations.
+ * @associationEnds
+ *   • A_supportedBy_to   -- A_520
+ *   • A_supportedBy_from -- A_521
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ISupportedBy extends IAbstractBuildRelationship {
+  readonly from: IBuildStep;
+  readonly to: ITool;
+}
+
+export class SupportedBy extends AbstractBuildRelationship implements ISupportedBy {
+  readonly metaClass = "SupportedBy" as const;
+  readonly from: IBuildStep;
+  readonly to: ITool;
+  constructor(args: { from: IBuildStep; to: ITool }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 316. SuppliedBy (§21.6.5) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.6.5
+ * @metaclass SuppliedBy (concrete)
+ * @generalization AbstractBuildRelationship
+ * @definition SuppliedBy class defines association between certain build
+ *   elements and their points of origin, represented by Supplier element.
+ * @ownedAttributes
+ *   • from : AbstractBuildElement [1] -- the build element.
+ *   • to   : Supplier             [1] -- The Supplier element that represents the origin of the build element.
+ * @associationEnds
+ *   • A_suppliedBy_to   -- A_505
+ *   • A_suppliedBy_from -- A_506
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface ISuppliedBy extends IAbstractBuildRelationship {
+  readonly from: IAbstractBuildElement;
+  readonly to: ISupplier;
+}
+
+export class SuppliedBy extends AbstractBuildRelationship implements ISuppliedBy {
+  readonly metaClass = "SuppliedBy" as const;
+  readonly from: IAbstractBuildElement;
+  readonly to: ISupplier;
+  constructor(args: { from: IAbstractBuildElement; to: ISupplier }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 317. DescribedBy (§21.6.6) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.6.6
+ * @metaclass DescribedBy (concrete)
+ * @generalization AbstractBuildRelationship
+ * @definition DescribedBy class defines association between certain build
+ *   step and a certain BuildDescription element.
+ * @ownedAttributes
+ *   • from : BuildStep        [1] -- the build step.
+ *   • to   : BuildDescription [1] -- The BuildDescription element that describes the transformation.
+ * @associationEnds
+ *   • A_describedBy_to   -- A_528
+ *   • A_describedBy_from -- A_529
+ * @operations (none)
+ * @constraints (none declared)
+ */
+export interface IDescribedBy extends IAbstractBuildRelationship {
+  readonly from: IBuildStep;
+  readonly to: IBuildDescription;
+}
+
+export class DescribedBy extends AbstractBuildRelationship implements IDescribedBy {
+  readonly metaClass = "DescribedBy" as const;
+  readonly from: IBuildStep;
+  readonly to: IBuildDescription;
+  constructor(args: { from: IBuildStep; to: IBuildDescription }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 318. BuildRelationship (§21.6 generic) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.6 (CMOF C_504; ExtendedBuildElements parallel)
+ * @metaclass BuildRelationship (concrete; generic)
+ * @generalization AbstractBuildRelationship
+ * @definition The BuildRelationship class represents a generic meta-model
+ *   build relationship. The CMOF declares it (C_504) within the build package.
+ * @ownedAttributes
+ *   • from : KDMEntity            [1] -- origin endpoint.
+ *   • to   : AbstractBuildElement [1] -- target endpoint.
+ * @associationEnds
+ *   • A_buildRelationship_to   -- A_498
+ *   • A_buildRelationship_from -- A_499
+ * @operations (none)
+ * @constraints (none declared)
+ *
+ * @specAmbiguity The CMOF declares C_504 BuildRelationship with from:KDMEntity,
+ *   to:AbstractBuildElement (cmof reverses the prose's "from:AbstractBuildElement,
+ *   to:KDMEntity" pattern from §21.7.2). This metaclass mirrors the CMOF.
+ */
+export interface IBuildRelationship extends IAbstractBuildRelationship {
+  readonly from: IKDMEntity;
+  readonly to: IAbstractBuildElement;
+}
+
+export class BuildRelationship extends AbstractBuildRelationship implements IBuildRelationship {
+  readonly metaClass = "BuildRelationship" as const;
+  readonly from: IKDMEntity;
+  readonly to: IAbstractBuildElement;
+  constructor(args: { from: IKDMEntity; to: IAbstractBuildElement }) {
+    super();
+    this.from = args.from;
+    this.to = args.to;
+  }
+}
+
+// ─── 319. BuildElement (§21.7.1) ───
+/**
+ * @standard OMG KDM 1.4 -- formal/16-09-01
+ * @section §21.7.1
+ * @metaclass BuildElement (concrete; generic)
+ * @generalization AbstractBuildElement
+ * @definition The BuildElement is a generic meta-model element that can be
+ *   used to define new extended meta-model elements through the KDM
+ *   light-weight extension mechanism.
+ * @ownedAttributes (inherited)
+ * @associationEnds (inherited)
+ * @operations (none)
+ * @constraints
+ *   1. BuildElement should have at least one stereotype. (§21.7.1)
+ */
+export interface IBuildElement extends IAbstractBuildElement {}
+
+export class BuildElement extends AbstractBuildElement implements IBuildElement {
+  readonly metaClass = "BuildElement" as const;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// END Implementer #4: Data + Build + Conceptual + Structure packages
+// (Wave 4 — final implementation wave)
+// ═══════════════════════════════════════════════════════════════════════════
