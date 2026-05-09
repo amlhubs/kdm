@@ -1,0 +1,46 @@
+{
+  "name": "@amlhubs/kdm",
+  "version": "0.0.1",
+  "description": "OMG Knowledge Discovery Metamodel (KDM) 1.4 (formal/16-09-01) / ISO/IEC 19506 — extensible TypeScript base classes and interfaces for the KDM metamodel. Pure KDM; downstream consumers extend through TypeScript inheritance.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc --noEmit -p tsconfig.test.json",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amlhubs/kdm.git",
+    "directory": "."
+  },
+  "keywords": [
+    "kdm",
+    "kdm-1.4",
+    "knowledge-discovery-metamodel",
+    "iso-19506",
+    "software-modernization",
+    "architecture-driven-modernization",
+    "adm",
+    "software-assurance",
+    "metamodel",
+    "metaclass",
+    "omg",
+    "model-driven",
+    "agentic-modeling-language",
+    "aml",
+    "agenihub"
+  ],
+  "license": "UNLICENSED"
+}

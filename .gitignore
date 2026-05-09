@@ -1,0 +1,29 @@
+# Build output
+dist/
+*.tsbuildinfo
+
+# Dependencies
+node_modules/
+
+# Auth tokens (CRITICAL — .npmrc holds the GitHub Packages token; never commit)
+.npmrc
+
+# Lockfiles (each consumer regenerates its own)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Logs / OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Env
+.env
+.env.local
