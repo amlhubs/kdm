@@ -38,17 +38,27 @@
 // Stereotype / ExtensionFamily / TagDefinition / ExtendedValue / TaggedValue
 // / TaggedRef — §10).
 //
-// Cross-package forward references: Source / Track endpoints (§11) are typed
-// as `unknown` placeholders and will be tightened by Wave 2 once the Source
-// package is published.
+// Cross-package forward references: the Wave-1 surface uses a single
+// `unknown`-aliased shadow type for `SourceRef` (§11) so that KDMEntity
+// can declare its `source` and `track` ends before Wave 2 is parsed by
+// the TypeScript compiler. Once all four waves are loaded as a single
+// compilation unit, the real `SourceRef` (line 1878, declared as the
+// concrete class in Wave 2 and exposed via the `ISourceRefFull` interface
+// at line 1870) and the real `ActionElement` (line 4885, Wave 3) take
+// over every member position — this `unknown` alias only serves as the
+// type the foundation surface widens KDMEntity.source/track to.
 // ═══════════════════════════════════════════════════════════════════════════
 
-// ─── Forward references (cross-package — defined in later waves) ───
-// FORWARD: SourceRef defined by Wave 2 (Source package, §11.4 SourceRef Class).
+// ─── Cross-package shadow type (resolved post-Wave-4) ───
+// `ISourceRef` here is intentionally `unknown` — it is the widening shadow
+// for KDMEntity.source / KDMEntity.track. The structural source-of-truth
+// type lives in Wave 2 as `ISourceRefFull` (line 1870) and the concrete
+// `SourceRef` class (line 1878). Consumers that need precise typing should
+// downcast `KDMEntity.source[i]` to `ISourceRefFull` after the file is
+// loaded as a whole.
 type ISourceRef = unknown;
-// FORWARD: ActionElement defined by Wave 3 (Action package, §14 Action.ActionElement).
-// (Used by ModelElement via reflection only — no member of the foundation
-// surface references it directly.)
+// `ActionElement` is fully declared at line 4885 (Wave 3); it is referenced
+// by ModelElement via reflection only and needs no shadow alias here.
 
 // ─── 1. Element (§9.3.1) ───
 /**
@@ -291,7 +301,7 @@ export abstract class ModelElement extends ExtendableElement implements IModelEl
  *      KDMEntity. (§9.5.2)
  */
 export interface IKDMEntity extends IModelElement {
-  readonly name: string;
+  readonly name?: string;
   readonly aggregatedRelation: ReadonlyArray<IAggregatedRelationship>;
   readonly source: ReadonlyArray<ISourceRef>;
   readonly track: ReadonlyArray<ISourceRef>;
@@ -309,7 +319,7 @@ export interface IKDMEntity extends IModelElement {
 }
 
 export abstract class KDMEntity extends ModelElement implements IKDMEntity {
-  readonly name: string = "";
+  readonly name?: string;
   readonly aggregatedRelation: ReadonlyArray<IAggregatedRelationship> = [];
   readonly source: ReadonlyArray<ISourceRef> = [];
   readonly track: ReadonlyArray<ISourceRef> = [];
@@ -5961,7 +5971,7 @@ export class DataManager extends PlatformResource implements IDataManager {
  * @standard OMG KDM 1.4 -- formal/16-09-01
  * @section §15.5.10
  * @metaclass PlatformEvent (concrete)
- * @generalization PlatformResource
+ * @generalization AbstractPlatformElement
  * @definition The PlatformEvent class is a meta-model element representing
  *   various events and callbacks associated with runtime platforms. This
  *   class follows the KDM event pattern, common to Resource Layer packages.
@@ -5971,19 +5981,27 @@ export class DataManager extends PlatformResource implements IDataManager {
  * @associationEnds (inherited)
  * @operations (none)
  * @constraints (none declared)
+ * @specAmbiguity PDF prose §15.5.10 declares "Superclass: PlatformResource";
+ *   the CMOF (machine-readable spec/kdm.cmof, line 211) declares
+ *   `superClass='C_104'` which resolves to `AbstractPlatformElement`. CMOF
+ *   supersedes prose per project policy (applied uniformly in the seven
+ *   sibling cases at UIEvent §16.5.6, Event §17.5.2, XMLDataType §18.11.7,
+ *   ContentRestriction §18.11.8, ConceptualScenario §20.5.5, BuildRelationship
+ *   §21.7.2, and the Image/ImageFile resolution at §11.5.4). PlatformEvent
+ *   here is therefore aligned with `AbstractPlatformElement`. The
+ *   `platformElement` ownership chain that PlatformResource introduces is
+ *   not inherited — PlatformEvent is a leaf event marker carrying only the
+ *   `kind` attribute the CMOF declares for it.
  */
-export interface IPlatformEvent extends IPlatformResource {
+export interface IPlatformEvent extends IAbstractPlatformElement {
   readonly kind?: string;
 }
 
-export class PlatformEvent extends PlatformResource implements IPlatformEvent {
+export class PlatformEvent extends AbstractPlatformElement implements IPlatformEvent {
   override readonly metaClass = "PlatformEvent" as const;
   readonly kind?: string;
-  constructor(args: {
-    kind?: string;
-    platformElement?: ReadonlyArray<IAbstractPlatformElement>;
-  } = {}) {
-    super({ platformElement: args.platformElement });
+  constructor(args: { kind?: string } = {}) {
+    super();
     this.kind = args.kind;
   }
 }
@@ -8636,25 +8654,38 @@ export class ContentItem extends AbstractContentElement implements IContentItem 
  *   schema definition.
  * @ownedAttributes
  *   • kind : String                              -- §18.11.3: content kind of the current SimpleContentType.
- *   • type : ComplexContentType [0..*]           -- §18.11.3: content type of the current ContentItem.
+ *   • type : ComplexContentType [0..1]           -- §18.11.3 / CMOF P_G_583 (association A_582):
+ *     content type of the current SimpleContentType. CMOF declares
+ *     `name='type' lower='0' upper='1'`. The association name is
+ *     `MemberTypes` (A_582), so consumer-side traversal from
+ *     ComplexContentType uses the `MemberTypes` association name to find
+ *     SimpleContentType members back; on the SimpleContentType side the
+ *     property is exactly `type` per CMOF.
  * @associationEnds
  *   • MemberTypes -- A_582 -- type end
  * @operations (none)
  * @constraints (none declared)
+ * @specAmbiguity Earlier waves had renamed this property to `memberType`
+ *   to mirror the association name `MemberTypes`. Per the project policy
+ *   "CMOF supersedes prose" (and supersedes association-name renames), the
+ *   property name has been restored to `type` as declared in CMOF
+ *   `<ownedAttribute … name='type' lower='0' upper='1' …/>` (kdm.cmof
+ *   line 1226). Cardinality also corrected from `[0..*]` (array) to
+ *   `[0..1]` (optional single) to match `lower='0' upper='1'`.
  */
 export interface ISimpleContentType extends IComplexContentType {
   readonly kind?: string;
-  readonly memberType: ReadonlyArray<IComplexContentType>;
+  readonly type?: IComplexContentType;
 }
 
 export class SimpleContentType extends ComplexContentType implements ISimpleContentType {
   override readonly metaClass = "SimpleContentType" as const;
   readonly kind?: string;
-  readonly memberType: ReadonlyArray<IComplexContentType>;
-  constructor(args: { kind?: string; memberType?: ReadonlyArray<IComplexContentType>; contentElement?: ReadonlyArray<IAbstractContentElement> } = {}) {
+  readonly type?: IComplexContentType;
+  constructor(args: { kind?: string; type?: IComplexContentType; contentElement?: ReadonlyArray<IAbstractContentElement> } = {}) {
     super({ contentElement: args.contentElement });
     this.kind = args.kind;
-    this.memberType = args.memberType ?? [];
+    this.type = args.type;
   }
 }
 
