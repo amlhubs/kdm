@@ -1,6 +1,6 @@
 {
   "name": "@amlhubs/kdm",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "OMG Knowledge Discovery Metamodel (KDM) 1.4 (formal/16-09-01) / ISO/IEC 19506 — extensible TypeScript base classes and interfaces for the KDM metamodel. Pure KDM; downstream consumers extend through TypeScript inheritance.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
